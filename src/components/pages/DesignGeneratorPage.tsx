@@ -5,6 +5,7 @@ import { Upload, Download, Wand2, Image as ImageIcon } from 'lucide-react';
 const DesignGeneratorPage = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [designText, setDesignText] = useState('');
+  const [subText, setSubText] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedDesign, setGeneratedDesign] = useState<string | null>(null);
 
@@ -24,86 +25,136 @@ const DesignGeneratorPage = () => {
     
     setIsGenerating(true);
     
-    // Create a functional design generator
     setTimeout(() => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       
       if (ctx) {
-        canvas.width = 1000;
-        canvas.height = 800;
+        canvas.width = 1200;
+        canvas.height = 1200;
         
         const img = new Image();
         img.onload = () => {
-          // Background gradient
+          // Professional gradient background similar to reference
           const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
           gradient.addColorStop(0, '#ffffff');
-          gradient.addColorStop(1, '#f8f9fa');
+          gradient.addColorStop(0.3, '#f8f9fa');
+          gradient.addColorStop(0.7, '#e9ecef');
+          gradient.addColorStop(1, '#dee2e6');
           ctx.fillStyle = gradient;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           
-          // Draw uploaded image with styling
-          const imgWidth = 400;
-          const imgHeight = 300;
-          const imgX = 50;
-          const imgY = 100;
-          
-          // Image border
+          // Catech Logo area (top)
           ctx.fillStyle = '#ff9900';
-          ctx.fillRect(imgX - 5, imgY - 5, imgWidth + 10, imgHeight + 10);
+          ctx.font = 'bold 36px Arial, sans-serif';
+          ctx.textAlign = 'left';
+          ctx.fillText('CATECH', 50, 60);
           
-          // Draw image
+          ctx.fillStyle = '#017020';
+          ctx.font = 'bold 20px Arial, sans-serif';
+          ctx.fillText('SOLUTIONS - GRAPHICS', 50, 85);
+          
+          // Decorative elements around logo
+          ctx.strokeStyle = '#ff9900';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.arc(300, 50, 25, 0, Math.PI * 2);
+          ctx.stroke();
+          
+          // Main content area
+          const imgWidth = 500;
+          const imgHeight = 600;
+          const imgX = 600;
+          const imgY = 200;
+          
+          // Image with professional frame
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(imgX - 10, imgY - 10, imgWidth + 20, imgHeight + 20);
+          ctx.strokeStyle = '#017020';
+          ctx.lineWidth = 4;
+          ctx.strokeRect(imgX - 10, imgY - 10, imgWidth + 20, imgHeight + 20);
+          
+          // Draw uploaded image
           ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
           
-          // Main text styling
-          ctx.fillStyle = '#017020';
-          ctx.font = 'bold 48px Arial, sans-serif';
-          ctx.fillText(designText, 50, 480);
-          
-          // Decorative elements
+          // Main text styling (left side)
           ctx.fillStyle = '#ff9900';
-          ctx.fillRect(50, 500, 300, 4);
+          ctx.font = 'bold 72px Arial, sans-serif';
+          ctx.textAlign = 'left';
+          const lines = designText.split(' ');
+          let yPos = 300;
           
-          // Catech branding section
-          ctx.fillStyle = '#017020';
-          ctx.font = 'bold 36px Arial, sans-serif';
-          ctx.fillText('CATECH SOLUTIONS', 50, 580);
+          lines.forEach((line, index) => {
+            if (index === 0) {
+              ctx.fillStyle = '#ff9900';
+            } else {
+              ctx.fillStyle = '#000000';
+            }
+            ctx.fillText(line, 50, yPos);
+            yPos += 80;
+          });
           
+          // Subtitle if provided
+          if (subText) {
+            ctx.fillStyle = '#ff9900';
+            ctx.font = 'italic 36px Arial, sans-serif';
+            ctx.fillText(subText, 50, yPos + 20);
+            yPos += 60;
+          }
+          
+          // Professional quote area
+          ctx.fillStyle = '#000000';
+          ctx.font = '24px Arial, sans-serif';
+          ctx.fillText('"Professional designs that', 50, yPos + 50);
+          ctx.fillText('speak your brand language"', 50, yPos + 80);
+          
+          // Orange accent bar
           ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 24px Arial, sans-serif';
-          ctx.fillText('Graphics & Design Studio', 50, 610);
+          ctx.fillRect(50, yPos + 100, 400, 8);
           
-          ctx.fillStyle = '#017020';
-          ctx.font = '20px Arial, sans-serif';
-          ctx.fillText('📧 info@catech.co.ke', 50, 650);
-          ctx.fillText('📞 +254 700 123 456', 50, 680);
-          ctx.fillText('🌐 www.catech.co.ke', 50, 710);
-          
-          // Logo area (placeholder)
-          ctx.fillStyle = '#ff9900';
-          ctx.fillRect(600, 450, 300, 200);
+          // Catech branding section (bottom)
           ctx.fillStyle = '#017020';
           ctx.font = 'bold 48px Arial, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('CATECH', 750, 530);
-          ctx.font = 'bold 24px Arial, sans-serif';
-          ctx.fillText('LOGO', 750, 560);
+          ctx.fillText('CATECH', canvas.width / 2, 950);
           
-          // Watermark
+          ctx.fillStyle = '#ff9900';
+          ctx.font = 'bold 28px Arial, sans-serif';
+          ctx.fillText('SOLUTIONS', canvas.width / 2, 985);
+          
+          // Contact information
+          ctx.fillStyle = '#000000';
+          ctx.font = '22px Arial, sans-serif';
+          ctx.textAlign = 'left';
+          ctx.fillText('📧 info@catech.co.ke', 50, 1050);
+          ctx.fillText('📞 +254 700 123 456', 350, 1050);
+          ctx.fillText('🌐 www.catech.co.ke', 650, 1050);
+          
+          // Professional watermark
           ctx.globalAlpha = 0.1;
           ctx.fillStyle = '#017020';
-          ctx.font = 'bold 120px Arial, sans-serif';
+          ctx.font = 'bold 150px Arial, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('CATECH', canvas.width / 2, canvas.height / 2);
+          ctx.save();
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+          ctx.rotate(-Math.PI / 6);
+          ctx.fillText('CATECH', 0, 0);
+          ctx.restore();
           
-          // QR code placeholder
+          // QR code placeholder (bottom right)
           ctx.globalAlpha = 1;
           ctx.fillStyle = '#000000';
-          ctx.fillRect(800, 600, 100, 100);
+          ctx.fillRect(950, 1000, 120, 120);
           ctx.fillStyle = '#ffffff';
-          ctx.font = '12px Arial, sans-serif';
+          ctx.font = 'bold 14px Arial, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('QR CODE', 850, 655);
+          ctx.fillText('SCAN FOR', 1010, 1145);
+          ctx.fillText('PORTFOLIO', 1010, 1165);
+          
+          // Professional border
+          ctx.strokeStyle = '#ff9900';
+          ctx.lineWidth = 8;
+          ctx.strokeRect(0, 0, canvas.width, canvas.height);
           
           setGeneratedDesign(canvas.toDataURL('image/png', 1.0));
           setIsGenerating(false);
@@ -127,9 +178,9 @@ const DesignGeneratorPage = () => {
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-          AI Design Generator
+          Professional Design Generator
         </h2>
-        <p className="text-gray-600">Upload an image and add text to create professional designs</p>
+        <p className="text-gray-600">Create stunning professional designs with Catech branding</p>
       </div>
 
       {/* Upload section */}
@@ -145,7 +196,7 @@ const DesignGeneratorPage = () => {
           <label htmlFor="image-upload" className="cursor-pointer">
             <div className="flex flex-col items-center space-y-2">
               <Upload className="text-[#ff9900]" size={48} />
-              <p className="text-gray-700 font-semibold">Click to upload an image</p>
+              <p className="text-gray-700 font-semibold">Upload Your Image</p>
               <p className="text-gray-500 text-sm">PNG, JPG up to 10MB</p>
             </div>
           </label>
@@ -161,34 +212,47 @@ const DesignGeneratorPage = () => {
           </div>
         )}
 
-        {/* Text input with black text */}
-        <div className="space-y-2">
-          <label className="block text-gray-700 font-semibold">Design Text</label>
-          <textarea
-            value={designText}
-            onChange={(e) => setDesignText(e.target.value)}
-            placeholder="Enter text for your design..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
-            rows={3}
-            style={{ color: '#000000' }}
-          />
+        {/* Input fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="block text-gray-700 font-semibold">Main Text</label>
+            <textarea
+              value={designText}
+              onChange={(e) => setDesignText(e.target.value)}
+              placeholder="e.g., Stay Cool"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
+              rows={2}
+              style={{ color: '#000000' }}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-gray-700 font-semibold">Subtitle (Optional)</label>
+            <textarea
+              value={subText}
+              onChange={(e) => setSubText(e.target.value)}
+              placeholder="e.g., Happy Easter"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
+              rows={2}
+              style={{ color: '#000000' }}
+            />
+          </div>
         </div>
 
         {/* Generate button */}
         <button
           onClick={generateDesign}
           disabled={!uploadedImage || !designText || isGenerating}
-          className="w-full py-3 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
+          className="w-full py-4 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
         >
           {isGenerating ? (
             <>
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              <span>Generating Professional Design...</span>
+              <span>Creating Professional Design...</span>
             </>
           ) : (
             <>
               <Wand2 size={20} />
-              <span>Generate Design</span>
+              <span>Generate Professional Design</span>
             </>
           )}
         </button>
@@ -201,14 +265,19 @@ const DesignGeneratorPage = () => {
             <ImageIcon className="text-[#ff9900]" size={24} />
             Your Professional Design
           </h3>
-          <img
-            src={generatedDesign}
-            alt="Generated Design"
-            className="w-full rounded-lg border-2 border-[#ff9900]/30 shadow-xl"
-          />
+          <div className="relative">
+            <img
+              src={generatedDesign}
+              alt="Generated Design"
+              className="w-full rounded-lg border-2 border-[#ff9900]/30 shadow-xl"
+            />
+            <div className="absolute top-2 right-2 bg-[#ff9900] text-white px-2 py-1 rounded text-sm font-bold">
+              CATECH BRANDED
+            </div>
+          </div>
           <button
             onClick={downloadDesign}
-            className="w-full py-3 bg-gradient-to-r from-[#017020] to-[#ff9900] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2 shadow-lg"
+            className="w-full py-4 bg-gradient-to-r from-[#017020] to-[#ff9900] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2 shadow-lg"
           >
             <Download size={20} />
             <span>Download High-Quality Design</span>
@@ -216,25 +285,34 @@ const DesignGeneratorPage = () => {
         </div>
       )}
 
-      {/* Features info */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-4 bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 rounded-lg border border-[#ff9900]/20">
-          <h4 className="font-semibold text-[#017020] mb-2">What's Included:</h4>
-          <ul className="text-sm text-gray-600 space-y-1">
-            <li>• Professional branding</li>
-            <li>• Contact information</li>
-            <li>• High-resolution output</li>
-            <li>• QR code integration</li>
-          </ul>
-        </div>
-        <div className="p-4 bg-gradient-to-r from-[#017020]/10 to-[#ff9900]/10 rounded-lg border border-[#017020]/20">
-          <h4 className="font-semibold text-[#ff9900] mb-2">Catech Solutions:</h4>
-          <ul className="text-sm text-gray-600 space-y-1">
-            <li>• Graphics & Design</li>
-            <li>• Professional layouts</li>
-            <li>• Brand consistency</li>
-            <li>• Digital marketing ready</li>
-          </ul>
+      {/* Features showcase */}
+      <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6">
+        <h4 className="text-lg font-bold text-[#017020] mb-4 text-center">Professional Features Included</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-[#ff9900] rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">C</span>
+            </div>
+            <p className="text-gray-600">Catech Logo</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">W</span>
+            </div>
+            <p className="text-gray-600">Watermark</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">Q</span>
+            </div>
+            <p className="text-gray-600">QR Code</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">H</span>
+            </div>
+            <p className="text-gray-600">HD Quality</p>
+          </div>
         </div>
       </div>
     </div>

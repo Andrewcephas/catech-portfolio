@@ -4,7 +4,6 @@ import { Github, Linkedin, Mail, Download, Eye } from "lucide-react";
 
 const HeroPage = () => {
   const [displayText, setDisplayText] = useState("");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fullText = "Graphic Designer & Creative Innovator";
 
   const profileImages = [
@@ -12,13 +11,7 @@ const HeroPage = () => {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-  ];
-
-  const colorSchemes = [
-    { border: '#ff9900', glow: 'rgba(255, 153, 0, 0.5)' },
-    { border: '#017020', glow: 'rgba(1, 112, 32, 0.5)' },
-    { border: '#ff6b6b', glow: 'rgba(255, 107, 107, 0.5)' },
-    { border: '#4ecdc4', glow: 'rgba(78, 205, 196, 0.5)' },
+    "/lovable-uploads/6fe90ea1-1e3b-443b-838b-e8df66c96450.png",
   ];
 
   useEffect(() => {
@@ -33,14 +26,6 @@ const HeroPage = () => {
     }, 100);
 
     return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const imageTimer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
-    }, 3000);
-
-    return () => clearInterval(imageTimer);
   }, []);
 
   const handleDownloadCV = () => {
@@ -95,8 +80,6 @@ Contact us for professional creative solutions!
     console.log('Navigate to projects page');
   };
 
-  const currentColor = colorSchemes[currentImageIndex];
-
   return (
     <div className="h-full flex flex-col justify-center items-center text-center relative overflow-hidden animate-fade-in">
       {/* Animated background elements */}
@@ -115,61 +98,69 @@ Contact us for professional creative solutions!
         ))}
       </div>
 
-      {/* 3D Rotating Profile Image with Reflection */}
-      <div className="relative mb-8 animate-scale-in perspective-1000">
-        <div 
-          className="w-48 h-48 relative transform-gpu transition-all duration-1000 preserve-3d hover:rotate-y-180"
-          style={{
-            transformStyle: 'preserve-3d'
-          }}
-        >
-          {/* Main Image */}
+      {/* 3D Rotating Image Gallery */}
+      <div className="relative mb-8 animate-scale-in" style={{ perspective: '1000px' }}>
+        <div className="relative w-64 h-64 mx-auto">
+          {/* Main rotating container */}
           <div 
-            className="w-full h-full rounded-full overflow-hidden border-4 shadow-2xl backface-hidden absolute"
+            className="absolute inset-0 animate-spin"
             style={{
-              borderColor: currentColor.border,
-              boxShadow: `0 0 30px ${currentColor.glow}, 0 10px 30px rgba(0,0,0,0.3)`
+              transformStyle: 'preserve-3d',
+              animation: 'rotateGallery 15s linear infinite'
             }}
           >
-            <img 
-              src={profileImages[currentImageIndex]}
-              alt="Profile"
-              className="w-full h-full object-cover transition-all duration-1000"
-            />
+            {profileImages.map((image, index) => (
+              <div
+                key={index}
+                className="absolute w-32 h-32 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl"
+                style={{
+                  transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(100px)`,
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                <img 
+                  src={image}
+                  alt={`Profile ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
           
-          {/* Back face */}
+          {/* Reflection */}
           <div 
-            className="w-full h-full rounded-full overflow-hidden border-4 shadow-2xl backface-hidden absolute rotate-y-180"
-            style={{
-              borderColor: currentColor.border,
-              boxShadow: `0 0 30px ${currentColor.glow}`
-            }}
+            className="absolute top-72 left-0 w-64 h-32 opacity-30 overflow-hidden"
+            style={{ transform: 'scaleY(-0.5)', filter: 'blur(1px)' }}
           >
-            <div className="w-full h-full bg-gradient-to-br from-[#ff9900] to-[#017020] flex items-center justify-center">
-              <div className="text-white font-bold text-lg">CATECH</div>
+            <div 
+              className="absolute inset-0 animate-spin"
+              style={{
+                transformStyle: 'preserve-3d',
+                animation: 'rotateGallery 15s linear infinite'
+              }}
+            >
+              {profileImages.map((image, index) => (
+                <div
+                  key={`reflection-${index}`}
+                  className="absolute w-32 h-32 rounded-lg overflow-hidden border-2 border-[#ff9900]/50"
+                  style={{
+                    transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(100px)`,
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
+                  <img 
+                    src={image}
+                    alt={`Reflection ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-        
-        {/* Reflection */}
-        <div 
-          className="w-48 h-24 absolute top-48 left-0 rounded-full overflow-hidden opacity-30"
-          style={{
-            background: `linear-gradient(to bottom, ${currentColor.glow}, transparent)`,
-            transform: 'scaleY(-1)',
-            filter: 'blur(2px)'
-          }}
-        >
-          <img 
-            src={profileImages[currentImageIndex]}
-            alt="Reflection"
-            className="w-full h-full object-cover object-top"
-          />
-        </div>
-        
-        <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center animate-pulse">
-          <div className="w-3 h-3 bg-[#ff9900] rounded-full"></div>
+          
+          <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center animate-pulse z-10">
+            <div className="w-3 h-3 bg-[#ff9900] rounded-full"></div>
+          </div>
         </div>
       </div>
 
@@ -232,6 +223,23 @@ Contact us for professional creative solutions!
           </button>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes rotateGallery {
+          0% { transform: rotateY(0deg); }
+          6.67% { transform: rotateY(0deg); }
+          13.33% { transform: rotateY(72deg); }
+          20% { transform: rotateY(72deg); }
+          26.67% { transform: rotateY(144deg); }
+          33.33% { transform: rotateY(144deg); }
+          40% { transform: rotateY(216deg); }
+          46.67% { transform: rotateY(216deg); }
+          53.33% { transform: rotateY(288deg); }
+          60% { transform: rotateY(288deg); }
+          66.67% { transform: rotateY(360deg); }
+          100% { transform: rotateY(360deg); }
+        }
+      `}</style>
     </div>
   );
 };
