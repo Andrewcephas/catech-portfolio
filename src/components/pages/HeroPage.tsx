@@ -99,23 +99,18 @@ Contact us for professional creative solutions!
       </div>
 
       {/* 3D Rotating Image Gallery */}
-      <div className="relative mb-8 animate-scale-in" style={{ perspective: '1000px' }}>
-        <div className="relative w-64 h-64 mx-auto">
+      <div className="relative mb-8 animate-scale-in perspective-1000">
+        <div className="relative w-48 h-48 mx-auto">
           {/* Main rotating container */}
           <div 
-            className="absolute inset-0 animate-spin"
-            style={{
-              transformStyle: 'preserve-3d',
-              animation: 'rotateGallery 15s linear infinite'
-            }}
+            className="absolute inset-0 animate-rotate-gallery preserve-3d"
           >
             {profileImages.map((image, index) => (
               <div
                 key={index}
-                className="absolute w-32 h-32 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl"
+                className="absolute w-24 h-24 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl backface-hidden"
                 style={{
-                  transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(100px)`,
-                  transformStyle: 'preserve-3d',
+                  transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(80px)`,
                 }}
               >
                 <img 
@@ -127,25 +122,24 @@ Contact us for professional creative solutions!
             ))}
           </div>
           
-          {/* Reflection */}
+          {/* Reflection - positioned closer */}
           <div 
-            className="absolute top-72 left-0 w-64 h-32 opacity-30 overflow-hidden"
-            style={{ transform: 'scaleY(-0.5)', filter: 'blur(1px)' }}
+            className="absolute top-52 left-0 w-48 h-24 opacity-40 overflow-hidden"
+            style={{ 
+              transform: 'scaleY(-0.8)', 
+              filter: 'blur(1px)',
+              background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.8) 100%)'
+            }}
           >
             <div 
-              className="absolute inset-0 animate-spin"
-              style={{
-                transformStyle: 'preserve-3d',
-                animation: 'rotateGallery 15s linear infinite'
-              }}
+              className="absolute inset-0 animate-rotate-gallery preserve-3d"
             >
               {profileImages.map((image, index) => (
                 <div
                   key={`reflection-${index}`}
-                  className="absolute w-32 h-32 rounded-lg overflow-hidden border-2 border-[#ff9900]/50"
+                  className="absolute w-24 h-24 rounded-lg overflow-hidden border-2 border-[#ff9900]/30 backface-hidden"
                   style={{
-                    transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(100px)`,
-                    transformStyle: 'preserve-3d',
+                    transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(80px)`,
                   }}
                 >
                   <img 
@@ -167,7 +161,7 @@ Contact us for professional creative solutions!
       {/* Main content */}
       <div className="z-10 animate-slide-up" style={{ animationDelay: '0.5s' }}>
         <h1 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent">
-          Hello, I'm a Creative
+          Hello, I'm a Creative Professional
         </h1>
         
         <div className="h-12 mb-6">
@@ -177,10 +171,35 @@ Contact us for professional creative solutions!
           </p>
         </div>
 
-        <p className="text-gray-600 mb-8 max-w-lg leading-relaxed px-4">
-          Passionate about creating stunning visual designs and bringing creative visions to life. 
-          Specialized in Adobe Creative Suite, web development, and modern design principles.
+        <p className="text-gray-600 mb-8 max-w-2xl leading-relaxed px-4">
+          My journey began in 2018 when I discovered my passion for design through Adobe Photoshop. 
+          What started as curiosity quickly evolved into expertise across the entire Adobe Creative Suite. 
+          Over the years, I've expanded into web development, mastering the MERN stack, Python, and UI/UX design. 
+          Today, I blend creativity with technology to deliver exceptional digital experiences and data-driven solutions.
         </p>
+
+        {/* My Journey Timeline */}
+        <div className="mb-8 max-w-2xl mx-auto">
+          <h3 className="text-lg font-semibold text-[#017020] mb-4">My Growth Journey</h3>
+          <div className="space-y-3 text-sm text-gray-600">
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
+              <span>2018: Started with Photoshop</span>
+              <span className="text-[#ff9900] font-bold">Foundation</span>
+            </div>
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
+              <span>2019-2020: Mastered Adobe Suite</span>
+              <span className="text-[#ff9900] font-bold">Creative Phase</span>
+            </div>
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
+              <span>2021: Web Development & MERN</span>
+              <span className="text-[#017020] font-bold">Tech Expansion</span>
+            </div>
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
+              <span>2022-2024: UI/UX & Data Science</span>
+              <span className="text-[#017020] font-bold">Professional Growth</span>
+            </div>
+          </div>
+        </div>
 
         {/* Social links - Always visible */}
         <div className="flex justify-center space-x-4 mb-8">
@@ -223,23 +242,6 @@ Contact us for professional creative solutions!
           </button>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes rotateGallery {
-          0% { transform: rotateY(0deg); }
-          6.67% { transform: rotateY(0deg); }
-          13.33% { transform: rotateY(72deg); }
-          20% { transform: rotateY(72deg); }
-          26.67% { transform: rotateY(144deg); }
-          33.33% { transform: rotateY(144deg); }
-          40% { transform: rotateY(216deg); }
-          46.67% { transform: rotateY(216deg); }
-          53.33% { transform: rotateY(288deg); }
-          60% { transform: rotateY(288deg); }
-          66.67% { transform: rotateY(360deg); }
-          100% { transform: rotateY(360deg); }
-        }
-      `}</style>
     </div>
   );
 };

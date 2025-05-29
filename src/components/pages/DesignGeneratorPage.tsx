@@ -30,131 +30,136 @@ const DesignGeneratorPage = () => {
       const ctx = canvas.getContext('2d');
       
       if (ctx) {
-        canvas.width = 1200;
-        canvas.height = 1200;
+        canvas.width = 1080;
+        canvas.height = 1080;
         
         const img = new Image();
         img.onload = () => {
-          // Professional gradient background similar to reference
+          // Professional gradient background
           const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-          gradient.addColorStop(0, '#ffffff');
-          gradient.addColorStop(0.3, '#f8f9fa');
-          gradient.addColorStop(0.7, '#e9ecef');
-          gradient.addColorStop(1, '#dee2e6');
+          gradient.addColorStop(0, '#1a1a1a');
+          gradient.addColorStop(0.5, '#2d2d2d');
+          gradient.addColorStop(1, '#1a1a1a');
           ctx.fillStyle = gradient;
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           
-          // Catech Logo area (top)
-          ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 36px Arial, sans-serif';
-          ctx.textAlign = 'left';
-          ctx.fillText('CATECH', 50, 60);
+          // Main image area with gradient mask (no rectangle border)
+          const imgSize = 600;
+          const imgX = (canvas.width - imgSize) / 2;
+          const imgY = 150;
           
-          ctx.fillStyle = '#017020';
-          ctx.font = 'bold 20px Arial, sans-serif';
-          ctx.fillText('SOLUTIONS - GRAPHICS', 50, 85);
-          
-          // Decorative elements around logo
-          ctx.strokeStyle = '#ff9900';
-          ctx.lineWidth = 3;
+          // Create circular clipping path for image
+          ctx.save();
           ctx.beginPath();
-          ctx.arc(300, 50, 25, 0, Math.PI * 2);
-          ctx.stroke();
+          ctx.arc(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 0, Math.PI * 2);
+          ctx.clip();
           
-          // Main content area
-          const imgWidth = 500;
-          const imgHeight = 600;
-          const imgX = 600;
-          const imgY = 200;
+          // Draw image
+          ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
           
-          // Image with professional frame
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(imgX - 10, imgY - 10, imgWidth + 20, imgHeight + 20);
-          ctx.strokeStyle = '#017020';
-          ctx.lineWidth = 4;
-          ctx.strokeRect(imgX - 10, imgY - 10, imgWidth + 20, imgHeight + 20);
+          // Add gradient overlay to image
+          const imgGradient = ctx.createRadialGradient(
+            imgX + imgSize/2, imgY + imgSize/2, 0,
+            imgX + imgSize/2, imgY + imgSize/2, imgSize/2
+          );
+          imgGradient.addColorStop(0, 'rgba(0,0,0,0)');
+          imgGradient.addColorStop(0.7, 'rgba(0,0,0,0.2)');
+          imgGradient.addColorStop(1, 'rgba(0,0,0,0.8)');
+          ctx.fillStyle = imgGradient;
+          ctx.fillRect(imgX, imgY, imgSize, imgSize);
           
-          // Draw uploaded image
-          ctx.drawImage(img, imgX, imgY, imgWidth, imgHeight);
+          ctx.restore();
           
-          // Main text styling (left side)
+          // CATECH LOGO - Center top
           ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 72px Arial, sans-serif';
-          ctx.textAlign = 'left';
-          const lines = designText.split(' ');
-          let yPos = 300;
+          ctx.font = 'bold 48px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('CATECH', canvas.width / 2, 80);
           
-          lines.forEach((line, index) => {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 24px Arial, sans-serif';
+          ctx.fillText('SOLUTIONS', canvas.width / 2, 110);
+          
+          // Main text below image
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 72px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          
+          const words = designText.split(' ');
+          let yPos = imgY + imgSize + 80;
+          
+          words.forEach((word, index) => {
             if (index === 0) {
               ctx.fillStyle = '#ff9900';
+              ctx.font = 'bold 84px Arial, sans-serif';
             } else {
-              ctx.fillStyle = '#000000';
+              ctx.fillStyle = '#ffffff';
+              ctx.font = 'bold 72px Arial, sans-serif';
             }
-            ctx.fillText(line, 50, yPos);
+            ctx.fillText(word, canvas.width / 2, yPos);
             yPos += 80;
           });
           
-          // Subtitle if provided
+          // Subtitle
           if (subText) {
-            ctx.fillStyle = '#ff9900';
+            ctx.fillStyle = '#cccccc';
             ctx.font = 'italic 36px Arial, sans-serif';
-            ctx.fillText(subText, 50, yPos + 20);
+            ctx.fillText(subText, canvas.width / 2, yPos + 20);
             yPos += 60;
           }
           
-          // Professional quote area
+          // Footer background rectangle
+          const footerHeight = 120;
+          const footerY = canvas.height - footerHeight;
+          
           ctx.fillStyle = '#000000';
-          ctx.font = '24px Arial, sans-serif';
-          ctx.fillText('"Professional designs that', 50, yPos + 50);
-          ctx.fillText('speak your brand language"', 50, yPos + 80);
+          ctx.fillRect(0, footerY, canvas.width, footerHeight);
           
-          // Orange accent bar
+          // Orange accent line
           ctx.fillStyle = '#ff9900';
-          ctx.fillRect(50, yPos + 100, 400, 8);
+          ctx.fillRect(0, footerY, canvas.width, 4);
           
-          // Catech branding section (bottom)
-          ctx.fillStyle = '#017020';
-          ctx.font = 'bold 48px Arial, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('CATECH', canvas.width / 2, 950);
-          
-          ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 28px Arial, sans-serif';
-          ctx.fillText('SOLUTIONS', canvas.width / 2, 985);
-          
-          // Contact information
-          ctx.fillStyle = '#000000';
-          ctx.font = '22px Arial, sans-serif';
+          // Footer content
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 24px Arial, sans-serif';
           ctx.textAlign = 'left';
-          ctx.fillText('📧 info@catech.co.ke', 50, 1050);
-          ctx.fillText('📞 +254 700 123 456', 350, 1050);
-          ctx.fillText('🌐 www.catech.co.ke', 650, 1050);
+          ctx.fillText('📧 info@catech.co.ke', 50, footerY + 35);
+          ctx.fillText('📞 +254 700 123 456', 50, footerY + 65);
+          ctx.fillText('🌐 www.catech.co.ke', 50, footerY + 95);
           
-          // Professional watermark
-          ctx.globalAlpha = 0.1;
-          ctx.fillStyle = '#017020';
-          ctx.font = 'bold 150px Arial, sans-serif';
+          // Right side footer
+          ctx.textAlign = 'right';
+          ctx.fillStyle = '#ff9900';
+          ctx.font = 'bold 32px Arial, sans-serif';
+          ctx.fillText('GRAPHICS', canvas.width - 50, footerY + 40);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 20px Arial, sans-serif';
+          ctx.fillText('Professional Design Solutions', canvas.width - 50, footerY + 70);
+          
+          // Watermark - subtle
+          ctx.globalAlpha = 0.05;
+          ctx.fillStyle = '#ff9900';
+          ctx.font = 'bold 120px Arial, sans-serif';
           ctx.textAlign = 'center';
           ctx.save();
           ctx.translate(canvas.width / 2, canvas.height / 2);
-          ctx.rotate(-Math.PI / 6);
+          ctx.rotate(-Math.PI / 12);
           ctx.fillText('CATECH', 0, 0);
           ctx.restore();
-          
-          // QR code placeholder (bottom right)
           ctx.globalAlpha = 1;
-          ctx.fillStyle = '#000000';
-          ctx.fillRect(950, 1000, 120, 120);
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 14px Arial, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('SCAN FOR', 1010, 1145);
-          ctx.fillText('PORTFOLIO', 1010, 1165);
           
-          // Professional border
-          ctx.strokeStyle = '#ff9900';
-          ctx.lineWidth = 8;
-          ctx.strokeRect(0, 0, canvas.width, canvas.height);
+          // QR code placeholder
+          const qrSize = 80;
+          const qrX = canvas.width - qrSize - 20;
+          const qrY = 20;
+          
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(qrX, qrY, qrSize, qrSize);
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 10px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('SCAN FOR', qrX + qrSize/2, qrY + qrSize + 15);
+          ctx.fillText('PORTFOLIO', qrX + qrSize/2, qrY + qrSize + 28);
           
           setGeneratedDesign(canvas.toDataURL('image/png', 1.0));
           setIsGenerating(false);
@@ -168,7 +173,7 @@ const DesignGeneratorPage = () => {
     if (generatedDesign) {
       const link = document.createElement('a');
       link.href = generatedDesign;
-      link.download = 'catech-professional-design.png';
+      link.download = 'catech-professional-poster.png';
       link.click();
     }
   };
@@ -178,9 +183,9 @@ const DesignGeneratorPage = () => {
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-          Professional Design Generator
+          Professional Poster Generator
         </h2>
-        <p className="text-gray-600">Create stunning professional designs with Catech branding</p>
+        <p className="text-gray-600">Create stunning professional posters with Catech branding</p>
       </div>
 
       {/* Upload section */}
@@ -222,7 +227,6 @@ const DesignGeneratorPage = () => {
               placeholder="e.g., Stay Cool"
               className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
               rows={2}
-              style={{ color: '#000000' }}
             />
           </div>
           <div className="space-y-2">
@@ -233,7 +237,6 @@ const DesignGeneratorPage = () => {
               placeholder="e.g., Happy Easter"
               className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
               rows={2}
-              style={{ color: '#000000' }}
             />
           </div>
         </div>
@@ -247,12 +250,12 @@ const DesignGeneratorPage = () => {
           {isGenerating ? (
             <>
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              <span>Creating Professional Design...</span>
+              <span>Creating Professional Poster...</span>
             </>
           ) : (
             <>
               <Wand2 size={20} />
-              <span>Generate Professional Design</span>
+              <span>Generate Professional Poster</span>
             </>
           )}
         </button>
@@ -263,12 +266,12 @@ const DesignGeneratorPage = () => {
         <div className="animate-scale-in space-y-4">
           <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
             <ImageIcon className="text-[#ff9900]" size={24} />
-            Your Professional Design
+            Your Professional Poster
           </h3>
           <div className="relative">
             <img
               src={generatedDesign}
-              alt="Generated Design"
+              alt="Generated Poster"
               className="w-full rounded-lg border-2 border-[#ff9900]/30 shadow-xl"
             />
             <div className="absolute top-2 right-2 bg-[#ff9900] text-white px-2 py-1 rounded text-sm font-bold">
@@ -280,7 +283,7 @@ const DesignGeneratorPage = () => {
             className="w-full py-4 bg-gradient-to-r from-[#017020] to-[#ff9900] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2 shadow-lg"
           >
             <Download size={20} />
-            <span>Download High-Quality Design</span>
+            <span>Download High-Quality Poster</span>
           </button>
         </div>
       )}
