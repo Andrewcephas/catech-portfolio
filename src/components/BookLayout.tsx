@@ -17,12 +17,12 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pages = [
-    { title: "Home", component: <HeroPage />, animation: "animate-fade-in" },
-    { title: "About", component: <AboutPage />, animation: "animate-slide-up" },
-    { title: "Skills", component: <SkillsPage />, animation: "animate-scale-in" },
-    { title: "Projects", component: <ProjectsPage />, animation: "animate-bounce-slow" },
-    { title: "Contact", component: <ContactPage />, animation: "animate-fade-in" },
-    { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-slide-up" },
+    { title: "Home", component: <HeroPage />, animation: "animate-page-peel-in" },
+    { title: "About", component: <AboutPage />, animation: "animate-page-peel-in" },
+    { title: "Skills", component: <SkillsPage />, animation: "animate-page-peel-in" },
+    { title: "Projects", component: <ProjectsPage />, animation: "animate-page-peel-in" },
+    { title: "Contact", component: <ContactPage />, animation: "animate-page-peel-in" },
+    { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
   ];
 
   const nextPage = () => {
@@ -79,60 +79,64 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
         </div>
       )}
 
-      {/* Book Container - Increased width */}
+      {/* Book Container - Increased width for large screens */}
       <div className="w-full max-w-8xl mx-auto h-full relative">
-        <div className="w-full lg:w-[98%] xl:w-[95%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
+        <div className="w-full lg:w-[95%] xl:w-[98%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
           
-          {/* Page Content */}
-          <div className="h-full relative overflow-hidden">
+          {/* Page Content - Enable scrolling for all pages */}
+          <div className="h-full relative">
             <div 
-              className={`h-full p-8 animate-page-peel-in`}
+              className={`h-full ${pages[currentPage].animation}`}
               key={currentPage}
             >
-              {pages[currentPage].component}
+              <div className="h-full overflow-y-auto">
+                <div className="p-8">
+                  {pages[currentPage].component}
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Page Indicator and Navigation - Outside book container */}
-          <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-4">
-            {/* Page Dots */}
-            <div className="flex space-x-2">
-              {pages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentPage === index
-                      ? 'bg-[#ff9900] scale-125'
-                      : 'bg-white/50 hover:bg-white/75'
-                  }`}
-                />
-              ))}
-            </div>
-            
-            {/* Page Number */}
-            <div className="text-white/80 text-sm font-medium">
-              {currentPage + 1} / {pages.length}
-            </div>
-            
-            {/* Navigation Arrows - Below page numbers */}
-            <div className="flex space-x-8 mt-4">
+        {/* Page Indicator and Navigation - Fixed positioning */}
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-4 z-30">
+          {/* Page Dots */}
+          <div className="flex space-x-2">
+            {pages.map((_, index) => (
               <button
-                onClick={prevPage}
-                disabled={currentPage === 0}
-                className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              
-              <button
-                onClick={nextPage}
-                disabled={currentPage === pages.length - 1}
-                className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentPage === index
+                    ? 'bg-[#ff9900] scale-125 shadow-lg'
+                    : 'bg-white/70 hover:bg-white/90'
+                }`}
+              />
+            ))}
+          </div>
+          
+          {/* Page Number */}
+          <div className="text-white/90 text-sm font-medium bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">
+            {currentPage + 1} / {pages.length}
+          </div>
+          
+          {/* Navigation Arrows - Below page numbers */}
+          <div className="flex space-x-6 mt-2">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 0}
+              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            
+            <button
+              onClick={nextPage}
+              disabled={currentPage === pages.length - 1}
+              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+            >
+              <ChevronRight size={24} />
+            </button>
           </div>
         </div>
       </div>
