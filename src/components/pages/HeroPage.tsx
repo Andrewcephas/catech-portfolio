@@ -98,57 +98,77 @@ Contact us for professional creative solutions!
         ))}
       </div>
 
-      {/* 3D Rotating Image Gallery */}
-      <div className="relative mb-8 animate-scale-in perspective-1000">
-        <div className="relative w-48 h-48 mx-auto">
-          {/* Main rotating container */}
+      {/* 3D Rotating Image Gallery - Fixed container */}
+      <div className="relative mb-8 animate-scale-in">
+        <div className="relative w-64 h-64 mx-auto overflow-hidden">
+          {/* Main rotating container with proper boundaries */}
           <div 
-            className="absolute inset-0 animate-rotate-gallery preserve-3d"
+            className="absolute inset-0 flex items-center justify-center perspective-1000"
           >
-            {profileImages.map((image, index) => (
-              <div
-                key={index}
-                className="absolute w-24 h-24 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl backface-hidden"
-                style={{
-                  transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(80px)`,
-                }}
+            <div className="relative w-32 h-32">
+              <div 
+                className="absolute inset-0 animate-rotate-gallery preserve-3d"
               >
-                <img 
-                  src={image}
-                  alt={`Profile ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                {profileImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="absolute w-20 h-20 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl backface-hidden"
+                    style={{
+                      transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(60px)`,
+                      left: '50%',
+                      top: '50%',
+                      marginLeft: '-40px',
+                      marginTop: '-40px',
+                    }}
+                  >
+                    <img 
+                      src={image}
+                      alt={`Profile ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
           
-          {/* Reflection - positioned closer */}
+          {/* Reflection - positioned closer and contained */}
           <div 
-            className="absolute top-52 left-0 w-48 h-24 opacity-40 overflow-hidden"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-16 opacity-40 overflow-hidden"
             style={{ 
-              transform: 'scaleY(-0.8)', 
+              transform: 'translateX(-50%) scaleY(-0.6)', 
               filter: 'blur(1px)',
               background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.8) 100%)'
             }}
           >
             <div 
-              className="absolute inset-0 animate-rotate-gallery preserve-3d"
+              className="absolute inset-0 flex items-start justify-center"
             >
-              {profileImages.map((image, index) => (
-                <div
-                  key={`reflection-${index}`}
-                  className="absolute w-24 h-24 rounded-lg overflow-hidden border-2 border-[#ff9900]/30 backface-hidden"
-                  style={{
-                    transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(80px)`,
-                  }}
+              <div className="relative w-32 h-32">
+                <div 
+                  className="absolute inset-0 animate-rotate-gallery preserve-3d"
                 >
-                  <img 
-                    src={image}
-                    alt={`Reflection ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
+                  {profileImages.map((image, index) => (
+                    <div
+                      key={`reflection-${index}`}
+                      className="absolute w-20 h-20 rounded-lg overflow-hidden border-2 border-[#ff9900]/30 backface-hidden"
+                      style={{
+                        transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(60px)`,
+                        left: '50%',
+                        top: '50%',
+                        marginLeft: '-40px',
+                        marginTop: '-40px',
+                      }}
+                    >
+                      <img 
+                        src={image}
+                        alt={`Reflection ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
           
@@ -201,7 +221,7 @@ Contact us for professional creative solutions!
           </div>
         </div>
 
-        {/* Social links - Always visible */}
+        {/* Social links */}
         <div className="flex justify-center space-x-4 mb-8">
           {[
             { icon: Github, href: "https://github.com", color: "bg-gray-800", label: "GitHub" },

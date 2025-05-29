@@ -35,20 +35,31 @@ const DesignGeneratorPage = () => {
         
         const img = new Image();
         img.onload = () => {
-          // Professional gradient background
-          const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-          gradient.addColorStop(0, '#1a1a1a');
-          gradient.addColorStop(0.5, '#2d2d2d');
-          gradient.addColorStop(1, '#1a1a1a');
-          ctx.fillStyle = gradient;
+          // Updated background - white (#f3f3ff) with orange accents
+          ctx.fillStyle = '#f3f3ff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
           
-          // Main image area with gradient mask (no rectangle border)
-          const imgSize = 600;
-          const imgX = (canvas.width - imgSize) / 2;
-          const imgY = 150;
+          // Orange accent stripes
+          ctx.fillStyle = '#ff9900';
+          ctx.fillRect(0, 0, canvas.width, 20);
+          ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
           
-          // Create circular clipping path for image
+          // Center logo area
+          const logoY = 100;
+          ctx.fillStyle = '#ff9900';
+          ctx.font = 'bold 64px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('CATECH', canvas.width / 2, logoY);
+          
+          ctx.fillStyle = '#017020';
+          ctx.font = 'bold 32px Arial, sans-serif';
+          ctx.fillText('SOLUTIONS', canvas.width / 2, logoY + 50);
+          
+          // Main image area - circular with gradient overlay (no rectangle)
+          const imgSize = 500;
+          const imgX = (canvas.width - imgSize) / 2;
+          const imgY = logoY + 100;
+          
           ctx.save();
           ctx.beginPath();
           ctx.arc(imgX + imgSize/2, imgY + imgSize/2, imgSize/2, 0, Math.PI * 2);
@@ -57,109 +68,85 @@ const DesignGeneratorPage = () => {
           // Draw image
           ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
           
-          // Add gradient overlay to image
+          // Gradient overlay on image
           const imgGradient = ctx.createRadialGradient(
-            imgX + imgSize/2, imgY + imgSize/2, 0,
+            imgX + imgSize/2, imgY + imgSize/2, imgSize/4,
             imgX + imgSize/2, imgY + imgSize/2, imgSize/2
           );
-          imgGradient.addColorStop(0, 'rgba(0,0,0,0)');
-          imgGradient.addColorStop(0.7, 'rgba(0,0,0,0.2)');
-          imgGradient.addColorStop(1, 'rgba(0,0,0,0.8)');
+          imgGradient.addColorStop(0, 'rgba(255,153,0,0)');
+          imgGradient.addColorStop(0.8, 'rgba(255,153,0,0.3)');
+          imgGradient.addColorStop(1, 'rgba(255,153,0,0.7)');
           ctx.fillStyle = imgGradient;
           ctx.fillRect(imgX, imgY, imgSize, imgSize);
           
           ctx.restore();
           
-          // CATECH LOGO - Center top
-          ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 48px Arial, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('CATECH', canvas.width / 2, 80);
-          
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 24px Arial, sans-serif';
-          ctx.fillText('SOLUTIONS', canvas.width / 2, 110);
-          
           // Main text below image
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 72px Arial, sans-serif';
-          ctx.textAlign = 'center';
-          
+          const textY = imgY + imgSize + 80;
           const words = designText.split(' ');
-          let yPos = imgY + imgSize + 80;
+          let currentY = textY;
           
           words.forEach((word, index) => {
             if (index === 0) {
               ctx.fillStyle = '#ff9900';
               ctx.font = 'bold 84px Arial, sans-serif';
             } else {
-              ctx.fillStyle = '#ffffff';
-              ctx.font = 'bold 72px Arial, sans-serif';
+              ctx.fillStyle = '#017020';
+              ctx.font = 'bold 68px Arial, sans-serif';
             }
-            ctx.fillText(word, canvas.width / 2, yPos);
-            yPos += 80;
+            ctx.textAlign = 'center';
+            ctx.fillText(word, canvas.width / 2, currentY);
+            currentY += 80;
           });
           
           // Subtitle
           if (subText) {
-            ctx.fillStyle = '#cccccc';
+            ctx.fillStyle = '#666666';
             ctx.font = 'italic 36px Arial, sans-serif';
-            ctx.fillText(subText, canvas.width / 2, yPos + 20);
-            yPos += 60;
+            ctx.fillText(subText, canvas.width / 2, currentY + 20);
+            currentY += 60;
           }
           
-          // Footer background rectangle
-          const footerHeight = 120;
+          // Footer rectangle background
+          const footerHeight = 140;
           const footerY = canvas.height - footerHeight;
           
-          ctx.fillStyle = '#000000';
+          ctx.fillStyle = '#017020';
           ctx.fillRect(0, footerY, canvas.width, footerHeight);
           
-          // Orange accent line
+          // Orange accent on footer
           ctx.fillStyle = '#ff9900';
-          ctx.fillRect(0, footerY, canvas.width, 4);
+          ctx.fillRect(0, footerY, canvas.width, 6);
           
-          // Footer content
+          // Footer content - left side
           ctx.fillStyle = '#ffffff';
           ctx.font = 'bold 24px Arial, sans-serif';
           ctx.textAlign = 'left';
-          ctx.fillText('📧 info@catech.co.ke', 50, footerY + 35);
-          ctx.fillText('📞 +254 700 123 456', 50, footerY + 65);
-          ctx.fillText('🌐 www.catech.co.ke', 50, footerY + 95);
+          ctx.fillText('📧 info@catech.co.ke', 60, footerY + 40);
+          ctx.fillText('📞 +254 700 123 456', 60, footerY + 75);
+          ctx.fillText('🌐 www.catech.co.ke', 60, footerY + 110);
           
-          // Right side footer
+          // Footer content - right side
           ctx.textAlign = 'right';
           ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 32px Arial, sans-serif';
-          ctx.fillText('GRAPHICS', canvas.width - 50, footerY + 40);
+          ctx.font = 'bold 36px Arial, sans-serif';
+          ctx.fillText('PROFESSIONAL', canvas.width - 60, footerY + 45);
           ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 20px Arial, sans-serif';
-          ctx.fillText('Professional Design Solutions', canvas.width - 50, footerY + 70);
+          ctx.font = 'bold 24px Arial, sans-serif';
+          ctx.fillText('Design Solutions', canvas.width - 60, footerY + 80);
+          ctx.fillText('Creative Excellence', canvas.width - 60, footerY + 110);
           
-          // Watermark - subtle
-          ctx.globalAlpha = 0.05;
+          // Subtle watermark
+          ctx.globalAlpha = 0.03;
           ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 120px Arial, sans-serif';
+          ctx.font = 'bold 200px Arial, sans-serif';
           ctx.textAlign = 'center';
           ctx.save();
           ctx.translate(canvas.width / 2, canvas.height / 2);
-          ctx.rotate(-Math.PI / 12);
+          ctx.rotate(-Math.PI / 8);
           ctx.fillText('CATECH', 0, 0);
           ctx.restore();
           ctx.globalAlpha = 1;
-          
-          // QR code placeholder
-          const qrSize = 80;
-          const qrX = canvas.width - qrSize - 20;
-          const qrY = 20;
-          
-          ctx.fillStyle = '#000000';
-          ctx.fillRect(qrX, qrY, qrSize, qrSize);
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 10px Arial, sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText('SCAN FOR', qrX + qrSize/2, qrY + qrSize + 15);
-          ctx.fillText('PORTFOLIO', qrX + qrSize/2, qrY + qrSize + 28);
           
           setGeneratedDesign(canvas.toDataURL('image/png', 1.0));
           setIsGenerating(false);
@@ -179,7 +166,7 @@ const DesignGeneratorPage = () => {
   };
 
   return (
-    <div className="h-full space-y-6 overflow-y-auto animate-slide-up">
+    <div className="h-full space-y-6 overflow-y-auto animate-slide-up bg-[#f3f3ff]">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
@@ -190,7 +177,7 @@ const DesignGeneratorPage = () => {
 
       {/* Upload section */}
       <div className="space-y-4">
-        <div className="border-2 border-dashed border-[#ff9900]/40 rounded-xl p-6 text-center bg-gradient-to-br from-[#ff9900]/5 to-[#017020]/5 hover:border-[#ff9900] transition-all duration-300">
+        <div className="border-2 border-dashed border-[#ff9900]/40 rounded-xl p-6 text-center bg-white hover:border-[#ff9900] transition-all duration-300">
           <input
             type="file"
             accept="image/*"
@@ -268,13 +255,13 @@ const DesignGeneratorPage = () => {
             <ImageIcon className="text-[#ff9900]" size={24} />
             Your Professional Poster
           </h3>
-          <div className="relative">
+          <div className="relative bg-white p-4 rounded-lg">
             <img
               src={generatedDesign}
               alt="Generated Poster"
               className="w-full rounded-lg border-2 border-[#ff9900]/30 shadow-xl"
             />
-            <div className="absolute top-2 right-2 bg-[#ff9900] text-white px-2 py-1 rounded text-sm font-bold">
+            <div className="absolute top-6 right-6 bg-[#ff9900] text-white px-3 py-1 rounded text-sm font-bold">
               CATECH BRANDED
             </div>
           </div>
@@ -289,7 +276,7 @@ const DesignGeneratorPage = () => {
       )}
 
       {/* Features showcase */}
-      <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6">
+      <div className="bg-white rounded-xl p-6 border border-[#ff9900]/20">
         <h4 className="text-lg font-bold text-[#017020] mb-4 text-center">Professional Features Included</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div className="text-center">
@@ -306,15 +293,15 @@ const DesignGeneratorPage = () => {
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-white font-bold">Q</span>
-            </div>
-            <p className="text-gray-600">QR Code</p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-white font-bold">H</span>
             </div>
             <p className="text-gray-600">HD Quality</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">P</span>
+            </div>
+            <p className="text-gray-600">Professional</p>
           </div>
         </div>
       </div>

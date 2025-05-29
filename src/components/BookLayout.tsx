@@ -54,7 +54,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
 
       {/* Menu Overlay */}
       {isMenuOpen && (
-        <div className="fixed inset-0 bg-black/80 z-40 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/80 z-40 flex items-center justify-center animate-page-peel-in">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 animate-scale-in">
             <h3 className="text-2xl font-bold text-[#017020] mb-6 text-center">Navigation</h3>
             <div className="space-y-3">
@@ -79,21 +79,22 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
         </div>
       )}
 
-      {/* Book Container - 90% width on large screens */}
-      <div className="w-full max-w-7xl mx-auto h-full relative">
-        <div className="w-full lg:w-[90%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
+      {/* Book Container - Increased width */}
+      <div className="w-full max-w-8xl mx-auto h-full relative">
+        <div className="w-full lg:w-[98%] xl:w-[95%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
           
           {/* Page Content */}
           <div className="h-full relative overflow-hidden">
             <div 
-              className={`h-full p-8 ${pages[currentPage].animation}`}
+              className={`h-full p-8 animate-page-peel-in`}
+              key={currentPage}
             >
               {pages[currentPage].component}
             </div>
           </div>
 
           {/* Page Indicator and Navigation - Outside book container */}
-          <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-4">
+          <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-4">
             {/* Page Dots */}
             <div className="flex space-x-2">
               {pages.map((_, index) => (
@@ -114,8 +115,8 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
               {currentPage + 1} / {pages.length}
             </div>
             
-            {/* Navigation Arrows */}
-            <div className="flex space-x-8">
+            {/* Navigation Arrows - Below page numbers */}
+            <div className="flex space-x-8 mt-4">
               <button
                 onClick={prevPage}
                 disabled={currentPage === 0}
