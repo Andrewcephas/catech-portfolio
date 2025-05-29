@@ -20,7 +20,7 @@ const AnimatedBackground = () => {
     window.addEventListener('resize', resizeCanvas);
 
     // Code particles animation
-    const codeStrings = ['<html>', 'function()', 'return', 'const', 'import', '{...}', 'useState', 'effect', 'render()'];
+    const codeStrings = ['andrew', 'cephas', 'ngumbau', 'catech', 'hire me', '{Quality}', 'graphics', 'website development', 'website design', 'web development', 'software development', 'full stack developer', 'frontend developer', 'backend developer', 'UI/UX designer'];
     const particles: Array<{
       x: number;
       y: number;
@@ -53,7 +53,7 @@ const AnimatedBackground = () => {
       ctx.strokeStyle = '#ff9900';
       ctx.lineWidth = 2;
       ctx.globalAlpha = 0.3;
-      
+
       ctx.beginPath();
       for (let x = 0; x <= canvas.width; x += 10) {
         const y = canvas.height * 0.7 + Math.sin((x + waveOffset) * 0.01) * 50;

@@ -62,11 +62,10 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
                 <button
                   key={index}
                   onClick={() => goToPage(index)}
-                  className={`w-full p-4 rounded-lg text-left transition-all duration-300 ${
-                    currentPage === index
-                      ? 'bg-gradient-to-r from-[#ff9900] to-[#017020] text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`w-full p-4 rounded-lg text-left transition-all duration-300 ${currentPage === index
+                    ? 'bg-gradient-to-r from-[#ff9900] to-[#017020] text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
                 >
                   <span className="font-semibold">{page.title}</span>
                   {currentPage === index && (
@@ -81,11 +80,11 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
 
       {/* Book Container - Increased width for large screens */}
       <div className="w-full max-w-8xl mx-auto h-full relative">
-        <div className="w-full lg:w-[95%] xl:w-[98%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
-          
+        <div className="w-full lg:w-[70%] xl:w-[80%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
+
           {/* Page Content - Enable scrolling for all pages */}
           <div className="h-full relative">
-            <div 
+            <div
               className={`h-full ${pages[currentPage].animation}`}
               key={currentPage}
             >
@@ -106,34 +105,33 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
               <button
                 key={index}
                 onClick={() => setCurrentPage(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  currentPage === index
-                    ? 'bg-[#ff9900] scale-125 shadow-lg'
-                    : 'bg-white/70 hover:bg-white/90'
-                }`}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${currentPage === index
+                  ? 'bg-[#ff9900] scale-125 shadow-lg'
+                  : 'bg-black/20 hover:bg-white/9s0'
+                  }`}
               />
             ))}
           </div>
-          
+
           {/* Page Number */}
           <div className="text-white/90 text-sm font-medium bg-black/20 backdrop-blur-sm px-3 py-1 rounded-full">
             {currentPage + 1} / {pages.length}
           </div>
-          
+
           {/* Navigation Arrows - Below page numbers */}
           <div className="flex space-x-6 mt-2">
             <button
               onClick={prevPage}
               disabled={currentPage === 0}
-              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+              className="p-3 bg-black/20 backdrop-blur-sm rounded-full text-black transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
             >
               <ChevronLeft size={24} />
             </button>
-            
+
             <button
               onClick={nextPage}
               disabled={currentPage === pages.length - 1}
-              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-black transition-all duration-300 hover:bg-black/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
             >
               <ChevronRight size={24} />
             </button>

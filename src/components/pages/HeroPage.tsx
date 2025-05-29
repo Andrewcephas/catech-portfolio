@@ -66,7 +66,7 @@ SERVICES:
 
 Contact us for professional creative solutions!
     `;
-    
+
     const blob = new Blob([cvContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -102,11 +102,11 @@ Contact us for professional creative solutions!
       <div className="relative mb-8 animate-scale-in">
         <div className="relative w-64 h-64 mx-auto overflow-hidden">
           {/* Main rotating container with proper boundaries */}
-          <div 
+          <div
             className="absolute inset-0 flex items-center justify-center perspective-1000"
           >
             <div className="relative w-32 h-32">
-              <div 
+              <div
                 className="absolute inset-0 animate-rotate-gallery preserve-3d"
               >
                 {profileImages.map((image, index) => (
@@ -118,10 +118,10 @@ Contact us for professional creative solutions!
                       left: '50%',
                       top: '50%',
                       marginLeft: '-40px',
-                      marginTop: '-40px',
+                      marginTop: '-10px',
                     }}
                   >
-                    <img 
+                    <img
                       src={image}
                       alt={`Profile ${index + 1}`}
                       className="w-full h-full object-cover"
@@ -131,21 +131,21 @@ Contact us for professional creative solutions!
               </div>
             </div>
           </div>
-          
+
           {/* Reflection - positioned closer and contained */}
-          <div 
+          <div
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-16 opacity-40 overflow-hidden"
-            style={{ 
-              transform: 'translateX(-50%) scaleY(-0.6)', 
+            style={{
+              transform: 'translateX(-50%) scaleY(-0.6)',
               filter: 'blur(1px)',
               background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.8) 100%)'
             }}
           >
-            <div 
+            <div
               className="absolute inset-0 flex items-start justify-center"
             >
               <div className="relative w-32 h-32">
-                <div 
+                <div
                   className="absolute inset-0 animate-rotate-gallery preserve-3d"
                 >
                   {profileImages.map((image, index) => (
@@ -160,7 +160,7 @@ Contact us for professional creative solutions!
                         marginTop: '-40px',
                       }}
                     >
-                      <img 
+                      <img
                         src={image}
                         alt={`Reflection ${index + 1}`}
                         className="w-full h-full object-cover"
@@ -171,7 +171,7 @@ Contact us for professional creative solutions!
               </div>
             </div>
           </div>
-          
+
           <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center animate-pulse z-10">
             <div className="w-3 h-3 bg-[#ff9900] rounded-full"></div>
           </div>
@@ -183,7 +183,7 @@ Contact us for professional creative solutions!
         <h1 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent">
           Hello, I'm a Creative Professional
         </h1>
-        
+
         <div className="h-12 mb-6">
           <p className="text-xl lg:text-2xl text-gray-700 font-light">
             {displayText}
@@ -192,9 +192,9 @@ Contact us for professional creative solutions!
         </div>
 
         <p className="text-gray-600 mb-8 max-w-2xl leading-relaxed px-4">
-          My journey began in 2018 when I discovered my passion for design through Adobe Photoshop. 
-          What started as curiosity quickly evolved into expertise across the entire Adobe Creative Suite. 
-          Over the years, I've expanded into web development, mastering the MERN stack, Python, and UI/UX design. 
+          My journey began in 2018 when I discovered my passion for design through Adobe Photoshop.
+          What started as curiosity quickly evolved into expertise across the entire Adobe Creative Suite.
+          Over the years, I've expanded into web development, mastering the MERN stack, Python, and UI/UX design.
           Today, I blend creativity with technology to deliver exceptional digital experiences and data-driven solutions.
         </p>
 
@@ -244,7 +244,7 @@ Contact us for professional creative solutions!
 
         {/* Action buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button 
+          <button
             onClick={handleViewWork}
             className="px-6 py-3 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl animate-bounce-slow flex items-center justify-center"
             style={{ animationDelay: '1.6s' }}
@@ -252,7 +252,7 @@ Contact us for professional creative solutions!
             <Eye size={16} className="mr-2" />
             View My Work
           </button>
-          <button 
+          <button
             onClick={handleDownloadCV}
             className="px-6 py-3 border-2 border-[#017020] text-[#017020] rounded-full font-semibold transition-all duration-300 hover:bg-[#017020] hover:text-white animate-scale-in flex items-center justify-center"
             style={{ animationDelay: '1.8s' }}

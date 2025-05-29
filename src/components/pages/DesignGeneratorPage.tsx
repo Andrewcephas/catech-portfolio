@@ -23,43 +23,43 @@ const DesignGeneratorPage = () => {
 
   const generateDesign = async () => {
     if (!uploadedImage || !designText) return;
-    
+
     setIsGenerating(true);
-    
+
     setTimeout(() => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      
+
       if (ctx) {
         canvas.width = 1080;
         canvas.height = 1080;
-        
+
         const img = new Image();
         img.onload = () => {
           // White background
           ctx.fillStyle = '#f3f3ff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
+
           // Orange accent stripes at top and bottom
           ctx.fillStyle = '#ff9900';
           ctx.fillRect(0, 0, canvas.width, 15);
           ctx.fillRect(0, canvas.height - 15, canvas.width, 15);
-          
+
           // Logo section at top
           const logoY = 60;
           ctx.fillStyle = '#ff9900';
           ctx.font = 'bold 48px Arial, sans-serif';
           ctx.textAlign = 'center';
           ctx.fillText('CATECH', canvas.width / 2, logoY);
-          
+
           ctx.fillStyle = '#017020';
           ctx.font = 'bold 24px Arial, sans-serif';
           ctx.fillText('SOLUTIONS', canvas.width / 2, logoY + 35);
-          
+
           // Dynamic layout based on image aspect ratio
           const imgAspectRatio = img.width / img.height;
           let leftSectionWidth, rightSectionWidth, imgSize, imgX, imgY;
-          
+
           if (imgAspectRatio > 1) {
             // Landscape image - give more space to image
             leftSectionWidth = canvas.width * 0.65;
@@ -69,11 +69,11 @@ const DesignGeneratorPage = () => {
             leftSectionWidth = canvas.width * 0.5;
             rightSectionWidth = canvas.width * 0.5;
           }
-          
+
           // Image section (left side) - no compression, maintain aspect ratio
           const maxImgWidth = leftSectionWidth - 80;
           const maxImgHeight = 600;
-          
+
           if (imgAspectRatio > maxImgWidth / maxImgHeight) {
             // Image is wider - fit by width
             imgSize = { width: maxImgWidth, height: maxImgWidth / imgAspectRatio };
@@ -81,24 +81,24 @@ const DesignGeneratorPage = () => {
             // Image is taller - fit by height
             imgSize = { width: maxImgHeight * imgAspectRatio, height: maxImgHeight };
           }
-          
+
           imgX = (leftSectionWidth - imgSize.width) / 2;
           imgY = logoY + 80;
-          
+
           // Draw image with no compression - just clipping if needed
           ctx.save();
           ctx.beginPath();
           ctx.roundRect(imgX, imgY, imgSize.width, imgSize.height, 15);
           ctx.clip();
-          
+
           // Calculate image positioning to center it
           const drawWidth = imgSize.width;
           const drawHeight = imgSize.height;
           const sourceAspect = img.width / img.height;
           const targetAspect = drawWidth / drawHeight;
-          
+
           let sourceX = 0, sourceY = 0, sourceWidth = img.width, sourceHeight = img.height;
-          
+
           if (sourceAspect > targetAspect) {
             // Source is wider - crop sides
             sourceWidth = img.height * targetAspect;
@@ -108,25 +108,25 @@ const DesignGeneratorPage = () => {
             sourceHeight = img.width / targetAspect;
             sourceY = (img.height - sourceHeight) / 2;
           }
-          
+
           ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, imgX, imgY, drawWidth, drawHeight);
           ctx.restore();
-          
+
           // Right section content
           const rightSectionX = leftSectionWidth + 20;
           const contentWidth = rightSectionWidth - 40;
-          
+
           // Dynamic text sizing based on content length
           let currentY = logoY + 100;
-          
+
           // Main text - adaptive font size
           const words = designText.split(' ');
           let mainFontSize = Math.max(36, Math.min(72, 800 / designText.length));
-          
+
           ctx.fillStyle = '#ff9900';
           ctx.font = `bold ${mainFontSize}px Arial, sans-serif`;
           ctx.textAlign = 'left';
-          
+
           // Word wrapping for main text
           words.forEach((word, index) => {
             const wordWidth = ctx.measureText(word).width;
@@ -135,13 +135,13 @@ const DesignGeneratorPage = () => {
               mainFontSize = Math.max(24, mainFontSize * 0.8);
               ctx.font = `bold ${mainFontSize}px Arial, sans-serif`;
             }
-            
+
             if (index === 0) {
               ctx.fillStyle = '#ff9900';
             } else {
               ctx.fillStyle = '#017020';
             }
-            
+
             // Simple word wrapping
             const lines = wrapText(ctx, word, contentWidth);
             lines.forEach(line => {
@@ -149,57 +149,57 @@ const DesignGeneratorPage = () => {
               currentY += mainFontSize + 10;
             });
           });
-          
+
           // Subtitle
           if (subText) {
             currentY += 20;
             const subFontSize = Math.max(18, Math.min(32, 400 / subText.length));
             ctx.fillStyle = '#666666';
             ctx.font = `italic ${subFontSize}px Arial, sans-serif`;
-            
+
             const subLines = wrapText(ctx, subText, contentWidth);
             subLines.forEach(line => {
               ctx.fillText(line, rightSectionX, currentY);
               currentY += subFontSize + 8;
             });
           }
-          
+
           // Quote section
           if (quote) {
             currentY += 30;
             const quoteFontSize = Math.max(16, Math.min(24, 300 / quote.length));
-            
+
             // Quote background
             const quoteHeight = Math.ceil(quote.length / 40) * (quoteFontSize + 8) + 40;
             ctx.fillStyle = '#ff9900';
             ctx.fillRect(rightSectionX - 10, currentY - 20, contentWidth + 20, quoteHeight);
-            
+
             // Quote text
             ctx.fillStyle = '#ffffff';
             ctx.font = `italic ${quoteFontSize}px Arial, sans-serif`;
             ctx.fillText('"', rightSectionX, currentY + 10);
-            
+
             const quoteLines = wrapText(ctx, quote, contentWidth - 40);
             quoteLines.forEach(line => {
               ctx.fillText(line, rightSectionX + 20, currentY + 10);
               currentY += quoteFontSize + 8;
             });
-            
+
             ctx.fillText('"', rightSectionX + contentWidth - 20, currentY);
           }
-          
+
           // Footer section
           const footerHeight = 120;
           const footerY = canvas.height - footerHeight;
-          
+
           // Footer background
           ctx.fillStyle = '#017020';
           ctx.fillRect(0, footerY, canvas.width, footerHeight);
-          
+
           // Orange accent line
           ctx.fillStyle = '#ff9900';
           ctx.fillRect(0, footerY, canvas.width, 4);
-          
+
           // Footer content
           ctx.fillStyle = '#ffffff';
           ctx.font = 'bold 20px Arial, sans-serif';
@@ -207,7 +207,7 @@ const DesignGeneratorPage = () => {
           ctx.fillText('📧 info@catech.co.ke', 40, footerY + 35);
           ctx.fillText('📞 +254 700 123 456', 40, footerY + 60);
           ctx.fillText('🌐 www.catech.co.ke', 40, footerY + 85);
-          
+
           // Right side of footer
           ctx.textAlign = 'right';
           ctx.fillStyle = '#ff9900';
@@ -217,7 +217,7 @@ const DesignGeneratorPage = () => {
           ctx.font = 'bold 18px Arial, sans-serif';
           ctx.fillText('Design Solutions', canvas.width - 40, footerY + 65);
           ctx.fillText('Creative Excellence', canvas.width - 40, footerY + 85);
-          
+
           setGeneratedDesign(canvas.toDataURL('image/png', 1.0));
           setIsGenerating(false);
         };
@@ -231,11 +231,11 @@ const DesignGeneratorPage = () => {
     const words = text.split(' ');
     const lines = [];
     let currentLine = '';
-    
+
     for (const word of words) {
       const testLine = currentLine + (currentLine ? ' ' : '') + word;
       const metrics = ctx.measureText(testLine);
-      
+
       if (metrics.width > maxWidth && currentLine) {
         lines.push(currentLine);
         currentLine = word;
@@ -243,11 +243,11 @@ const DesignGeneratorPage = () => {
         currentLine = testLine;
       }
     }
-    
+
     if (currentLine) {
       lines.push(currentLine);
     }
-    
+
     return lines;
   };
 
