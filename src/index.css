@@ -54,6 +54,15 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* Ensure black text in input fields */
+  input, textarea, .text-input {
+    color: #000000 !important;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #666666 !important;
+  }
 }
 
 @layer utilities {
@@ -136,7 +145,18 @@
     backface-visibility: hidden;
   }
 
-  /* Responsive Design */
+  /* Large screen responsiveness - 90% width */
+  @media (min-width: 1024px) {
+    .w-5\/6 {
+      width: 90% !important;
+    }
+    
+    .w-1\/12 {
+      width: 5% !important;
+    }
+  }
+
+  /* Mobile responsiveness */
   @media (max-width: 768px) {
     .perspective-1000 {
       perspective: 500px;
@@ -144,6 +164,40 @@
     
     .animate-fade-in {
       animation-duration: 0.5s;
+    }
+    
+    .w-5\/6 {
+      width: 85% !important;
+    }
+    
+    .w-1\/12 {
+      width: 7.5% !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .text-4xl {
+      font-size: 2rem !important;
+    }
+    
+    .text-3xl {
+      font-size: 1.75rem !important;
+    }
+    
+    .p-8 {
+      padding: 1rem !important;
+    }
+    
+    .space-y-6 > * + * {
+      margin-top: 1rem !important;
+    }
+
+    .w-5\/6 {
+      width: 95% !important;
+    }
+
+    .w-1\/12 {
+      width: 2.5% !important;
     }
   }
 
@@ -170,33 +224,6 @@
 
   .light-theme .text-white {
     color: #212529 !important;
-  }
-
-  /* Mobile responsiveness */
-  @media (max-width: 640px) {
-    .w-2\/3 {
-      width: 85% !important;
-    }
-    
-    .w-1\/6 {
-      width: 7.5% !important;
-    }
-    
-    .text-4xl {
-      font-size: 2rem !important;
-    }
-    
-    .text-3xl {
-      font-size: 1.75rem !important;
-    }
-    
-    .p-8 {
-      padding: 1rem !important;
-    }
-    
-    .space-y-6 > * + * {
-      margin-top: 1rem !important;
-    }
   }
 
   /* Custom scrollbar */

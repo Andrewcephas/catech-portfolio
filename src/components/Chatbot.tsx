@@ -12,7 +12,7 @@ const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { 
-      text: "Hi! I'm your design assistant. I can help you with questions about graphic design, Adobe software, or project inquiries. What would you like to know?", 
+      text: "Hi! I'm your digital assistant from Catech Solutions. I can help you with questions about our services including data science, graphics design, web development, UI/UX design, Figma, Adobe Creative Suite, MERN stack development, Python programming, and more. How can I assist you today?", 
       isBot: true, 
       timestamp: new Date() 
     }
@@ -32,40 +32,67 @@ const Chatbot = () => {
   const getBotResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
     
-    if (lowerMessage.includes('adobe') || lowerMessage.includes('photoshop') || lowerMessage.includes('illustrator')) {
-      return "I'm proficient in the entire Adobe Creative Suite! I specialize in Photoshop for photo editing, Illustrator for vector graphics, and InDesign for layout design. What specific Adobe software are you interested in?";
+    // Data Science related queries
+    if (lowerMessage.includes('data science') || lowerMessage.includes('analytics') || lowerMessage.includes('machine learning') || lowerMessage.includes('ai')) {
+      return "Excellent! We specialize in data science solutions including machine learning, data analytics, predictive modeling, and AI implementation. We work with Python, R, TensorFlow, and various data visualization tools. What specific data science challenge are you looking to solve?";
     }
     
-    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('quote')) {
-      return "Pricing depends on the project scope and complexity. For logos, I typically charge $200-500. For complete branding packages, it's $800-2000. Would you like to discuss your specific project for a detailed quote?";
+    // Web Development queries
+    if (lowerMessage.includes('web development') || lowerMessage.includes('website') || lowerMessage.includes('mern') || lowerMessage.includes('react')) {
+      return "Great choice! We're experts in web development using the MERN stack (MongoDB, Express, React, Node.js). We build responsive, scalable web applications, e-commerce sites, and custom web solutions. What type of web project do you have in mind?";
     }
     
-    if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('examples')) {
-      return "You can view my portfolio by navigating to the Projects page in this portfolio, or visit catech.co.ke for more examples. I've worked on branding, print design, digital graphics, and more!";
+    // Graphics Design queries
+    if (lowerMessage.includes('graphics') || lowerMessage.includes('design') || lowerMessage.includes('adobe') || lowerMessage.includes('photoshop') || lowerMessage.includes('illustrator')) {
+      return "Perfect! We're specialists in graphics design using the complete Adobe Creative Suite including Photoshop, Illustrator, InDesign, After Effects, and Premiere Pro. We create logos, branding, print materials, digital graphics, and motion graphics. What design project can we help you with?";
     }
     
-    if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
-      return "You can reach me at info@catech.co.ke or +254 700 123 456. You can also use the contact form on the Contact page. I typically respond within 24 hours!";
+    // UI/UX Design queries
+    if (lowerMessage.includes('ui') || lowerMessage.includes('ux') || lowerMessage.includes('figma') || lowerMessage.includes('user interface') || lowerMessage.includes('user experience')) {
+      return "Fantastic! We excel in UI/UX design using Figma, Adobe XD, and other modern design tools. We create user-centered designs, wireframes, prototypes, and complete design systems. Our process includes user research, usability testing, and iterative design. What UI/UX project are you working on?";
     }
     
-    if (lowerMessage.includes('logo') || lowerMessage.includes('brand')) {
-      return "I love creating unique logos and brand identities! My process includes research, concept development, multiple revisions, and final file delivery in all formats. What type of business or project do you need branding for?";
+    // Python queries
+    if (lowerMessage.includes('python') || lowerMessage.includes('django') || lowerMessage.includes('flask') || lowerMessage.includes('automation')) {
+      return "Excellent! Python is one of our core technologies. We develop web applications with Django/Flask, automation scripts, data analysis tools, API integrations, and machine learning solutions. We also create desktop applications and handle system integrations. What Python project do you need help with?";
     }
     
-    if (lowerMessage.includes('time') || lowerMessage.includes('timeline') || lowerMessage.includes('deadline')) {
-      return "Project timelines vary: Simple logos take 3-5 days, complete branding packages take 1-2 weeks, and print materials take 2-7 days. Rush jobs are possible with premium pricing. What's your timeline?";
+    // Pricing queries
+    if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('quote') || lowerMessage.includes('budget')) {
+      return "Our pricing is competitive and project-based. Web development: $500-5000+, Graphics design: $50-500+, UI/UX projects: $300-2000+, Data science consulting: $100-200/hour. Python development varies by complexity. For an accurate quote, let's discuss your specific requirements!";
     }
     
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-      return "Hello! Great to meet you! I'm excited to help with your design needs. Are you looking for logo design, branding, print materials, or digital graphics?";
+    // Portfolio queries
+    if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('examples') || lowerMessage.includes('projects')) {
+      return "Check out our portfolio right here in this website! Navigate to the Projects page to see our recent work in web development, graphics design, and data science. You can also visit catech.co.ke for our complete portfolio and case studies. Which type of project interests you most?";
+    }
+    
+    // Contact queries
+    if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone') || lowerMessage.includes('reach')) {
+      return "Great! You can reach us at info@catech.co.ke or call +254 700 123 456. We're also available on WhatsApp. You can use the contact form on our Contact page here. We typically respond within 2-4 hours during business hours. What's the best way to reach you?";
+    }
+    
+    // Technology stack queries
+    if (lowerMessage.includes('technology') || lowerMessage.includes('stack') || lowerMessage.includes('tools')) {
+      return "Our tech stack includes: Frontend (React, Next.js, HTML5, CSS3, JavaScript, TypeScript), Backend (Node.js, Python, Django, Flask), Databases (MongoDB, PostgreSQL, MySQL), Design (Adobe Creative Suite, Figma, Sketch), Data Science (Python, R, TensorFlow, Pandas), and Cloud (AWS, Google Cloud, Azure). What technology are you interested in?";
+    }
+    
+    // Timeline queries
+    if (lowerMessage.includes('time') || lowerMessage.includes('timeline') || lowerMessage.includes('deadline') || lowerMessage.includes('delivery')) {
+      return "Our typical timelines: Simple websites (1-2 weeks), Complex web apps (4-12 weeks), Logo design (2-5 days), Complete branding (1-3 weeks), UI/UX design (2-6 weeks), Data science projects (2-8 weeks), Python development (1-6 weeks). Rush projects available with premium pricing. What's your target timeline?";
+    }
+    
+    // Greetings
+    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey') || lowerMessage.includes('good')) {
+      return "Hello! Welcome to Catech Solutions! 🎉 We're a full-service digital agency specializing in data science, web development, graphics design, UI/UX, and Python development. We'd love to help bring your ideas to life. What project are you considering?";
     }
     
     // Default responses
     const defaultResponses = [
-      "That's an interesting question! I'd love to discuss this further. You can reach out via the contact form or email me at info@catech.co.ke for a detailed conversation.",
-      "Thanks for asking! For specific project details and pricing, I'd recommend we have a proper consultation. Feel free to contact me through the contact page!",
-      "I'm here to help with all your design needs! For the best assistance with your question, let's connect via email at info@catech.co.ke or through the contact form.",
-      "Great question! I'd be happy to provide more detailed information. Check out my portfolio page or contact me directly to discuss your specific requirements."
+      "That's a great question! At Catech Solutions, we handle diverse projects across data science, web development, graphics design, UI/UX, and Python programming. Could you tell me more about what you're looking for specifically?",
+      "Thanks for reaching out! We'd love to discuss your project in detail. Our team specializes in cutting-edge technology and creative solutions. Feel free to email us at info@catech.co.ke for a comprehensive consultation!",
+      "Interesting! We work with clients on various technology and design challenges. Whether it's building a web app, creating stunning graphics, analyzing data, or developing Python solutions, we're here to help. What's your main goal?",
+      "I'd be happy to provide more specific information about our services! We're experts in modern web technologies, creative design, and data solutions. Let's connect via info@catech.co.ke to discuss your project requirements in detail."
     ];
     
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
@@ -84,7 +111,6 @@ const Chatbot = () => {
     setInput("");
     setIsTyping(true);
     
-    // Simulate typing delay
     setTimeout(() => {
       const botResponse = getBotResponse(input);
       const botMessage: Message = { 
@@ -95,7 +121,7 @@ const Chatbot = () => {
       
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+    }, 1500 + Math.random() * 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -125,7 +151,7 @@ const Chatbot = () => {
                 <Bot size={20} />
               </div>
               <div>
-                <h3 className="font-bold">Design Assistant</h3>
+                <h3 className="font-bold">Catech Assistant</h3>
                 <p className="text-sm opacity-90">Online • Ready to help</p>
               </div>
             </div>
@@ -176,7 +202,7 @@ const Chatbot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
+          {/* Input with black text */}
           <div className="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
             <div className="flex space-x-2">
               <input
@@ -184,9 +210,10 @@ const Chatbot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me about design services..."
-                className="flex-1 p-3 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#ff9900] bg-gray-50"
+                placeholder="Ask about our services..."
+                className="flex-1 p-3 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#ff9900] bg-gray-50 text-black"
                 disabled={isTyping}
+                style={{ color: '#000000' }}
               />
               <button
                 onClick={handleSend}

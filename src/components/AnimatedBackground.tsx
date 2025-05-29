@@ -19,32 +19,91 @@ const AnimatedBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Particle system for animated background
+    // Code particles animation
+    const codeStrings = ['<html>', 'function()', 'return', 'const', 'import', '{...}', 'useState', 'effect', 'render()'];
     const particles: Array<{
       x: number;
       y: number;
       vx: number;
       vy: number;
-      size: number;
+      text: string;
       opacity: number;
+      size: number;
     }> = [];
 
-    for (let i = 0; i < 50; i++) {
+    // Wave properties
+    let waveOffset = 0;
+
+    for (let i = 0; i < 15; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
-        size: Math.random() * 3 + 1,
-        opacity: Math.random() * 0.5 + 0.2,
+        vx: (Math.random() - 0.5) * 1,
+        vy: Math.random() * 2 + 1,
+        text: codeStrings[Math.floor(Math.random() * codeStrings.length)],
+        opacity: Math.random() * 0.7 + 0.3,
+        size: Math.random() * 14 + 10,
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw connecting lines
-      ctx.strokeStyle = 'rgba(255, 153, 0, 0.1)';
+      // Draw animated wave
+      ctx.strokeStyle = '#ff9900';
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.3;
+      
+      ctx.beginPath();
+      for (let x = 0; x <= canvas.width; x += 10) {
+        const y = canvas.height * 0.7 + Math.sin((x + waveOffset) * 0.01) * 50;
+        if (x === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+
+      // Second wave
+      ctx.strokeStyle = '#017020';
+      ctx.beginPath();
+      for (let x = 0; x <= canvas.width; x += 10) {
+        const y = canvas.height * 0.3 + Math.sin((x + waveOffset + 100) * 0.008) * 40;
+        if (x === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.stroke();
+
+      waveOffset += 2;
+
+      // Update and draw code particles
+      particles.forEach(particle => {
+        particle.y += particle.vy;
+        particle.x += particle.vx;
+
+        if (particle.y > canvas.height + 20) {
+          particle.y = -20;
+          particle.x = Math.random() * canvas.width;
+          particle.text = codeStrings[Math.floor(Math.random() * codeStrings.length)];
+        }
+
+        if (particle.x < -50 || particle.x > canvas.width + 50) {
+          particle.vx *= -1;
+        }
+
+        ctx.globalAlpha = particle.opacity;
+        ctx.fillStyle = Math.random() > 0.5 ? '#ff9900' : '#017020';
+        ctx.font = `${particle.size}px 'Courier New', monospace`;
+        ctx.fillText(particle.text, particle.x, particle.y);
+      });
+
+      // Draw connecting lines between nearby particles
+      ctx.globalAlpha = 0.1;
+      ctx.strokeStyle = '#ff9900';
       ctx.lineWidth = 1;
 
       for (let i = 0; i < particles.length; i++) {
@@ -53,7 +112,7 @@ const AnimatedBackground = () => {
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 100) {
+          if (distance < 150) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -61,20 +120,6 @@ const AnimatedBackground = () => {
           }
         }
       }
-
-      // Update and draw particles
-      particles.forEach(particle => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(1, 112, 32, ${particle.opacity})`;
-        ctx.fill();
-      });
 
       requestAnimationFrame(animate);
     };
@@ -90,7 +135,7 @@ const AnimatedBackground = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-0"
-      style={{ background: 'transparent' }}
+      style={{ background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)' }}
     />
   );
 };
