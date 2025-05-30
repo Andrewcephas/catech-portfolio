@@ -7,10 +7,10 @@ const HeroPage = () => {
   const fullText = "Graphic Designer & Creative Innovator";
 
   const profileImages = [
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=300&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
     "/lovable-uploads/6fe90ea1-1e3b-443b-838b-e8df66c96450.png",
   ];
 
@@ -81,7 +81,7 @@ Contact us for professional creative solutions!
   };
 
   return (
-    <div className="h-full flex flex-col justify-center items-center text-center relative overflow-hidden animate-fade-in">
+    <div className="h-full flex flex-col justify-center items-center text-center relative overflow-hidden animate-fade-in pt-4">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(8)].map((_, i) => (
@@ -98,27 +98,27 @@ Contact us for professional creative solutions!
         ))}
       </div>
 
-      {/* 3D Rotating Image Gallery - Fixed container */}
-      <div className="relative mb-8 animate-scale-in">
-        <div className="relative w-64 h-64 mx-auto overflow-hidden">
-          {/* Main rotating container with proper boundaries */}
+      {/* 3D Rotating Image Gallery - Made much bigger */}
+      <div className="relative mb-6 animate-scale-in">
+        <div className="relative w-96 h-96 mx-auto overflow-hidden">
+          {/* Main rotating container with bigger size */}
           <div
             className="absolute inset-0 flex items-center justify-center perspective-1000"
           >
-            <div className="relative w-32 h-32">
+            <div className="relative w-64 h-64">
               <div
                 className="absolute inset-0 animate-rotate-gallery preserve-3d"
               >
                 {profileImages.map((image, index) => (
                   <div
                     key={index}
-                    className="absolute w-20 h-20 rounded-lg overflow-hidden border-2 border-[#ff9900] shadow-xl backface-hidden"
+                    className="absolute w-40 h-40 rounded-lg overflow-hidden border-4 border-[#ff9900] shadow-2xl backface-hidden"
                     style={{
-                      transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(60px)`,
+                      transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(120px)`,
                       left: '50%',
                       top: '50%',
-                      marginLeft: '-40px',
-                      marginTop: '-10px',
+                      marginLeft: '-80px',
+                      marginTop: '-80px',
                     }}
                   >
                     <img
@@ -134,30 +134,30 @@ Contact us for professional creative solutions!
 
           {/* Reflection - positioned closer and contained */}
           <div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-16 opacity-40 overflow-hidden"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-64 h-32 opacity-30 overflow-hidden"
             style={{
               transform: 'translateX(-50%) scaleY(-0.6)',
-              filter: 'blur(1px)',
+              filter: 'blur(2px)',
               background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.8) 100%)'
             }}
           >
             <div
               className="absolute inset-0 flex items-start justify-center"
             >
-              <div className="relative w-32 h-32">
+              <div className="relative w-64 h-64">
                 <div
                   className="absolute inset-0 animate-rotate-gallery preserve-3d"
                 >
                   {profileImages.map((image, index) => (
                     <div
                       key={`reflection-${index}`}
-                      className="absolute w-20 h-20 rounded-lg overflow-hidden border-2 border-[#ff9900]/30 backface-hidden"
+                      className="absolute w-40 h-40 rounded-lg overflow-hidden border-4 border-[#ff9900]/30 backface-hidden"
                       style={{
-                        transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(60px)`,
+                        transform: `rotateY(${index * (360 / profileImages.length)}deg) translateZ(120px)`,
                         left: '50%',
                         top: '50%',
-                        marginLeft: '-40px',
-                        marginTop: '-40px',
+                        marginLeft: '-80px',
+                        marginTop: '-80px',
                       }}
                     >
                       <img
@@ -172,8 +172,8 @@ Contact us for professional creative solutions!
             </div>
           </div>
 
-          <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center animate-pulse z-10">
-            <div className="w-3 h-3 bg-[#ff9900] rounded-full"></div>
+          <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-[#017020] rounded-full flex items-center justify-center animate-pulse z-10">
+            <div className="w-4 h-4 bg-[#ff9900] rounded-full"></div>
           </div>
         </div>
       </div>
@@ -191,48 +191,46 @@ Contact us for professional creative solutions!
           </p>
         </div>
 
-        <p className="text-gray-600 mb-8 max-w-2xl leading-relaxed px-4">
+        <p className="text-gray-600 mb-6 max-w-2xl leading-relaxed px-4 text-base">
           My journey began in 2018 when I discovered my passion for design through Adobe Photoshop.
           What started as curiosity quickly evolved into expertise across the entire Adobe Creative Suite.
           Over the years, I've expanded into web development, mastering the MERN stack, Python, and UI/UX design.
           Today, I blend creativity with technology to deliver exceptional digital experiences and data-driven solutions.
         </p>
 
-        {/* My Journey Timeline */}
-        <div className="mb-8 max-w-2xl mx-auto">
-          <h3 className="text-lg font-semibold text-[#017020] mb-4">My Growth Journey</h3>
-          <div className="space-y-3 text-sm text-gray-600">
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
-              <span>2018: Started with Photoshop</span>
-              <span className="text-[#ff9900] font-bold">Foundation</span>
+        {/* My Journey Timeline - More compact */}
+        <div className="mb-6 max-w-2xl mx-auto">
+          <h3 className="text-lg font-semibold text-[#017020] mb-3">My Growth Journey</h3>
+          <div className="grid grid-cols-2 gap-2 text-sm text-gray-600">
+            <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
+              <span className="block font-bold text-[#ff9900]">2018</span>
+              <span>Photoshop Foundation</span>
             </div>
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
-              <span>2019-2020: Mastered Adobe Suite</span>
-              <span className="text-[#ff9900] font-bold">Creative Phase</span>
+            <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
+              <span className="block font-bold text-[#ff9900]">2019-2020</span>
+              <span>Adobe Suite Mastery</span>
             </div>
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
-              <span>2021: Web Development & MERN</span>
-              <span className="text-[#017020] font-bold">Tech Expansion</span>
+            <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
+              <span className="block font-bold text-[#017020]">2021</span>
+              <span>Web Development</span>
             </div>
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded">
-              <span>2022-2024: UI/UX & Data Science</span>
-              <span className="text-[#017020] font-bold">Professional Growth</span>
+            <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
+              <span className="block font-bold text-[#017020]">2022-2024</span>
+              <span>UI/UX & Data Science</span>
             </div>
           </div>
         </div>
 
         {/* Social links */}
-        <div className="flex justify-center space-x-4 mb-8">
+        <div className="flex justify-center space-x-4 mb-6">
           {[
-            { icon: Github, href: "https://github.com", color: "bg-gray-800", label: "GitHub" },
-            { icon: Linkedin, href: "https://linkedin.com", color: "bg-blue-600", label: "LinkedIn" },
-            { icon: Mail, href: "mailto:info@catech.co.ke", color: "bg-[#ff9900]", label: "Email" },
+            { icon: Github, href: "/", color: "bg-gray-800", label: "GitHub" },
+            { icon: Linkedin, href: "/", color: "bg-blue-600", label: "LinkedIn" },
+            { icon: Mail, href: "/", color: "bg-[#ff9900]", label: "Email" },
           ].map((social, index) => (
             <a
               key={index}
               href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className={`p-3 ${social.color} text-white rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg animate-fade-in`}
               style={{ animationDelay: `${1 + index * 0.2}s` }}
               title={social.label}

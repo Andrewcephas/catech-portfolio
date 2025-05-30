@@ -1,197 +1,209 @@
 
-import { Calendar, User, Tag, ExternalLink } from "lucide-react";
+import { useState } from 'react';
+import { Calendar, User, ArrowRight, Globe, Palette, Lightbulb } from 'lucide-react';
 
 const BlogPage = () => {
+  const [selectedPost, setSelectedPost] = useState<number | null>(null);
+
   const blogPosts = [
     {
       id: 1,
-      title: "The Art of Balancing Design and Development",
-      excerpt: "Exploring how to seamlessly blend creative design with functional development to create exceptional user experiences.",
-      category: "Design & Development",
-      date: "2024-01-15",
-      readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300&h=200&fit=crop",
-      tags: ["Design", "Development", "UX/UI"]
+      title: "Why Your Business Needs a Professional Website in 2025",
+      excerpt: "In today's digital-first world, a website isn't just nice to have—it's essential for business survival and growth.",
+      content: `In 2025, having a professional website is no longer optional for businesses—it's a fundamental requirement for success. Here's why:
+
+**24/7 Accessibility**: Your website works around the clock, providing customers with information, services, and support even when your physical location is closed.
+
+**Credibility and Trust**: 75% of consumers judge a company's credibility based on its website design. A professional website builds trust and establishes your business as legitimate and reliable.
+
+**Global Reach**: A website breaks down geographical barriers, allowing you to reach customers worldwide and expand your market beyond local boundaries.
+
+**Cost-Effective Marketing**: Compared to traditional advertising, a website provides long-term value and can generate leads at a fraction of the cost of print or broadcast media.
+
+**Customer Insights**: Modern websites provide valuable analytics about customer behavior, preferences, and demographics, helping you make informed business decisions.
+
+**Competitive Advantage**: While some businesses still lack an online presence, having a well-designed website sets you apart from competitors and positions you as forward-thinking.
+
+**E-commerce Opportunities**: Even service-based businesses can benefit from online booking systems, payment processing, and digital service delivery.
+
+At Catech Solutions, we create websites that not only look professional but also drive results. Contact us to transform your online presence.`,
+      author: "Catech Team",
+      date: "2025-01-15",
+      category: "Web Development",
+      icon: Globe,
+      readTime: "5 min read"
     },
     {
       id: 2,
-      title: "Adobe Creative Suite Mastery Tips",
-      excerpt: "Professional techniques and workflows for maximizing productivity in Photoshop, Illustrator, and InDesign.",
-      category: "Design Tools",
-      date: "2024-01-10",
-      readTime: "7 min read", 
-      image: "https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=300&h=200&fit=crop",
-      tags: ["Adobe", "Photoshop", "Illustrator", "Workflow"]
+      title: "How Graphic Design Elevates Your Business Brand",
+      excerpt: "Great design isn't just about looking good—it's about communicating your brand's values and connecting with your audience on an emotional level.",
+      content: `Graphic design is the silent ambassador of your brand. Every visual element tells a story about your business, and here's how professional design elevates your brand:
+
+**First Impressions Matter**: You have 7 seconds to make a first impression. Professional graphic design ensures those crucial seconds work in your favor, creating instant brand recognition and trust.
+
+**Brand Consistency**: Consistent visual elements across all platforms—from business cards to social media—create a cohesive brand experience that customers remember and trust.
+
+**Emotional Connection**: Colors, typography, and imagery evoke emotions. Strategic design choices can make customers feel confident, excited, or comfortable with your brand.
+
+**Communication Clarity**: Good design simplifies complex information, making your message clear and accessible to your target audience.
+
+**Competitive Differentiation**: In crowded markets, distinctive design helps your business stand out and be memorable among competitors.
+
+**Professional Credibility**: High-quality design signals that you're a serious, established business that pays attention to details.
+
+**Marketing Effectiveness**: Well-designed marketing materials have higher engagement rates and conversion rates than generic designs.
+
+**Brand Value**: Strong visual branding can increase business value by up to 20%, making your company more attractive to investors and customers.
+
+Our design team at Catech understands the psychology of visual communication. We create designs that don't just look beautiful—they work strategically to grow your business.`,
+      author: "Design Team",
+      date: "2025-01-10",
+      category: "Graphic Design",
+      icon: Palette,
+      readTime: "4 min read"
     },
     {
       id: 3,
-      title: "Creating Effective Brand Identities",
-      excerpt: "A step-by-step guide to developing memorable brand identities that resonate with target audiences.",
-      category: "Branding",
-      date: "2024-01-05",
-      readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=300&h=200&fit=crop",
-      tags: ["Branding", "Logo Design", "Identity"]
-    },
-    {
-      id: 4,
-      title: "Responsive Design Best Practices",
-      excerpt: "Essential techniques for creating websites that work beautifully across all devices and screen sizes.",
-      category: "Web Development",
-      date: "2023-12-28",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=300&h=200&fit=crop",
-      tags: ["Responsive", "CSS", "Mobile-First"]
-    },
-    {
-      id: 5,
-      title: "Music and Creativity: Finding Inspiration",
-      excerpt: "How playing guitar and musical expression enhances creative thinking in design and problem-solving.",
-      category: "Creativity",
-      date: "2023-12-20",
-      readTime: "4 min read",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop",
-      tags: ["Music", "Creativity", "Inspiration"]
+      title: "Why Choose Creativity Over Generic Solutions",
+      excerpt: "In a world of templates and cookie-cutter solutions, creativity is your competitive advantage. Here's why custom creative solutions matter.",
+      content: `In an age of templates and automated solutions, creativity has become the ultimate differentiator. Here's why choosing creative, custom solutions over generic ones is crucial for your business:
+
+**Unique Brand Identity**: Generic solutions make you look like everyone else. Creative approaches ensure your brand stands out with a unique personality that resonates with your specific audience.
+
+**Problem-Solving Innovation**: Creative thinking leads to innovative solutions that generic templates simply can't provide. We solve your unique business challenges with tailored approaches.
+
+**Authentic Storytelling**: Your business has a unique story. Creative solutions help tell that story authentically, rather than forcing your narrative into a pre-made mold.
+
+**Flexibility and Scalability**: Custom creative solutions grow with your business. Unlike rigid templates, creative designs can evolve and adapt to your changing needs.
+
+**Higher Engagement**: Original, creative content consistently outperforms generic content in engagement metrics, conversions, and customer retention.
+
+**Brand Loyalty**: Customers connect more deeply with brands that demonstrate creativity and originality, leading to stronger loyalty and word-of-mouth marketing.
+
+**Future-Proofing**: Creative solutions are built to last and adapt, while generic solutions quickly become outdated and commonplace.
+
+**ROI Excellence**: While creative solutions may require more investment upfront, they deliver superior long-term returns through better performance and longevity.
+
+**Cultural Relevance**: Creative approaches can be tailored to your specific market, culture, and audience, something generic solutions cannot achieve.
+
+At Catech Solutions, we believe every business deserves a creative approach that reflects its unique value proposition. Don't settle for generic—choose creativity that drives results.`,
+      author: "Creative Director",
+      date: "2025-01-05",
+      category: "Business Strategy",
+      icon: Lightbulb,
+      readTime: "6 min read"
     }
   ];
 
-  const categories = ["All", "Design & Development", "Design Tools", "Branding", "Web Development", "Creativity"];
+  const handleReadMore = (postId: number) => {
+    setSelectedPost(selectedPost === postId ? null : postId);
+  };
 
   return (
-    <div className="h-full space-y-6 overflow-y-auto">
+    <div className="h-full space-y-6 overflow-y-auto animate-page-peel-in">
       {/* Header */}
-      <div className="text-center animate-fade-in">
-        <div className="relative w-40 h-28 mx-auto mb-4 transform rotate-2">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=150&fit=crop"
-            alt="Writing and creativity"
-            className="w-full h-full object-cover rounded-lg"
-          />
-        </div>
+      <div className="text-center mb-8">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-          Design & Dev Insights
+          Business Growth Blog
         </h2>
-        <p className="text-gray-600">Sharing knowledge, tutorials, and creative insights</p>
+        <p className="text-gray-600">Insights on web development, design, and business growth strategies</p>
       </div>
 
-      {/* Categories */}
-      <div className="flex flex-wrap gap-2 justify-center animate-slide-up">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-[#ff9900]/10 hover:to-[#017020]/10 hover:border-[#ff9900] transition-all duration-300"
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      {/* Featured Post */}
-      <div className="bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl p-6 border border-[#ff9900]/20 animate-slide-up">
-        <div className="flex items-center space-x-4">
-          <div className="relative w-32 h-24 transform -rotate-1">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-lg border-2 border-[#ff9900] border-opacity-100"></div>
-            <img 
-              src={blogPosts[0].image}
-              alt={blogPosts[0].title}
-              className="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="px-3 py-1 bg-[#ff9900] text-white rounded-full text-xs font-medium">
-                Featured
-              </span>
-              <span className="text-gray-500 text-sm">{blogPosts[0].category}</span>
-            </div>
-            <h3 className="font-bold text-gray-800 mb-2">{blogPosts[0].title}</h3>
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">{blogPosts[0].excerpt}</p>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4 text-xs text-gray-500">
-                <span className="flex items-center gap-1">
-                  <Calendar size={12} />
-                  {blogPosts[0].date}
-                </span>
-                <span>{blogPosts[0].readTime}</span>
-              </div>
-              <button className="px-3 py-1 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full text-xs font-medium hover:scale-105 transition-transform">
-                Read More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Blog Posts Grid */}
-      <div className="space-y-4">
-        {blogPosts.slice(1).map((post, index) => (
-          <div
-            key={post.id}
-            className={`bg-white p-4 rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 animate-fade-in`}
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <div className="flex space-x-4">
-              <div className="relative w-24 h-20 transform rotate-1">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
-                <img 
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover rounded-lg"
-                />
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="px-2 py-1 bg-[#017020]/10 text-[#017020] rounded text-xs font-medium">
-                    {post.category}
-                  </span>
-                </div>
-                <h4 className="font-bold text-gray-800 mb-1 text-sm">{post.title}</h4>
-                <p className="text-gray-600 text-xs mb-2 line-clamp-2">{post.excerpt}</p>
-                
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 text-xs text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={10} />
-                      {post.date}
-                    </span>
-                    <span>{post.readTime}</span>
+      {/* Blog Posts */}
+      <div className="space-y-6">
+        {blogPosts.map((post) => (
+          <article key={post.id} className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-xl">
+            {/* Post Header */}
+            <div className="p-6 border-b border-gray-100">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#ff9900] to-[#017020] rounded-lg flex items-center justify-center">
+                    <post.icon className="text-white" size={24} />
                   </div>
-                  <button className="p-1 text-[#ff9900] hover:bg-[#ff9900]/10 rounded transition-colors">
-                    <ExternalLink size={14} />
-                  </button>
+                  <div>
+                    <span className="inline-block bg-[#ff9900]/10 text-[#ff9900] px-3 py-1 rounded-full text-sm font-medium">
+                      {post.category}
+                    </span>
+                  </div>
                 </div>
+                <span className="text-gray-500 text-sm">{post.readTime}</span>
+              </div>
+
+              <h3 className="text-xl font-bold text-gray-800 mb-2 hover:text-[#017020] transition-colors cursor-pointer">
+                {post.title}
+              </h3>
+
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                {post.excerpt}
+              </p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4 text-sm text-gray-500">
+                  <div className="flex items-center space-x-1">
+                    <User size={16} />
+                    <span>{post.author}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Calendar size={16} />
+                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => handleReadMore(post.id)}
+                  className="flex items-center space-x-2 text-[#017020] hover:text-[#ff9900] transition-colors font-medium"
+                >
+                  <span>{selectedPost === post.id ? 'Show Less' : 'Read More'}</span>
+                  <ArrowRight size={16} className={`transition-transform ${selectedPost === post.id ? 'rotate-90' : ''}`} />
+                </button>
               </div>
             </div>
-          </div>
+
+            {/* Expandable Content */}
+            {selectedPost === post.id && (
+              <div className="p-6 bg-gray-50 animate-fade-in">
+                <div className="prose prose-gray max-w-none">
+                  {post.content.split('\n').map((paragraph, index) => {
+                    if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
+                      return (
+                        <h4 key={index} className="font-bold text-[#017020] mt-4 mb-2">
+                          {paragraph.slice(2, -2)}
+                        </h4>
+                      );
+                    }
+                    return paragraph.trim() && (
+                      <p key={index} className="mb-3 text-gray-700 leading-relaxed">
+                        {paragraph}
+                      </p>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-gray-200">
+                  <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-4 rounded-lg">
+                    <h5 className="font-bold text-[#017020] mb-2">Ready to Get Started?</h5>
+                    <p className="text-gray-700 mb-3">
+                      Contact Catech Solutions today to discuss how we can help transform your business with creative solutions.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-2 text-sm">
+                      <span className="text-[#ff9900] font-medium">📧 info@catech.co.ke</span>
+                      <span className="text-[#017020] font-medium">📞 +254 700 123 456</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </article>
         ))}
       </div>
 
-      {/* Newsletter Signup */}
-      <div className="text-center p-6 bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl border border-[#ff9900]/20 animate-fade-in">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">Stay Updated</h3>
-        <p className="text-gray-600 mb-4">Get the latest insights and tutorials delivered to your inbox</p>
-        <div className="flex gap-2 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Your email address"
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:border-[#ff9900] focus:outline-none"
-          />
-          <button className="px-6 py-2 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold hover:scale-105 transition-transform duration-300">
-            Subscribe
-          </button>
-        </div>
+      {/* Call to Action */}
+      <div className="bg-gradient-to-r from-[#ff9900] to-[#017020] rounded-xl p-6 text-white text-center">
+        <h3 className="text-xl font-bold mb-2">Stay Updated</h3>
+        <p className="mb-4">Subscribe to our newsletter for the latest insights on business growth and design trends.</p>
+        <button className="bg-white text-[#017020] px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          Subscribe Now
+        </button>
       </div>
     </div>
   );

@@ -4,9 +4,12 @@ import { Upload, Download, Wand2, Image as ImageIcon } from 'lucide-react';
 
 const DesignGeneratorPage = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [designText, setDesignText] = useState('');
-  const [subText, setSubText] = useState('');
+  const [mainText, setMainText] = useState('');
+  const [scriptText, setScriptText] = useState('');
   const [quote, setQuote] = useState('');
+  const [quoteReference, setQuoteReference] = useState('');
+  const [tagline, setTagline] = useState('');
+  const [footerText, setFooterText] = useState('Choose Catech Stay Happy Always - 0793614592');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedDesign, setGeneratedDesign] = useState<string | null>(null);
 
@@ -22,7 +25,7 @@ const DesignGeneratorPage = () => {
   };
 
   const generateDesign = async () => {
-    if (!uploadedImage || !designText) return;
+    if (!uploadedImage) return;
 
     setIsGenerating(true);
 
@@ -36,187 +39,172 @@ const DesignGeneratorPage = () => {
 
         const img = new Image();
         img.onload = () => {
-          // White background
-          ctx.fillStyle = '#f3f3ff';
+          // Soft grey background
+          ctx.fillStyle = '#f8f9fa';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-          // Orange accent stripes at top and bottom
+          // Company logo at top center
           ctx.fillStyle = '#ff9900';
-          ctx.fillRect(0, 0, canvas.width, 15);
-          ctx.fillRect(0, canvas.height - 15, canvas.width, 15);
-
-          // Logo section at top
-          const logoY = 60;
-          ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 48px Arial, sans-serif';
+          ctx.font = 'bold 42px Arial, sans-serif';
           ctx.textAlign = 'center';
-          ctx.fillText('CATECH', canvas.width / 2, logoY);
+          ctx.fillText('CATECH', canvas.width / 2, 70);
 
           ctx.fillStyle = '#017020';
-          ctx.font = 'bold 24px Arial, sans-serif';
-          ctx.fillText('SOLUTIONS', canvas.width / 2, logoY + 35);
+          ctx.font = 'bold 20px Arial, sans-serif';
+          ctx.fillText('SOLUTIONS • GRAPHICS', canvas.width / 2, 100);
 
-          // Dynamic layout based on image aspect ratio
+          // Calculate layout based on image aspect ratio
           const imgAspectRatio = img.width / img.height;
-          let leftSectionWidth, rightSectionWidth, imgSize, imgX, imgY;
-
-          if (imgAspectRatio > 1) {
-            // Landscape image - give more space to image
-            leftSectionWidth = canvas.width * 0.65;
-            rightSectionWidth = canvas.width * 0.35;
+          const isPortrait = imgAspectRatio < 1;
+          
+          let imageSection, textSection;
+          
+          if (isPortrait) {
+            // Portrait: Image takes left 45%, text takes right 55%
+            imageSection = { x: 40, y: 140, width: canvas.width * 0.45, height: canvas.height - 300 };
+            textSection = { x: canvas.width * 0.48, y: 140, width: canvas.width * 0.48, height: canvas.height - 300 };
           } else {
-            // Portrait image - balanced layout
-            leftSectionWidth = canvas.width * 0.5;
-            rightSectionWidth = canvas.width * 0.5;
+            // Landscape: Image takes left 60%, text takes right 40%
+            imageSection = { x: 40, y: 140, width: canvas.width * 0.58, height: canvas.height - 300 };
+            textSection = { x: canvas.width * 0.62, y: 140, width: canvas.width * 0.34, height: canvas.height - 300 };
           }
 
-          // Image section (left side) - no compression, maintain aspect ratio
-          const maxImgWidth = leftSectionWidth - 80;
-          const maxImgHeight = 600;
-
+          // Draw image with proper aspect ratio (no compression)
+          const maxImgWidth = imageSection.width;
+          const maxImgHeight = imageSection.height;
+          
+          let imgDrawWidth, imgDrawHeight;
           if (imgAspectRatio > maxImgWidth / maxImgHeight) {
-            // Image is wider - fit by width
-            imgSize = { width: maxImgWidth, height: maxImgWidth / imgAspectRatio };
+            imgDrawWidth = maxImgWidth;
+            imgDrawHeight = maxImgWidth / imgAspectRatio;
           } else {
-            // Image is taller - fit by height
-            imgSize = { width: maxImgHeight * imgAspectRatio, height: maxImgHeight };
+            imgDrawHeight = maxImgHeight;
+            imgDrawWidth = maxImgHeight * imgAspectRatio;
           }
 
-          imgX = (leftSectionWidth - imgSize.width) / 2;
-          imgY = logoY + 80;
+          const imgX = imageSection.x + (imageSection.width - imgDrawWidth) / 2;
+          const imgY = imageSection.y + (imageSection.height - imgDrawHeight) / 2;
 
-          // Draw image with no compression - just clipping if needed
+          // Gradient fade at bottom of image
           ctx.save();
           ctx.beginPath();
-          ctx.roundRect(imgX, imgY, imgSize.width, imgSize.height, 15);
+          ctx.roundRect(imgX, imgY, imgDrawWidth, imgDrawHeight, 12);
           ctx.clip();
-
-          // Calculate image positioning to center it
-          const drawWidth = imgSize.width;
-          const drawHeight = imgSize.height;
-          const sourceAspect = img.width / img.height;
-          const targetAspect = drawWidth / drawHeight;
-
-          let sourceX = 0, sourceY = 0, sourceWidth = img.width, sourceHeight = img.height;
-
-          if (sourceAspect > targetAspect) {
-            // Source is wider - crop sides
-            sourceWidth = img.height * targetAspect;
-            sourceX = (img.width - sourceWidth) / 2;
-          } else {
-            // Source is taller - crop top/bottom
-            sourceHeight = img.width / targetAspect;
-            sourceY = (img.height - sourceHeight) / 2;
-          }
-
-          ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, imgX, imgY, drawWidth, drawHeight);
+          ctx.drawImage(img, imgX, imgY, imgDrawWidth, imgDrawHeight);
+          
+          // Add gradient fade
+          const gradient = ctx.createLinearGradient(0, imgY + imgDrawHeight - 80, 0, imgY + imgDrawHeight);
+          gradient.addColorStop(0, 'rgba(248, 249, 250, 0)');
+          gradient.addColorStop(1, 'rgba(248, 249, 250, 0.7)');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(imgX, imgY, imgDrawWidth, imgDrawHeight);
           ctx.restore();
 
-          // Right section content
-          const rightSectionX = leftSectionWidth + 20;
-          const contentWidth = rightSectionWidth - 40;
+          // Text section content
+          let currentY = textSection.y + 40;
+          const textWidth = textSection.width - 40;
 
-          // Dynamic text sizing based on content length
-          let currentY = logoY + 100;
+          // Tagline (top-left of text section)
+          if (tagline) {
+            ctx.fillStyle = '#ff9900';
+            ctx.font = 'bold 28px Arial, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText(tagline, textSection.x, currentY);
+            currentY += 50;
+          }
 
-          // Main text - adaptive font size
-          const words = designText.split(' ');
-          let mainFontSize = Math.max(36, Math.min(72, 800 / designText.length));
-
-          ctx.fillStyle = '#ff9900';
-          ctx.font = `bold ${mainFontSize}px Arial, sans-serif`;
-          ctx.textAlign = 'left';
-
-          // Word wrapping for main text
-          words.forEach((word, index) => {
-            const wordWidth = ctx.measureText(word).width;
-            if (wordWidth > contentWidth) {
-              // Word too long, reduce font size
-              mainFontSize = Math.max(24, mainFontSize * 0.8);
-              ctx.font = `bold ${mainFontSize}px Arial, sans-serif`;
-            }
-
-            if (index === 0) {
-              ctx.fillStyle = '#ff9900';
-            } else {
-              ctx.fillStyle = '#017020';
-            }
-
-            // Simple word wrapping
-            const lines = wrapText(ctx, word, contentWidth);
-            lines.forEach(line => {
-              ctx.fillText(line, rightSectionX, currentY);
+          // Main text
+          if (mainText) {
+            ctx.fillStyle = '#000000';
+            const mainFontSize = Math.max(36, Math.min(64, 800 / mainText.length));
+            ctx.font = `bold ${mainFontSize}px Arial, sans-serif`;
+            
+            const mainLines = wrapText(ctx, mainText, textWidth);
+            mainLines.forEach(line => {
+              ctx.fillText(line, textSection.x, currentY);
               currentY += mainFontSize + 10;
             });
-          });
-
-          // Subtitle
-          if (subText) {
             currentY += 20;
-            const subFontSize = Math.max(18, Math.min(32, 400 / subText.length));
-            ctx.fillStyle = '#666666';
-            ctx.font = `italic ${subFontSize}px Arial, sans-serif`;
+          }
 
-            const subLines = wrapText(ctx, subText, contentWidth);
-            subLines.forEach(line => {
-              ctx.fillText(line, rightSectionX, currentY);
-              currentY += subFontSize + 8;
+          // Script text (decorative overlay style)
+          if (scriptText) {
+            ctx.save();
+            ctx.fillStyle = '#ff9900';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 3;
+            const scriptFontSize = Math.max(32, Math.min(56, 600 / scriptText.length));
+            ctx.font = `italic bold ${scriptFontSize}px Georgia, serif`;
+            
+            const scriptLines = wrapText(ctx, scriptText, textWidth);
+            scriptLines.forEach(line => {
+              ctx.strokeText(line, textSection.x, currentY);
+              ctx.fillText(line, textSection.x, currentY);
+              currentY += scriptFontSize + 10;
             });
+            ctx.restore();
+            currentY += 30;
           }
 
           // Quote section
           if (quote) {
-            currentY += 30;
-            const quoteFontSize = Math.max(16, Math.min(24, 300 / quote.length));
-
+            const quoteBoxHeight = Math.ceil(quote.length / 35) * 25 + 80;
+            
             // Quote background
-            const quoteHeight = Math.ceil(quote.length / 40) * (quoteFontSize + 8) + 40;
-            ctx.fillStyle = '#ff9900';
-            ctx.fillRect(rightSectionX - 10, currentY - 20, contentWidth + 20, quoteHeight);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(textSection.x - 10, currentY - 20, textWidth + 20, quoteBoxHeight);
+            ctx.strokeStyle = '#ff9900';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(textSection.x - 10, currentY - 20, textWidth + 20, quoteBoxHeight);
 
             // Quote text
-            ctx.fillStyle = '#ffffff';
-            ctx.font = `italic ${quoteFontSize}px Arial, sans-serif`;
-            ctx.fillText('"', rightSectionX, currentY + 10);
-
-            const quoteLines = wrapText(ctx, quote, contentWidth - 40);
+            ctx.fillStyle = '#333333';
+            ctx.font = 'italic 18px Arial, sans-serif';
+            ctx.fillText('"', textSection.x + 10, currentY + 10);
+            
+            const quoteLines = wrapText(ctx, quote, textWidth - 40);
             quoteLines.forEach(line => {
-              ctx.fillText(line, rightSectionX + 20, currentY + 10);
-              currentY += quoteFontSize + 8;
+              ctx.fillText(line, textSection.x + 25, currentY + 10);
+              currentY += 25;
             });
-
-            ctx.fillText('"', rightSectionX + contentWidth - 20, currentY);
+            
+            ctx.fillText('"', textSection.x + textWidth - 20, currentY);
+            
+            // Quote reference
+            if (quoteReference) {
+              currentY += 15;
+              ctx.fillStyle = '#ff9900';
+              ctx.font = 'bold 16px Arial, sans-serif';
+              ctx.textAlign = 'center';
+              ctx.fillRect(textSection.x + textWidth/2 - 80, currentY, 160, 25);
+              ctx.fillStyle = '#ffffff';
+              ctx.fillText(`(${quoteReference})`, textSection.x + textWidth/2, currentY + 17);
+              ctx.textAlign = 'left';
+            }
           }
 
-          // Footer section
-          const footerHeight = 120;
+          // Vertical watermark
+          ctx.save();
+          ctx.translate(canvas.width - 60, canvas.height / 2);
+          ctx.rotate(-Math.PI / 2);
+          ctx.fillStyle = 'rgba(255, 153, 0, 0.1)';
+          ctx.font = 'bold 72px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          const watermarkText = scriptText || mainText || 'CATECH';
+          ctx.fillText(watermarkText.toUpperCase(), 0, 0);
+          ctx.restore();
+
+          // Footer banner
+          const footerHeight = 80;
           const footerY = canvas.height - footerHeight;
-
-          // Footer background
-          ctx.fillStyle = '#017020';
+          
+          ctx.fillStyle = '#ff9900';
           ctx.fillRect(0, footerY, canvas.width, footerHeight);
-
-          // Orange accent line
-          ctx.fillStyle = '#ff9900';
-          ctx.fillRect(0, footerY, canvas.width, 4);
-
-          // Footer content
+          
           ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 20px Arial, sans-serif';
-          ctx.textAlign = 'left';
-          ctx.fillText('📧 info@catech.co.ke', 40, footerY + 35);
-          ctx.fillText('📞 +254 700 123 456', 40, footerY + 60);
-          ctx.fillText('🌐 www.catech.co.ke', 40, footerY + 85);
-
-          // Right side of footer
-          ctx.textAlign = 'right';
-          ctx.fillStyle = '#ff9900';
-          ctx.font = 'bold 28px Arial, sans-serif';
-          ctx.fillText('PROFESSIONAL', canvas.width - 40, footerY + 40);
-          ctx.fillStyle = '#ffffff';
-          ctx.font = 'bold 18px Arial, sans-serif';
-          ctx.fillText('Design Solutions', canvas.width - 40, footerY + 65);
-          ctx.fillText('Creative Excellence', canvas.width - 40, footerY + 85);
+          ctx.font = 'bold 24px Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(footerText, canvas.width / 2, footerY + 50);
 
           setGeneratedDesign(canvas.toDataURL('image/png', 1.0));
           setIsGenerating(false);
@@ -267,7 +255,7 @@ const DesignGeneratorPage = () => {
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
           Professional Poster Generator
         </h2>
-        <p className="text-gray-600">Create stunning adaptive professional posters with Catech branding</p>
+        <p className="text-gray-600">Create stunning adaptive professional posters like the reference design</p>
       </div>
 
       {/* Upload section */}
@@ -300,35 +288,63 @@ const DesignGeneratorPage = () => {
         )}
 
         {/* Input fields */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="block text-gray-700 font-semibold">Main Text *</label>
-            <textarea
-              value={designText}
-              onChange={(e) => setDesignText(e.target.value)}
-              placeholder="e.g., Stay Cool Summer"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
-              rows={2}
+            <label className="block text-gray-700 font-semibold">Tagline (Top-left)</label>
+            <input
+              value={tagline}
+              onChange={(e) => setTagline(e.target.value)}
+              placeholder="e.g., Stay Cool"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none text-black bg-white"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-gray-700 font-semibold">Subtitle</label>
-            <textarea
-              value={subText}
-              onChange={(e) => setSubText(e.target.value)}
-              placeholder="e.g., Happy Easter 2025"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
-              rows={2}
+            <label className="block text-gray-700 font-semibold">Main Text (Bold)</label>
+            <input
+              value={mainText}
+              onChange={(e) => setMainText(e.target.value)}
+              placeholder="e.g., Happy"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none text-black bg-white"
             />
           </div>
           <div className="space-y-2">
-            <label className="block text-gray-700 font-semibold">Inspiring Quote</label>
+            <label className="block text-gray-700 font-semibold">Script Text (Decorative)</label>
+            <input
+              value={scriptText}
+              onChange={(e) => setScriptText(e.target.value)}
+              placeholder="e.g., Easter"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none text-black bg-white"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-gray-700 font-semibold">Footer Text</label>
+            <input
+              value={footerText}
+              onChange={(e) => setFooterText(e.target.value)}
+              placeholder="Contact information"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none text-black bg-white"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label className="block text-gray-700 font-semibold">Quote/Scripture</label>
             <textarea
               value={quote}
               onChange={(e) => setQuote(e.target.value)}
-              placeholder="e.g., Success is not final, failure is not fatal"
+              placeholder="e.g., He is not here, for He has risen, as He said..."
               className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none resize-none text-black bg-white"
-              rows={2}
+              rows={3}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-gray-700 font-semibold">Quote Reference</label>
+            <input
+              value={quoteReference}
+              onChange={(e) => setQuoteReference(e.target.value)}
+              placeholder="e.g., Matthew 28:6"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:border-[#ff9900] focus:outline-none text-black bg-white"
             />
           </div>
         </div>
@@ -336,18 +352,18 @@ const DesignGeneratorPage = () => {
         {/* Generate button */}
         <button
           onClick={generateDesign}
-          disabled={!uploadedImage || !designText || isGenerating}
+          disabled={!uploadedImage || isGenerating}
           className="w-full py-4 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
         >
           {isGenerating ? (
             <>
               <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-              <span>Creating Adaptive Professional Poster...</span>
+              <span>Creating Professional Poster...</span>
             </>
           ) : (
             <>
               <Wand2 size={20} />
-              <span>Generate Adaptive Professional Poster</span>
+              <span>Generate Professional Poster</span>
             </>
           )}
         </button>
@@ -358,7 +374,7 @@ const DesignGeneratorPage = () => {
         <div className="animate-scale-in space-y-4">
           <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2">
             <ImageIcon className="text-[#ff9900]" size={24} />
-            Your Adaptive Professional Poster
+            Your Professional Poster
           </h3>
           <div className="relative bg-white p-4 rounded-lg">
             <img
@@ -367,7 +383,7 @@ const DesignGeneratorPage = () => {
               className="w-full rounded-lg border-2 border-[#ff9900]/30 shadow-xl"
             />
             <div className="absolute top-6 right-6 bg-[#ff9900] text-white px-3 py-1 rounded text-sm font-bold">
-              CATECH ADAPTIVE
+              CATECH PROFESSIONAL
             </div>
           </div>
           <button
@@ -375,38 +391,38 @@ const DesignGeneratorPage = () => {
             className="w-full py-4 bg-gradient-to-r from-[#017020] to-[#ff9900] text-white rounded-lg font-semibold transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2 shadow-lg"
           >
             <Download size={20} />
-            <span>Download High-Quality Adaptive Poster</span>
+            <span>Download High-Quality Poster</span>
           </button>
         </div>
       )}
 
-      {/* Features showcase */}
+      {/* Reference showcase */}
       <div className="bg-white rounded-xl p-6 border border-[#ff9900]/20">
-        <h4 className="text-lg font-bold text-[#017020] mb-4 text-center">Adaptive Design Features</h4>
+        <h4 className="text-lg font-bold text-[#017020] mb-4 text-center">Design Features</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div className="text-center">
             <div className="w-12 h-12 bg-[#ff9900] rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-white font-bold">A</span>
             </div>
-            <p className="text-gray-600">Adaptive Text</p>
+            <p className="text-gray-600">Adaptive Layout</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-[#017020] rounded-full flex items-center justify-center mx-auto mb-2">
-              <span className="text-white font-bold">R</span>
-            </div>
-            <p className="text-gray-600">Responsive Layout</p>
-          </div>
-          <div className="text-center">
-            <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-white font-bold">N</span>
             </div>
             <p className="text-gray-600">No Compression</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+            <div className="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-white font-bold">Q</span>
             </div>
             <p className="text-gray-600">Quote Section</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span className="text-white font-bold">W</span>
+            </div>
+            <p className="text-gray-600">Watermark</p>
           </div>
         </div>
       </div>
