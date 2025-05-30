@@ -1,6 +1,6 @@
-
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Wand2, Download, RefreshCw, Upload } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 const DesignGeneratorPage = () => {
   const [tagline, setTagline] = useState('Stay Cool');
@@ -10,6 +10,8 @@ const DesignGeneratorPage = () => {
   const [reference, setReference] = useState('Matthew 28:6');
   const [footerText, setFooterText] = useState('CATECH SOLUTIONS | info@catech.co.ke | +254 700 123 456');
   const [userImage, setUserImage] = useState('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face');
+  const [isDownloading, setIsDownloading] = useState(false);
+  const posterRef = useRef<HTMLDivElement>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -36,6 +38,29 @@ const DesignGeneratorPage = () => {
     setScriptTitle(randomTheme.script);
     setQuote(randomTheme.quote);
     setReference(randomTheme.ref);
+  };
+
+  const downloadPoster = async () => {
+    if (!posterRef.current) return;
+    
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(posterRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#f8f9fa'
+      });
+      
+      const link = document.createElement('a');
+      link.download = `${mainTitle}-${scriptTitle}-poster.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    } catch (error) {
+      console.error('Error downloading poster:', error);
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -153,9 +178,13 @@ const DesignGeneratorPage = () => {
                   <RefreshCw size={16} />
                   <span>Random Theme</span>
                 </button>
-                <button className="flex items-center justify-center space-x-2 px-3 md:px-4 py-2 bg-[#ff9900] text-white rounded-lg hover:bg-[#e6870a] transition-colors text-sm md:text-base">
+                <button 
+                  onClick={downloadPoster}
+                  disabled={isDownloading}
+                  className="flex items-center justify-center space-x-2 px-3 md:px-4 py-2 bg-[#ff9900] text-white rounded-lg hover:bg-[#e6870a] transition-colors text-sm md:text-base disabled:opacity-50"
+                >
                   <Download size={16} />
-                  <span>Download</span>
+                  <span>{isDownloading ? 'Downloading...' : 'Download'}</span>
                 </button>
               </div>
             </div>
@@ -169,6 +198,7 @@ const DesignGeneratorPage = () => {
             
             {/* Poster Preview */}
             <div 
+              ref={posterRef}
               className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden"
               style={{ aspectRatio: '3/4', minHeight: '400px' }}
             >

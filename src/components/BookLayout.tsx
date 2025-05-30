@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import DateTimeDisplay from "./DateTimeDisplay";
@@ -13,6 +12,7 @@ import ResumePage from "./pages/ResumePage";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import GuitarPage from "./pages/GuitarPage";
 import BlogPage from "./pages/BlogPage";
+import GamePage from "./pages/GamePage";
 
 interface BookLayoutProps {
   currentPage: number;
@@ -31,6 +31,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
     { title: "Testimonials", component: <TestimonialsPage />, animation: "animate-page-peel-in" },
     { title: "Guitar", component: <GuitarPage />, animation: "animate-page-peel-in" },
     { title: "Blog", component: <BlogPage />, animation: "animate-page-peel-in" },
+    { title: "Games", component: <GamePage />, animation: "animate-page-peel-in" },
     { title: "Contact", component: <ContactPage />, animation: "animate-page-peel-in" },
     { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
   ];
