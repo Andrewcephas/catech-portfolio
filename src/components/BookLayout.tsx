@@ -1,7 +1,7 @@
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import DateTimeDisplay from "./DateTimeDisplay";
+import VisitCounter from "./VisitCounter";
 import HeroPage from "./pages/HeroPage";
 import AboutPage from "./pages/AboutPage";
 import SkillsPage from "./pages/SkillsPage";
@@ -56,6 +56,11 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
       {/* Date and Time Display */}
       <DateTimeDisplay />
 
+      {/* Visit Counter - Next to hamburger menu */}
+      <div className="fixed top-4 left-20 z-50">
+        <VisitCounter />
+      </div>
+
       {/* Hamburger Menu */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -90,11 +95,11 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
         </div>
       )}
 
-      {/* Book Container - Increased width for large screens */}
+      {/* Book Container */}
       <div className="w-full max-w-8xl mx-auto h-full relative">
         <div className="w-full lg:w-[95%] xl:w-[98%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
 
-          {/* Page Content - Enable scrolling for all pages */}
+          {/* Page Content */}
           <div className="h-full relative">
             <div
               className={`h-full ${pages[currentPage].animation}`}
@@ -109,9 +114,18 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
           </div>
         </div>
 
-        {/* Navigation Controls - Fixed positioning at bottom */}
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-3 z-30">
-          {/* Page Dots - Above everything */}
+        {/* Navigation Controls - Fixed positioning at bottom with new layout */}
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex items-center space-x-6 z-30">
+          {/* Previous Button */}
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 0}
+            className="p-2 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/40 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          {/* Page Dots - Left side */}
           <div className="flex space-x-2 bg-black/30 backdrop-blur-sm p-3 rounded-full">
             {pages.map((_, index) => (
               <button
@@ -125,31 +139,19 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
             ))}
           </div>
 
-          {/* Navigation container - horizontal layout */}
-          <div className="flex items-center space-x-6 bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full">
-            {/* Previous Button */}
-            <button
-              onClick={prevPage}
-              disabled={currentPage === 0}
-              className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {/* Page Number */}
-            <div className="text-white font-medium px-4 py-1 bg-black/20 backdrop-blur-sm rounded-full text-sm min-w-[80px] text-center">
-              {currentPage + 1} / {pages.length}
-            </div>
-
-            {/* Next Button */}
-            <button
-              onClick={nextPage}
-              disabled={currentPage === pages.length - 1}
-              className="p-2 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
-            >
-              <ChevronRight size={20} />
-            </button>
+          {/* Page Number - Center */}
+          <div className="text-white font-medium px-4 py-2 bg-black/30 backdrop-blur-sm rounded-full text-sm min-w-[80px] text-center shadow-lg">
+            {currentPage + 1} / {pages.length}
           </div>
+
+          {/* Next Button */}
+          <button
+            onClick={nextPage}
+            disabled={currentPage === pages.length - 1}
+            className="p-2 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/40 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
     </div>
