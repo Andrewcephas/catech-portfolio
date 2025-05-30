@@ -7,6 +7,10 @@ import SkillsPage from "./pages/SkillsPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
 import DesignGeneratorPage from "./pages/DesignGeneratorPage";
+import ResumePage from "./pages/ResumePage";
+import TestimonialsPage from "./pages/TestimonialsPage";
+import GuitarPage from "./pages/GuitarPage";
+import BlogPage from "./pages/BlogPage";
 
 interface BookLayoutProps {
   currentPage: number;
@@ -21,6 +25,10 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
     { title: "About", component: <AboutPage />, animation: "animate-page-peel-in" },
     { title: "Skills", component: <SkillsPage />, animation: "animate-page-peel-in" },
     { title: "Projects", component: <ProjectsPage />, animation: "animate-page-peel-in" },
+    { title: "Resume", component: <ResumePage />, animation: "animate-page-peel-in" },
+    { title: "Testimonials", component: <TestimonialsPage />, animation: "animate-page-peel-in" },
+    { title: "Guitar", component: <GuitarPage />, animation: "animate-page-peel-in" },
+    { title: "Blog", component: <BlogPage />, animation: "animate-page-peel-in" },
     { title: "Contact", component: <ContactPage />, animation: "animate-page-peel-in" },
     { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
   ];
@@ -57,7 +65,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
         <div className="fixed inset-0 bg-black/80 z-40 flex items-center justify-center animate-page-peel-in">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 animate-scale-in">
             <h3 className="text-2xl font-bold text-[#017020] mb-6 text-center">Navigation</h3>
-            <div className="space-y-3">
+            <div className="space-y-3 max-h-96 overflow-y-auto">
               {pages.map((page, index) => (
                 <button
                   key={index}
@@ -80,7 +88,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
 
       {/* Book Container - Increased width for large screens */}
       <div className="w-full max-w-8xl mx-auto h-full relative">
-        <div className="w-full lg:w-[70%] xl:w-[80%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
+        <div className="w-full lg:w-[95%] xl:w-[98%] mx-auto h-full bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in">
 
           {/* Page Content - Enable scrolling for all pages */}
           <div className="h-full relative">
@@ -100,14 +108,14 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
         {/* Page Indicator and Navigation - Fixed positioning */}
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-4 z-30">
           {/* Page Dots */}
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 bg-black/20 backdrop-blur-sm p-3 rounded-full">
             {pages.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentPage(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-300 ${currentPage === index
                   ? 'bg-[#ff9900] scale-125 shadow-lg'
-                  : 'bg-black/20 hover:bg-white/9s0'
+                  : 'bg-white/60 hover:bg-white/90'
                   }`}
               />
             ))}
@@ -123,7 +131,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
             <button
               onClick={prevPage}
               disabled={currentPage === 0}
-              className="p-3 bg-black/20 backdrop-blur-sm rounded-full text-black transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+              className="p-3 bg-black/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
             >
               <ChevronLeft size={24} />
             </button>
@@ -131,7 +139,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
             <button
               onClick={nextPage}
               disabled={currentPage === pages.length - 1}
-              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-black transition-all duration-300 hover:bg-black/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+              className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
             >
               <ChevronRight size={24} />
             </button>
