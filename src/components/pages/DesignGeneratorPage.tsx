@@ -1,3 +1,4 @@
+
 import { useState, useRef } from 'react';
 import { Wand2, Download, RefreshCw, Upload } from 'lucide-react';
 import html2canvas from 'html2canvas';
@@ -8,8 +9,8 @@ const DesignGeneratorPage = () => {
   const [scriptTitle, setScriptTitle] = useState('Easter');
   const [quote, setQuote] = useState('He is not here; he has risen! Remember how he told you, while he was still with you in Galilee.');
   const [reference, setReference] = useState('Matthew 28:6');
-  const [footerText, setFooterText] = useState('CATECH SOLUTIONS | info@catech.co.ke | +254 700 123 456');
-  const [userImage, setUserImage] = useState('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face');
+  const [footerText, setFooterText] = useState('CATECH SOLUTIONS | ngumbaucephas2@gmail.com | +254 793 614 592');
+  const [userImage, setUserImage] = useState('/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png');
   const [isDownloading, setIsDownloading] = useState(false);
   const posterRef = useRef<HTMLDivElement>(null);
 
@@ -45,19 +46,37 @@ const DesignGeneratorPage = () => {
     
     setIsDownloading(true);
     try {
+      // Wait a moment for any animations to complete
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       const canvas = await html2canvas(posterRef.current, {
-        scale: 2,
+        scale: 3, // Higher scale for better quality
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#f8f9fa'
+        backgroundColor: '#f8f9fa',
+        width: posterRef.current.offsetWidth,
+        height: posterRef.current.offsetHeight,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: posterRef.current.offsetWidth,
+        windowHeight: posterRef.current.offsetHeight,
+        imageTimeout: 15000, // Increase timeout for image loading
+        logging: false // Disable console logging
       });
       
+      // Create download link
       const link = document.createElement('a');
-      link.download = `${mainTitle}-${scriptTitle}-poster.png`;
-      link.href = canvas.toDataURL();
+      link.download = `${mainTitle}-${scriptTitle}-poster-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
+      
+      // Trigger download
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+      
     } catch (error) {
       console.error('Error downloading poster:', error);
+      alert('Download failed. Please try again.');
     } finally {
       setIsDownloading(false);
     }
@@ -196,71 +215,78 @@ const DesignGeneratorPage = () => {
           <div className="bg-white p-3 md:p-6 rounded-xl border border-gray-200">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Live Preview</h3>
             
-            {/* Poster Preview */}
+            {/* Poster Preview - Fixed dimensions for consistent download */}
             <div 
               ref={posterRef}
-              className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden"
-              style={{ aspectRatio: '3/4', minHeight: '400px' }}
+              className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden mx-auto"
+              style={{ 
+                aspectRatio: '3/4', 
+                width: '400px',
+                height: '533px',
+                maxWidth: '100%'
+              }}
             >
               {/* Company Logo - Top Center */}
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
                 <img 
                   src="/lovable-uploads/a6a68b67-9026-42f1-a535-3e8057802d8c.png" 
                   alt="CATECH Logo" 
-                  className="h-8 md:h-12 w-auto"
+                  className="h-8 md:h-10 w-auto"
+                  crossOrigin="anonymous"
                 />
               </div>
 
               {/* Tagline - Top Left */}
               <div className="absolute top-4 left-4 z-10">
-                <span className="text-[#ff9900] font-bold text-sm md:text-lg" style={{ fontFamily: 'Arial Black, sans-serif' }}>
+                <span className="text-[#ff9900] font-bold text-sm md:text-base" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                   {tagline}
                 </span>
               </div>
 
-              {/* Main Content Area - Centered between logo and footer */}
-              <div className="absolute inset-0 flex items-center justify-center" style={{ top: '20%', bottom: '20%' }}>
-                <div className="w-full px-4 md:px-6 flex">
+              {/* Main Content Area - Properly centered between logo and footer */}
+              <div className="absolute inset-0 flex items-center justify-center" style={{ top: '15%', bottom: '15%' }}>
+                <div className="w-full px-4 flex h-full">
                   {/* Left Side - Text Content */}
-                  <div className="w-1/2 pr-2 md:pr-4 flex flex-col justify-center">
+                  <div className="w-1/2 pr-3 flex flex-col justify-center">
                     {/* Main Title */}
-                    <div className="mb-2 md:mb-4">
-                      <h1 className="text-black font-bold text-2xl md:text-4xl lg:text-5xl" style={{ fontFamily: 'Arial Black, sans-serif' }}>
+                    <div className="mb-3">
+                      <h1 className="text-black font-bold text-xl md:text-2xl lg:text-3xl leading-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                         {mainTitle}
                       </h1>
                       <h1 
-                        className="text-[#ff9900] font-bold text-2xl md:text-4xl lg:text-5xl mt-1 md:mt-2" 
+                        className="text-[#ff9900] font-bold text-xl md:text-2xl lg:text-3xl mt-1 leading-tight" 
                         style={{ 
                           fontFamily: 'Brush Script MT, cursive',
-                          textShadow: '2px 2px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white'
+                          textShadow: '1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white'
                         }}
                       >
                         {scriptTitle}
                       </h1>
                     </div>
 
-                    {/* Quote Text */}
-                    <div className="mb-3 md:mb-4">
-                      <p className="text-gray-800 text-xs md:text-sm lg:text-base leading-relaxed text-wrap">
+                    {/* Quote Text - Better text wrapping */}
+                    <div className="mb-3">
+                      <p className="text-gray-800 text-xs md:text-sm leading-relaxed break-words" style={{ wordWrap: 'break-word', hyphens: 'auto' }}>
                         {quote}
                       </p>
                     </div>
 
                     {/* Reference */}
                     <div>
-                      <span className="bg-[#ff9900] text-white px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium">
+                      <span className="bg-[#ff9900] text-white px-2 py-1 rounded-full text-xs font-medium">
                         {reference}
                       </span>
                     </div>
                   </div>
 
                   {/* Right Side - Image */}
-                  <div className="w-1/2 pl-2 md:pl-4 flex justify-center items-center">
-                    <div className="relative w-full h-full max-w-48 max-h-64">
+                  <div className="w-1/2 pl-3 flex justify-center items-center">
+                    <div className="relative w-full h-full max-w-32 max-h-48">
                       <img
                         src={userImage}
                         alt="Profile"
                         className="w-full h-full object-cover rounded-lg"
+                        crossOrigin="anonymous"
                         style={{
                           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0.3) 90%, rgba(0,0,0,0) 100%)',
                           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0.3) 90%, rgba(0,0,0,0) 100%)'
@@ -273,17 +299,17 @@ const DesignGeneratorPage = () => {
 
               {/* Watermark - Right Side */}
               <div 
-                className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 rotate-90 opacity-10 z-0"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 opacity-10 z-0"
                 style={{ transformOrigin: 'center' }}
               >
-                <span className="text-gray-400 font-bold text-lg md:text-2xl lg:text-3xl whitespace-nowrap">
+                <span className="text-gray-400 font-bold text-lg whitespace-nowrap">
                   {mainTitle} {scriptTitle}
                 </span>
               </div>
 
-              {/* Footer */}
-              <div className="absolute bottom-0 left-0 right-0 bg-[#ff9900] text-white text-center py-2 md:py-3">
-                <p className="text-xs md:text-sm font-medium text-wrap px-2">
+              {/* Footer - Properly wrapped text */}
+              <div className="absolute bottom-0 left-0 right-0 bg-[#ff9900] text-white text-center py-2">
+                <p className="text-xs font-medium px-2 break-words" style={{ wordWrap: 'break-word', lineHeight: '1.2' }}>
                   {footerText}
                 </p>
               </div>

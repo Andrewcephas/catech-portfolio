@@ -30,23 +30,23 @@ const ContactPage = () => {
     { 
       icon: Mail, 
       label: "Email", 
-      value: "info@catech.co.ke", 
+      value: "ngumbaucephas2@gmail.com", 
       color: "text-[#ff9900]",
-      action: () => window.open('mailto:info@catech.co.ke', '_blank')
+      action: () => window.open('mailto:ngumbaucephas2@gmail.com', '_blank')
     },
     { 
       icon: Phone, 
       label: "Phone", 
-      value: "+254 700 123 456", 
+      value: "+254 793 614 592", 
       color: "text-[#017020]",
-      action: () => window.open('tel:+254700123456', '_blank')
+      action: () => window.open('tel:+254793614592', '_blank')
     },
     { 
       icon: MapPin, 
-      label: "Location", 
-      value: "Nairobi, Kenya", 
+      label: "Website", 
+      value: "ceo.catech.co.ke", 
       color: "text-[#ff9900]",
-      action: () => window.open('https://maps.google.com/?q=Nairobi,Kenya', '_blank')
+      action: () => window.open('https://ceo.catech.co.ke', '_blank')
     },
   ];
 

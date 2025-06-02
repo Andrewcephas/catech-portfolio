@@ -5,23 +5,23 @@ const ResumePage = () => {
   const education = [
     {
       degree: "Bachelor's Degree in Progress",
-      institution: "University (8-4-4 System)",
-      period: "2021 - Present",
-      status: "3rd Year Completed",
-      description: "Pursuing comprehensive education in technology and design"
+      institution: "Kisii University",
+      period: "2022 - 2026",
+      status: "In Progress",
+      description: "Pursuing comprehensive education in technology and innovation"
     },
     {
       degree: "Secondary Education",
-      institution: "High School",
-      period: "2017 - 2020",
-      status: "Completed",
+      institution: "Misuuni High School",
+      period: "2018 - 2022",
+      status: "Completed - C+ Grade",
       description: "Kenya Certificate of Secondary Education (KCSE)"
     },
     {
       degree: "Primary Education", 
-      institution: "Primary School",
-      period: "2001 - 2009",
-      status: "Completed",
+      institution: "Kaliani Primary School",
+      period: "2009 - 2017",
+      status: "Completed - 343 Marks",
       description: "Kenya Certificate of Primary Education (KCPE)"
     }
   ];
@@ -30,26 +30,39 @@ const ResumePage = () => {
     {
       role: "Freelance Designer & Developer",
       company: "Catech Solutions",
-      period: "2019 - Present",
+      period: "2018 - Present",
       location: "Nairobi, Kenya",
       achievements: [
         "Delivered 50+ design and development projects",
-        "Built responsive websites and brand identities",
+        "Built responsive websites and e-commerce platforms",
         "Maintained 98% client satisfaction rate",
         "Specialized in Adobe Creative Suite and web technologies"
       ]
     },
     {
-      role: "Creative Designer",
-      company: "Various Clients",
-      period: "2018 - 2019", 
-      location: "Remote",
+      role: "Skills Development & Learning",
+      company: "Self-Directed Learning",
+      period: "2023 - Present", 
+      location: "University & Online",
       achievements: [
-        "Created brand identities for startups",
-        "Designed marketing materials and print designs",
-        "Collaborated with international clients",
-        "Developed expertise in Photoshop, Illustrator, InDesign"
+        "Enhanced technical skills while studying at Kisii University",
+        "Developed expertise in modern web technologies",
+        "Created comprehensive project portfolio",
+        "Built client management systems and e-commerce solutions"
       ]
+    }
+  ];
+
+  const projects = [
+    {
+      name: "E-commerce Platform",
+      url: "https://ecommerce.catech.co.ke/",
+      description: "Full-featured e-commerce solution with modern design"
+    },
+    {
+      name: "KSUCU Management System",
+      url: "https://ksucu-mc.co.ke/",
+      description: "Frontend client project management system (Under Development)"
     }
   ];
 
@@ -60,8 +73,60 @@ const ResumePage = () => {
   };
 
   const handleDownload = () => {
-    // In a real app, this would download the actual PDF
-    alert("Resume download would start here. Connect to a real PDF file.");
+    const cvContent = `
+ANDREW CEPHAS NGUMBAU - CREATIVE PROFESSIONAL
+============================================
+
+Personal Information:
+--------------------
+Name: Andrew Cephas Ngumbau
+Email: ngumbaucephas2@gmail.com
+Phone: +254 793 614 592
+Website: ceo.catech.co.ke
+
+Education:
+----------
+• 2022 - 2026: Kisii University (Bachelor's Degree - In Progress)
+• 2018 - 2022: Misuuni High School (KCSE - C+ Grade)
+• 2009 - 2017: Kaliani Primary School (KCPE - 343 Marks)
+
+Professional Experience:
+-----------------------
+• 2018 - Present: Freelance Designer & Developer at Catech Solutions
+• 2023 - Present: Active Skills Development (University & Self-Directed)
+• 50+ Completed Projects
+• 30+ Satisfied Clients
+
+Key Projects:
+-------------
+• E-commerce Platform: https://ecommerce.catech.co.ke/
+• KSUCU Management System: https://ksucu-mc.co.ke/ (Under Development)
+
+Skills:
+-------
+Design: Photoshop, Illustrator, InDesign, After Effects, Figma, UI/UX Design
+Development: HTML/CSS, JavaScript, React, Node.js, WordPress, Responsive Design
+Tools: Git, VS Code, Adobe Creative Suite, Figma, Sketch
+
+Services:
+---------
+• Logo Design & Branding
+• Web Application Development
+• UI/UX Design
+• E-commerce Solutions
+• Print Design
+• Digital Marketing Materials
+
+Contact for professional creative solutions!
+    `;
+
+    const blob = new Blob([cvContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Andrew_Cephas_Ngumbau_Resume.txt';
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -71,8 +136,8 @@ const ResumePage = () => {
         <div className="relative w-40 h-28 mx-auto mb-4 transform rotate-3">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-lg border-2 border-[#ff9900] border-opacity-100"></div>
           <img 
-            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=200&h=150&fit=crop"
-            alt="Professional workspace"
+            src="/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png"
+            alt="Andrew Cephas Ngumbau"
             className="w-full h-full object-cover rounded-lg"
           />
         </div>
@@ -89,11 +154,39 @@ const ResumePage = () => {
         </button>
       </div>
 
-      {/* Education */}
+      {/* Projects Section */}
       <div className="bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl p-6 border border-[#ff9900]/20 animate-slide-up">
         <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+          <ExternalLink className="text-[#ff9900]" size={24} />
+          Featured Projects
+        </h3>
+        <div className="space-y-3">
+          {projects.map((project, index) => (
+            <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h4 className="font-bold text-gray-800">{project.name}</h4>
+                  <p className="text-gray-600 text-sm mt-1">{project.description}</p>
+                </div>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-4 px-3 py-1 bg-[#ff9900] text-white rounded-full text-xs hover:bg-[#e6870a] transition-colors"
+                >
+                  Visit
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Education */}
+      <div className="bg-gradient-to-r from-[#017020]/5 to-[#ff9900]/5 rounded-xl p-6 border border-[#017020]/20 animate-slide-up">
+        <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
           <Award className="text-[#ff9900]" size={24} />
-          Education (8-4-4 System)
+          Education
         </h3>
         <div className="space-y-4">
           {education.map((edu, index) => (
@@ -119,7 +212,7 @@ const ResumePage = () => {
       </div>
 
       {/* Experience */}
-      <div className="bg-gradient-to-r from-[#017020]/5 to-[#ff9900]/5 rounded-xl p-6 border border-[#017020]/20 animate-slide-up">
+      <div className="bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl p-6 border border-[#ff9900]/20 animate-slide-up">
         <h3 className="text-xl font-bold text-gray-800 mb-4">Professional Experience</h3>
         <div className="space-y-4">
           {experience.map((exp, index) => (

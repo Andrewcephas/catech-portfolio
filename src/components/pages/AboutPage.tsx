@@ -27,24 +27,24 @@ const AboutPage = () => {
 
   const educationTimeline = [
     {
-      period: "2021 - Present",
-      title: "University Education (8-4-4 System)",
-      institution: "Currently in 3rd Year",
-      description: "Pursuing comprehensive education in technology and innovation",
+      period: "2022 - 2026",
+      title: "University Education",
+      institution: "Kisii University",
+      description: "Currently pursuing Bachelor's degree in technology and innovation",
       status: "In Progress"
     },
     {
-      period: "2017 - 2020",
+      period: "2018 - 2022",
       title: "Secondary Education",
-      institution: "High School Graduate",
-      description: "Completed Kenya Certificate of Secondary Education (KCSE)",
+      institution: "Misuuni High School",
+      description: "Completed Kenya Certificate of Secondary Education (KCSE) - C+ Grade",
       status: "Completed"
     },
     {
-      period: "2001 - 2009",
+      period: "2009 - 2017",
       title: "Primary Education",
-      institution: "Primary School Graduate",
-      description: "Completed Kenya Certificate of Primary Education (KCPE)",
+      institution: "Kaliani Primary School",
+      description: "Completed Kenya Certificate of Primary Education (KCPE) - 343 Marks",
       status: "Completed"
     }
   ];
@@ -56,8 +56,8 @@ const AboutPage = () => {
         <div className="relative w-32 h-32 mx-auto mb-4 transform rotate-3">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-2xl border-2 border-[#ff9900] border-opacity-100"></div>
           <img 
-            src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=200&h=200&fit=crop"
-            alt="Professional workspace"
+            src="/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png"
+            alt="Andrew Cephas Ngumbau"
             className="w-full h-full object-cover rounded-2xl"
           />
         </div>
@@ -69,9 +69,9 @@ const AboutPage = () => {
           <p className="text-gray-700 leading-relaxed">
             <strong className="text-[#017020]">"I bridge the gap between user-friendly design and robust, scalable code."</strong>
             <br/><br/>
-            As a hybrid creative professional, I combine artistic vision with technical expertise to deliver 
-            exceptional digital experiences. My passion lies in transforming ideas into beautiful, functional 
-            solutions that make a real impact.
+            As a hybrid creative professional currently studying at Kisii University, I combine artistic vision with technical expertise to deliver 
+            exceptional digital experiences. Since 2023, I've been actively developing my skills in both design and development, 
+            creating solutions that make a real impact.
           </p>
         </div>
       </div>
@@ -96,11 +96,11 @@ const AboutPage = () => {
         ))}
       </div>
 
-      {/* Educational Background (8-4-4 System) */}
+      {/* Educational Background */}
       <div className="bg-gradient-to-r from-[#017020]/5 to-[#ff9900]/5 rounded-xl p-6 border border-[#017020]/20 animate-slide-up">
         <h3 className="text-xl font-bold text-[#017020] mb-4 flex items-center gap-2">
           <GraduationCap className="text-[#ff9900]" size={24} />
-          Educational Journey (8-4-4 System)
+          Educational Journey
         </h3>
         <div className="space-y-4">
           {educationTimeline.map((edu, index) => (
@@ -137,7 +137,7 @@ const AboutPage = () => {
           <div className="relative w-24 h-24 transform -rotate-2">
             <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
             <img 
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=150&h=150&fit=crop"
+              src="/lovable-uploads/a28bc92e-ea57-43b0-be33-8ce891c2f057.png"
               alt="Creative workspace"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -148,9 +148,9 @@ const AboutPage = () => {
               My Creative Journey
             </h3>
             <p className="text-gray-700 text-sm mb-3 leading-relaxed">
-              My journey began in 2009 after completing primary education. Since then, I've been on a continuous 
-              path of learning and growth, developing expertise in both design and development while pursuing 
-              my university education.
+              My journey began in 2018 after completing high school at Misuuni High School with a C+ grade. 
+              Since joining Kisii University in 2022, I've been on a continuous path of learning and growth, 
+              developing expertise in both design and development.
             </p>
             <p className="text-gray-700 text-sm leading-relaxed">
               What sets me apart is my ability to think both artistically and technically. Whether crafting 
@@ -190,7 +190,7 @@ const AboutPage = () => {
       <div className="grid grid-cols-2 gap-4">
         {[
           { value: "50+", label: "Projects", color: "text-[#ff9900]" },
-          { value: "5+", label: "Years Experience", color: "text-[#017020]" },
+          { value: "6+", label: "Years Experience", color: "text-[#017020]" },
           { value: "30+", label: "Happy Clients", color: "text-[#ff9900]" },
           { value: "24/7", label: "Dedicated Support", color: "text-[#017020]" },
         ].map((stat, index) => (

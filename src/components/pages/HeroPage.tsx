@@ -7,11 +7,12 @@ const HeroPage = () => {
   const fullText = "Graphic Designer & Creative Innovator";
 
   const profileImages = [
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-    "/lovable-uploads/6fe90ea1-1e3b-443b-838b-e8df66c96450.png",
+    "/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png",
+    "/lovable-uploads/d5191dc1-6bf2-4df9-b973-0cc8e5047aaf.png",
+    "/lovable-uploads/a28bc92e-ea57-43b0-be33-8ce891c2f057.png",
+    "/lovable-uploads/cff0335c-00cc-4e3e-b24b-d64290ddc074.png",
+    "/lovable-uploads/b88e02b7-e05f-4aaf-b88d-e5c1bb7b2d6b.png",
+    "/lovable-uploads/fd9a0405-6960-42c1-a42c-f9bf83cef1f8.png",
   ];
 
   useEffect(() => {
@@ -33,10 +34,16 @@ const HeroPage = () => {
 CATECH SOLUTIONS - CREATIVE PROFESSIONAL
 ========================================
 
-Name: Creative Professional
-Email: info@catech.co.ke
-Phone: +254 700 123 456
-Website: www.catech.co.ke
+Name: Andrew Cephas Ngumbau
+Email: ngumbaucephas2@gmail.com
+Phone: +254 793 614 592
+Website: ceo.catech.co.ke
+
+EDUCATION:
+----------
+• 2022 - 2026: Kisii University (Current)
+• 2018 - 2022: Misuuni High School (C+ Grade)
+• 2009 - 2017: Kaliani Primary School (343 Marks)
 
 SKILLS:
 -------
@@ -50,10 +57,16 @@ SKILLS:
 
 EXPERIENCE:
 -----------
-• 5+ Years in Graphics Design
-• 3+ Years in Web Development
+• 5+ Years in Graphics Design (2018-Present)
+• 3+ Years in Web Development (2021-Present)
+• Skills Development: 2023-Present
 • 50+ Completed Projects
 • 30+ Satisfied Clients
+
+PROJECTS:
+---------
+• E-commerce Platform: https://ecommerce.catech.co.ke/
+• KSUCU Management System: ksucu-mc.co.ke (Frontend Client Project Management System - Under Development)
 
 SERVICES:
 ---------
@@ -71,7 +84,7 @@ Contact us for professional creative solutions!
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Catech_Solutions_CV.txt';
+    link.download = 'Andrew_Cephas_Ngumbau_CV.txt';
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -181,7 +194,7 @@ Contact us for professional creative solutions!
       {/* Main content with enhanced responsiveness */}
       <div className="z-10 animate-slide-up px-4" style={{ animationDelay: '0.5s' }}>
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent">
-          Hello, I'm a Creative Professional
+          Hello, I'm Andrew Cephas Ngumbau
         </h1>
 
         <div className="h-8 md:h-12 mb-4 md:mb-6">
@@ -194,7 +207,7 @@ Contact us for professional creative solutions!
         <p className="text-gray-600 mb-4 md:mb-6 max-w-2xl leading-relaxed px-2 md:px-4 text-sm md:text-base responsive-text">
           My journey began in 2018 when I discovered my passion for design through Adobe Photoshop.
           What started as curiosity quickly evolved into expertise across the entire Adobe Creative Suite.
-          Over the years, I've expanded into web development, mastering the MERN stack, Python, and UI/UX design.
+          Since 2023, I've been actively developing my skills while pursuing my degree at Kisii University.
           Today, I blend creativity with technology to deliver exceptional digital experiences and data-driven solutions.
         </p>
 
@@ -207,16 +220,16 @@ Contact us for professional creative solutions!
               <span className="text-ellipsis-2">Photoshop Foundation</span>
             </div>
             <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
-              <span className="block font-bold text-[#ff9900]">2019-2020</span>
+              <span className="block font-bold text-[#ff9900]">2019-2022</span>
               <span className="text-ellipsis-2">Adobe Suite Mastery</span>
             </div>
             <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
-              <span className="block font-bold text-[#017020]">2021</span>
-              <span className="text-ellipsis-2">Web Development</span>
+              <span className="block font-bold text-[#017020]">2022</span>
+              <span className="text-ellipsis-2">University Started</span>
             </div>
             <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 p-2 rounded text-center">
-              <span className="block font-bold text-[#017020]">2022-2024</span>
-              <span className="text-ellipsis-2">UI/UX & Data Science</span>
+              <span className="block font-bold text-[#017020]">2023-2024</span>
+              <span className="text-ellipsis-2">Skills Development</span>
             </div>
           </div>
         </div>
@@ -224,9 +237,9 @@ Contact us for professional creative solutions!
         {/* Social links - Responsive sizing */}
         <div className="flex justify-center space-x-3 md:space-x-4 mb-4 md:mb-6">
           {[
-            { icon: Github, href: "/", color: "bg-gray-800", label: "GitHub" },
-            { icon: Linkedin, href: "/", color: "bg-blue-600", label: "LinkedIn" },
-            { icon: Mail, href: "/", color: "bg-[#ff9900]", label: "Email" },
+            { icon: Github, href: "https://github.com", color: "bg-gray-800", label: "GitHub" },
+            { icon: Linkedin, href: "https://linkedin.com", color: "bg-blue-600", label: "LinkedIn" },
+            { icon: Mail, href: "mailto:ngumbaucephas2@gmail.com", color: "bg-[#ff9900]", label: "Email" },
           ].map((social, index) => (
             <a
               key={index}
