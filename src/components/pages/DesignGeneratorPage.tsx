@@ -1,4 +1,3 @@
-
 import { useState, useRef } from 'react';
 import { Wand2, Download, RefreshCw, Upload } from 'lucide-react';
 import html2canvas from 'html2canvas';
@@ -10,7 +9,7 @@ const DesignGeneratorPage = () => {
   const [quote, setQuote] = useState('He is not here; he has risen! Remember how he told you, while he was still with you in Galilee.');
   const [reference, setReference] = useState('Matthew 28:6');
   const [footerText, setFooterText] = useState('CATECH SOLUTIONS | ngumbaucephas2@gmail.com | +254 793 614 592');
-  const [userImage, setUserImage] = useState('/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png');
+  const [userImage, setUserImage] = useState('/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png');
   const [isDownloading, setIsDownloading] = useState(false);
   const posterRef = useRef<HTMLDivElement>(null);
 
@@ -44,13 +43,18 @@ const DesignGeneratorPage = () => {
   const downloadPoster = async () => {
     if (!posterRef.current) return;
     
+    const withWatermark = window.confirm("Do you want to download with watermark?\n\nClick OK for watermark (free)\nClick Cancel for no watermark (paid)");
+    
+    if (!withWatermark) {
+      alert("To download without watermark, please pay to CATECH account 0793614592 and contact us for the watermark-free version.");
+      return;
+    }
+    
     setIsDownloading(true);
     try {
-      // Create a temporary clone for download to avoid affecting the preview
       const originalElement = posterRef.current;
       const clonedElement = originalElement.cloneNode(true) as HTMLElement;
       
-      // Remove any animations and motion effects from the clone
       const removeAnimations = (element: HTMLElement) => {
         element.style.animation = 'none';
         element.style.transition = 'none';
@@ -63,17 +67,15 @@ const DesignGeneratorPage = () => {
       
       removeAnimations(clonedElement);
       
-      // Temporarily add clone to DOM for rendering
       clonedElement.style.position = 'absolute';
       clonedElement.style.left = '-9999px';
       clonedElement.style.top = '0';
       document.body.appendChild(clonedElement);
       
-      // Wait for fonts and images to load
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       const canvas = await html2canvas(clonedElement, {
-        scale: 4, // Higher scale for better quality
+        scale: 4,
         useCORS: true,
         allowTaint: false,
         backgroundColor: '#f8f9fa',
@@ -86,7 +88,6 @@ const DesignGeneratorPage = () => {
         foreignObjectRendering: false,
         imageTimeout: 0,
         onclone: (clonedDoc) => {
-          // Ensure all styles are properly applied
           const clonedPoster = clonedDoc.querySelector('[data-poster-ref]') as HTMLElement;
           if (clonedPoster) {
             clonedPoster.style.width = '400px';
@@ -97,15 +98,12 @@ const DesignGeneratorPage = () => {
         }
       });
       
-      // Remove clone from DOM
       document.body.removeChild(clonedElement);
       
-      // Create download link
       const link = document.createElement('a');
       link.download = `${mainTitle}-${scriptTitle}-poster-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       
-      // Trigger download
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -251,7 +249,6 @@ const DesignGeneratorPage = () => {
           <div className="bg-white p-3 md:p-6 rounded-xl border border-gray-200">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Live Preview</h3>
             
-            {/* Poster Preview - Fixed dimensions for consistent download */}
             <div 
               ref={posterRef}
               data-poster-ref="true"
@@ -262,7 +259,6 @@ const DesignGeneratorPage = () => {
                 maxWidth: '100%'
               }}
             >
-              {/* Company Logo - Top Center */}
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
                 <img 
                   src="/lovable-uploads/a6a68b67-9026-42f1-a535-3e8057802d8c.png" 
@@ -273,19 +269,15 @@ const DesignGeneratorPage = () => {
                 />
               </div>
 
-              {/* Tagline - Top Left */}
               <div className="absolute top-4 left-4 z-10">
                 <span className="text-[#ff9900] font-bold text-base" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                   {tagline}
                 </span>
               </div>
 
-              {/* Main Content Area - Centered between logo and footer */}
               <div className="absolute" style={{ top: '80px', left: '16px', right: '16px', bottom: '60px' }}>
                 <div className="flex h-full">
-                  {/* Left Side - Text Content */}
                   <div className="w-1/2 pr-4 flex flex-col justify-center">
-                    {/* Main Title */}
                     <div className="mb-4">
                       <h1 className="text-black font-bold text-2xl leading-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                         {mainTitle}
@@ -301,7 +293,6 @@ const DesignGeneratorPage = () => {
                       </h1>
                     </div>
 
-                    {/* Quote Text - Better wrapping */}
                     <div className="mb-4">
                       <p className="text-gray-800 text-sm leading-relaxed" style={{ 
                         wordWrap: 'break-word', 
@@ -312,7 +303,6 @@ const DesignGeneratorPage = () => {
                       </p>
                     </div>
 
-                    {/* Reference */}
                     <div>
                       <span className="bg-[#ff9900] text-white px-3 py-1 rounded-full text-xs font-medium">
                         {reference}
@@ -320,7 +310,6 @@ const DesignGeneratorPage = () => {
                     </div>
                   </div>
 
-                  {/* Right Side - Image */}
                   <div className="w-1/2 pl-4 flex justify-center items-center">
                     <div className="relative" style={{ width: '140px', height: '200px' }}>
                       <img
@@ -339,7 +328,6 @@ const DesignGeneratorPage = () => {
                 </div>
               </div>
 
-              {/* Watermark - Right Side */}
               <div 
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 opacity-10 z-0"
                 style={{ transformOrigin: 'center' }}
@@ -349,7 +337,6 @@ const DesignGeneratorPage = () => {
                 </span>
               </div>
 
-              {/* Footer */}
               <div className="absolute bottom-0 left-0 right-0 bg-[#ff9900] text-white text-center py-2">
                 <p className="text-xs font-medium px-2" style={{ 
                   wordWrap: 'break-word', 

@@ -15,6 +15,14 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Create mailto link with form data
+    const subject = `New Contact Form Submission from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    const mailtoLink = `mailto:ngumbaucephas2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Open email client
+    window.open(mailtoLink, '_blank');
+    
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
@@ -44,9 +52,9 @@ const ContactPage = () => {
     { 
       icon: MapPin, 
       label: "Website", 
-      value: "ceo.catech.co.ke", 
+      value: "catech.co.ke", 
       color: "text-[#ff9900]",
-      action: () => window.open('https://ceo.catech.co.ke', '_blank')
+      action: () => window.open('https://catech.co.ke', '_blank')
     },
   ];
 
@@ -94,7 +102,7 @@ const ContactPage = () => {
         
         {submitted && (
           <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg animate-fade-in">
-            ✅ Message sent successfully! I'll get back to you soon.
+            ✅ Email client opened! Your message is ready to send.
           </div>
         )}
 
@@ -139,7 +147,7 @@ const ContactPage = () => {
             {isSubmitting ? (
               <>
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                <span>Sending...</span>
+                <span>Opening Email...</span>
               </>
             ) : (
               <>

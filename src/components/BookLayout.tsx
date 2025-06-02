@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import DateTimeDisplay from "./DateTimeDisplay";
@@ -117,45 +118,30 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
           </div>
         </div>
 
-        {/* Enhanced Responsive Navigation Controls */}
+        {/* Previous Button - Bottom Left Corner */}
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 0}
+          className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-30 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        >
+          <ChevronLeft size={20} className="md:w-6 md:h-6" />
+        </button>
+
+        {/* Next Button - Bottom Right Corner */}
+        <button
+          onClick={nextPage}
+          disabled={currentPage === pages.length - 1}
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-30 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        >
+          <ChevronRight size={20} className="md:w-6 md:h-6" />
+        </button>
+
+        {/* Page Counter - Bottom Center */}
         <div className="fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-30">
-          <div className="flex items-center justify-center space-x-2 md:space-x-4 bg-black/30 backdrop-blur-sm p-2 md:p-3 rounded-full">
-            {/* Previous Button */}
-            <button
-              onClick={prevPage}
-              disabled={currentPage === 0}
-              className="p-2 bg-white/20 rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              <ChevronLeft size={16} className="md:w-5 md:h-5" />
-            </button>
-
-            {/* Page Dots - Hidden on mobile */}
-            <div className="hidden md:flex space-x-2">
-              {pages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${currentPage === index
-                    ? 'bg-[#ff9900] scale-125 shadow-lg'
-                    : 'bg-white/60 hover:bg-white/90'
-                    }`}
-                />
-              ))}
-            </div>
-
-            {/* Page Number - Center */}
+          <div className="flex items-center justify-center bg-black/30 backdrop-blur-sm p-2 md:p-3 rounded-full">
             <div className="text-white font-medium px-3 md:px-4 py-1 md:py-2 bg-white/20 rounded-full text-xs md:text-sm min-w-[60px] md:min-w-[80px] text-center">
               {currentPage + 1} / {pages.length}
             </div>
-
-            {/* Next Button */}
-            <button
-              onClick={nextPage}
-              disabled={currentPage === pages.length - 1}
-              className="p-2 bg-white/20 rounded-full text-white transition-all duration-300 hover:bg-white/30 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              <ChevronRight size={16} className="md:w-5 md:h-5" />
-            </button>
           </div>
         </div>
       </div>
