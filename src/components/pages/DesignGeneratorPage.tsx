@@ -46,23 +46,59 @@ const DesignGeneratorPage = () => {
     
     setIsDownloading(true);
     try {
-      // Wait a moment for any animations to complete
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Create a temporary clone for download to avoid affecting the preview
+      const originalElement = posterRef.current;
+      const clonedElement = originalElement.cloneNode(true) as HTMLElement;
       
-      const canvas = await html2canvas(posterRef.current, {
-        scale: 3, // Higher scale for better quality
+      // Remove any animations and motion effects from the clone
+      const removeAnimations = (element: HTMLElement) => {
+        element.style.animation = 'none';
+        element.style.transition = 'none';
+        element.style.transform = 'none';
+        const children = element.children;
+        for (let i = 0; i < children.length; i++) {
+          removeAnimations(children[i] as HTMLElement);
+        }
+      };
+      
+      removeAnimations(clonedElement);
+      
+      // Temporarily add clone to DOM for rendering
+      clonedElement.style.position = 'absolute';
+      clonedElement.style.left = '-9999px';
+      clonedElement.style.top = '0';
+      document.body.appendChild(clonedElement);
+      
+      // Wait for fonts and images to load
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const canvas = await html2canvas(clonedElement, {
+        scale: 4, // Higher scale for better quality
         useCORS: true,
-        allowTaint: true,
+        allowTaint: false,
         backgroundColor: '#f8f9fa',
-        width: posterRef.current.offsetWidth,
-        height: posterRef.current.offsetHeight,
+        width: 400,
+        height: 533,
         scrollX: 0,
         scrollY: 0,
-        windowWidth: posterRef.current.offsetWidth,
-        windowHeight: posterRef.current.offsetHeight,
-        imageTimeout: 15000, // Increase timeout for image loading
-        logging: false // Disable console logging
+        logging: false,
+        removeContainer: true,
+        foreignObjectRendering: false,
+        imageTimeout: 0,
+        onclone: (clonedDoc) => {
+          // Ensure all styles are properly applied
+          const clonedPoster = clonedDoc.querySelector('[data-poster-ref]') as HTMLElement;
+          if (clonedPoster) {
+            clonedPoster.style.width = '400px';
+            clonedPoster.style.height = '533px';
+            clonedPoster.style.transform = 'none';
+            clonedPoster.style.animation = 'none';
+          }
+        }
       });
+      
+      // Remove clone from DOM
+      document.body.removeChild(clonedElement);
       
       // Create download link
       const link = document.createElement('a');
@@ -218,9 +254,9 @@ const DesignGeneratorPage = () => {
             {/* Poster Preview - Fixed dimensions for consistent download */}
             <div 
               ref={posterRef}
-              className="relative w-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden mx-auto"
+              data-poster-ref="true"
+              className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden mx-auto"
               style={{ 
-                aspectRatio: '3/4', 
                 width: '400px',
                 height: '533px',
                 maxWidth: '100%'
@@ -231,30 +267,31 @@ const DesignGeneratorPage = () => {
                 <img 
                   src="/lovable-uploads/a6a68b67-9026-42f1-a535-3e8057802d8c.png" 
                   alt="CATECH Logo" 
-                  className="h-8 md:h-10 w-auto"
+                  className="h-10 w-auto"
                   crossOrigin="anonymous"
+                  style={{ imageRendering: 'crisp-edges' }}
                 />
               </div>
 
               {/* Tagline - Top Left */}
               <div className="absolute top-4 left-4 z-10">
-                <span className="text-[#ff9900] font-bold text-sm md:text-base" style={{ fontFamily: 'Arial Black, sans-serif' }}>
+                <span className="text-[#ff9900] font-bold text-base" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                   {tagline}
                 </span>
               </div>
 
-              {/* Main Content Area - Properly centered between logo and footer */}
-              <div className="absolute inset-0 flex items-center justify-center" style={{ top: '15%', bottom: '15%' }}>
-                <div className="w-full px-4 flex h-full">
+              {/* Main Content Area - Centered between logo and footer */}
+              <div className="absolute" style={{ top: '80px', left: '16px', right: '16px', bottom: '60px' }}>
+                <div className="flex h-full">
                   {/* Left Side - Text Content */}
-                  <div className="w-1/2 pr-3 flex flex-col justify-center">
+                  <div className="w-1/2 pr-4 flex flex-col justify-center">
                     {/* Main Title */}
-                    <div className="mb-3">
-                      <h1 className="text-black font-bold text-xl md:text-2xl lg:text-3xl leading-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>
+                    <div className="mb-4">
+                      <h1 className="text-black font-bold text-2xl leading-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                         {mainTitle}
                       </h1>
                       <h1 
-                        className="text-[#ff9900] font-bold text-xl md:text-2xl lg:text-3xl mt-1 leading-tight" 
+                        className="text-[#ff9900] font-bold text-2xl mt-1 leading-tight" 
                         style={{ 
                           fontFamily: 'Brush Script MT, cursive',
                           textShadow: '1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white'
@@ -264,30 +301,35 @@ const DesignGeneratorPage = () => {
                       </h1>
                     </div>
 
-                    {/* Quote Text - Better text wrapping */}
-                    <div className="mb-3">
-                      <p className="text-gray-800 text-xs md:text-sm leading-relaxed break-words" style={{ wordWrap: 'break-word', hyphens: 'auto' }}>
+                    {/* Quote Text - Better wrapping */}
+                    <div className="mb-4">
+                      <p className="text-gray-800 text-sm leading-relaxed" style={{ 
+                        wordWrap: 'break-word', 
+                        hyphens: 'auto',
+                        lineHeight: '1.4'
+                      }}>
                         {quote}
                       </p>
                     </div>
 
                     {/* Reference */}
                     <div>
-                      <span className="bg-[#ff9900] text-white px-2 py-1 rounded-full text-xs font-medium">
+                      <span className="bg-[#ff9900] text-white px-3 py-1 rounded-full text-xs font-medium">
                         {reference}
                       </span>
                     </div>
                   </div>
 
                   {/* Right Side - Image */}
-                  <div className="w-1/2 pl-3 flex justify-center items-center">
-                    <div className="relative w-full h-full max-w-32 max-h-48">
+                  <div className="w-1/2 pl-4 flex justify-center items-center">
+                    <div className="relative" style={{ width: '140px', height: '200px' }}>
                       <img
                         src={userImage}
                         alt="Profile"
                         className="w-full h-full object-cover rounded-lg"
                         crossOrigin="anonymous"
                         style={{
+                          imageRendering: 'crisp-edges',
                           maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0.3) 90%, rgba(0,0,0,0) 100%)',
                           WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0.3) 90%, rgba(0,0,0,0) 100%)'
                         }}
@@ -307,9 +349,13 @@ const DesignGeneratorPage = () => {
                 </span>
               </div>
 
-              {/* Footer - Properly wrapped text */}
+              {/* Footer */}
               <div className="absolute bottom-0 left-0 right-0 bg-[#ff9900] text-white text-center py-2">
-                <p className="text-xs font-medium px-2 break-words" style={{ wordWrap: 'break-word', lineHeight: '1.2' }}>
+                <p className="text-xs font-medium px-2" style={{ 
+                  wordWrap: 'break-word', 
+                  lineHeight: '1.2',
+                  whiteSpace: 'normal'
+                }}>
                   {footerText}
                 </p>
               </div>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Github, Linkedin, Mail, Download, Eye } from "lucide-react";
 
@@ -111,32 +110,38 @@ Contact us for professional creative solutions!
         ))}
       </div>
 
-      {/* Enhanced 3D Rotating Image Gallery - Much bigger and circular */}
+      {/* Enhanced 3D Rotating Image Gallery - Professional and bigger */}
       <div className="relative mb-4 md:mb-6 animate-scale-in">
-        <div className="relative w-80 h-80 md:w-[500px] md:h-[500px] mx-auto overflow-visible">
+        <div className="relative w-96 h-96 md:w-[600px] md:h-[600px] mx-auto">
           {/* Main rotating container with enhanced circular layout */}
           <div className="absolute inset-0 flex items-center justify-center perspective-1000">
             <div className="relative w-full h-full">
               <div className="absolute inset-0 animate-rotate-gallery preserve-3d">
                 {profileImages.map((image, index) => {
                   const angle = (index * 360) / profileImages.length;
-                  const radius = 150; // Increased radius for bigger circle
+                  const radius = 180; // Increased radius for bigger circle
                   return (
                     <div
                       key={index}
-                      className="absolute w-32 h-32 md:w-48 md:h-48 rounded-xl overflow-hidden border-4 border-[#ff9900] shadow-2xl backface-hidden"
+                      className="absolute rounded-2xl overflow-hidden border-4 border-[#ff9900] shadow-2xl backface-hidden"
                       style={{
+                        width: '200px',
+                        height: '250px',
                         transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
                         left: '50%',
                         top: '50%',
-                        marginLeft: '-64px', // Half of w-32
-                        marginTop: '-64px', // Half of h-32
+                        marginLeft: '-100px', // Half of width
+                        marginTop: '-125px', // Half of height
                       }}
                     >
                       <img
                         src={image}
                         alt={`Profile ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-center"
+                        style={{
+                          objectPosition: 'center top', // Focus on face area
+                          imageRendering: 'crisp-edges'
+                        }}
                       />
                     </div>
                   );
@@ -147,7 +152,7 @@ Contact us for professional creative solutions!
 
           {/* Enhanced reflection with proper positioning */}
           <div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-32 md:h-48 opacity-20 overflow-hidden"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-40 md:h-60 opacity-20 overflow-hidden"
             style={{
               transform: 'translateX(-50%) scaleY(-0.4)',
               filter: 'blur(3px)',
@@ -159,23 +164,29 @@ Contact us for professional creative solutions!
                 <div className="absolute inset-0 animate-rotate-gallery preserve-3d">
                   {profileImages.map((image, index) => {
                     const angle = (index * 360) / profileImages.length;
-                    const radius = 150;
+                    const radius = 180;
                     return (
                       <div
                         key={`reflection-${index}`}
-                        className="absolute w-32 h-32 md:w-48 md:h-48 rounded-xl overflow-hidden border-4 border-[#ff9900]/20 backface-hidden"
+                        className="absolute rounded-2xl overflow-hidden border-4 border-[#ff9900]/20 backface-hidden"
                         style={{
+                          width: '200px',
+                          height: '250px',
                           transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
                           left: '50%',
                           top: '50%',
-                          marginLeft: '-64px',
-                          marginTop: '-64px',
+                          marginLeft: '-100px',
+                          marginTop: '-125px',
                         }}
                       >
                         <img
                           src={image}
                           alt={`Reflection ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-center"
+                          style={{
+                            objectPosition: 'center top',
+                            imageRendering: 'crisp-edges'
+                          }}
                         />
                       </div>
                     );
