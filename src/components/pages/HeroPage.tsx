@@ -1,17 +1,22 @@
+
 import { useState, useEffect } from "react";
 import { Github, Linkedin, Mail, Download, Eye } from "lucide-react";
 
-const HeroPage = () => {
+interface HeroPageProps {
+  onNavigateToProjects?: () => void;
+}
+
+const HeroPage = ({ onNavigateToProjects }: HeroPageProps) => {
   const [displayText, setDisplayText] = useState("");
   const fullText = "Graphic Designer & Creative Innovator";
 
   const profileImages = [
-    "/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png",
-    "/lovable-uploads/d5191dc1-6bf2-4df9-b973-0cc8e5047aaf.png",
-    "/lovable-uploads/a28bc92e-ea57-43b0-be33-8ce891c2f057.png",
-    "/lovable-uploads/cff0335c-00cc-4e3e-b24b-d64290ddc074.png",
-    "/lovable-uploads/b88e02b7-e05f-4aaf-b88d-e5c1bb7b2d6b.png",
-    "/lovable-uploads/fd9a0405-6960-42c1-a42c-f9bf83cef1f8.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
   ];
 
   useEffect(() => {
@@ -36,7 +41,7 @@ CATECH SOLUTIONS - CREATIVE PROFESSIONAL
 Name: Andrew Cephas Ngumbau
 Email: ngumbaucephas2@gmail.com
 Phone: +254 793 614 592
-Website: ceo.catech.co.ke
+Website: catech.co.ke
 
 EDUCATION:
 ----------
@@ -89,11 +94,17 @@ Contact us for professional creative solutions!
   };
 
   const handleViewWork = () => {
-    console.log('Navigate to projects page');
+    if (onNavigateToProjects) {
+      onNavigateToProjects();
+    } else {
+      // Fallback to navigate to projects page (page 3)
+      const event = new CustomEvent('navigateToPage', { detail: 3 });
+      window.dispatchEvent(event);
+    }
   };
 
   return (
-    <div className="h-full flex flex-col justify-center items-center text-center relative overflow-hidden animate-fade-in pt-2 md:pt-4">
+    <div className="h-full flex flex-col justify-center items-center text-center relative overflow-hidden animate-fade-in">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(8)].map((_, i) => (
@@ -110,28 +121,27 @@ Contact us for professional creative solutions!
         ))}
       </div>
 
-      {/* Enhanced 3D Rotating Image Gallery - Professional and bigger */}
-      <div className="relative mb-4 md:mb-6 animate-scale-in">
-        <div className="relative w-96 h-96 md:w-[600px] md:h-[600px] mx-auto">
-          {/* Main rotating container with enhanced circular layout */}
+      {/* Enhanced 3D Rotating Image Gallery with reduced top margin */}
+      <div className="relative mb-2 md:mb-4 animate-scale-in mt-0">
+        <div className="relative w-80 h-80 md:w-[500px] md:h-[500px] mx-auto">
           <div className="absolute inset-0 flex items-center justify-center perspective-1000">
             <div className="relative w-full h-full">
               <div className="absolute inset-0 animate-rotate-gallery preserve-3d">
                 {profileImages.map((image, index) => {
                   const angle = (index * 360) / profileImages.length;
-                  const radius = 180; // Increased radius for bigger circle
+                  const radius = 150;
                   return (
                     <div
                       key={index}
                       className="absolute rounded-2xl overflow-hidden border-4 border-[#ff9900] shadow-2xl backface-hidden"
                       style={{
-                        width: '200px',
-                        height: '250px',
+                        width: '180px',
+                        height: '220px',
                         transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
                         left: '50%',
                         top: '50%',
-                        marginLeft: '-100px', // Half of width
-                        marginTop: '-125px', // Half of height
+                        marginLeft: '-90px',
+                        marginTop: '-110px',
                       }}
                     >
                       <img
@@ -139,59 +149,13 @@ Contact us for professional creative solutions!
                         alt={`Profile ${index + 1}`}
                         className="w-full h-full object-cover object-center"
                         style={{
-                          objectPosition: 'center top', // Focus on face area
+                          objectPosition: 'center 20%',
                           imageRendering: 'crisp-edges'
                         }}
                       />
                     </div>
                   );
                 })}
-              </div>
-            </div>
-          </div>
-
-          {/* Enhanced reflection with proper positioning */}
-          <div
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-40 md:h-60 opacity-20 overflow-hidden"
-            style={{
-              transform: 'translateX(-50%) scaleY(-0.4)',
-              filter: 'blur(3px)',
-              background: 'linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.6) 100%)'
-            }}
-          >
-            <div className="absolute inset-0 flex items-start justify-center perspective-1000">
-              <div className="relative w-full h-full">
-                <div className="absolute inset-0 animate-rotate-gallery preserve-3d">
-                  {profileImages.map((image, index) => {
-                    const angle = (index * 360) / profileImages.length;
-                    const radius = 180;
-                    return (
-                      <div
-                        key={`reflection-${index}`}
-                        className="absolute rounded-2xl overflow-hidden border-4 border-[#ff9900]/20 backface-hidden"
-                        style={{
-                          width: '200px',
-                          height: '250px',
-                          transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
-                          left: '50%',
-                          top: '50%',
-                          marginLeft: '-100px',
-                          marginTop: '-125px',
-                        }}
-                      >
-                        <img
-                          src={image}
-                          alt={`Reflection ${index + 1}`}
-                          className="w-full h-full object-cover object-center"
-                          style={{
-                            objectPosition: 'center top',
-                            imageRendering: 'crisp-edges'
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
               </div>
             </div>
           </div>

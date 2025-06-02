@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Menu, X } from "lucide-react";
 import DateTimeDisplay from "./DateTimeDisplay";
 import VisitCounter from "./VisitCounter";
@@ -24,7 +24,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const pages = [
-    { title: "Home", component: <HeroPage />, animation: "animate-page-peel-in" },
+    { title: "Home", component: <HeroPage onNavigateToProjects={() => setCurrentPage(3)} />, animation: "animate-page-peel-in" },
     { title: "About", component: <AboutPage />, animation: "animate-page-peel-in" },
     { title: "Skills", component: <SkillsPage />, animation: "animate-page-peel-in" },
     { title: "Projects", component: <ProjectsPage />, animation: "animate-page-peel-in" },
@@ -36,6 +36,18 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
     { title: "Contact", component: <ContactPage />, animation: "animate-page-peel-in" },
     { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
   ];
+
+  // Listen for custom navigation events
+  useEffect(() => {
+    const handleNavigateToPage = (event: CustomEvent) => {
+      setCurrentPage(event.detail);
+    };
+
+    window.addEventListener('navigateToPage', handleNavigateToPage as EventListener);
+    return () => {
+      window.removeEventListener('navigateToPage', handleNavigateToPage as EventListener);
+    };
+  }, [setCurrentPage]);
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {
@@ -118,26 +130,26 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
           </div>
         </div>
 
-        {/* Previous Button - Bottom Left Corner */}
+        {/* Previous Button - Bottom Left Corner with higher z-index */}
         <button
           onClick={prevPage}
           disabled={currentPage === 0}
-          className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-30 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-40 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           <ChevronLeft size={20} className="md:w-6 md:h-6" />
         </button>
 
-        {/* Next Button - Bottom Right Corner */}
+        {/* Next Button - Bottom Right Corner with higher z-index */}
         <button
           onClick={nextPage}
           disabled={currentPage === pages.length - 1}
-          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-30 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 p-3 md:p-4 bg-black/30 backdrop-blur-sm rounded-full text-white transition-all duration-300 hover:bg-black/50 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           <ChevronRight size={20} className="md:w-6 md:h-6" />
         </button>
 
-        {/* Page Counter - Bottom Center */}
-        <div className="fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-30">
+        {/* Page Counter - Bottom Center with higher z-index */}
+        <div className="fixed bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-40">
           <div className="flex items-center justify-center bg-black/30 backdrop-blur-sm p-2 md:p-3 rounded-full">
             <div className="text-white font-medium px-3 md:px-4 py-1 md:py-2 bg-white/20 rounded-full text-xs md:text-sm min-w-[60px] md:min-w-[80px] text-center">
               {currentPage + 1} / {pages.length}
