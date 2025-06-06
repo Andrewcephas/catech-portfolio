@@ -18,7 +18,7 @@ const ResumePage = () => {
       description: "Kenya Certificate of Secondary Education (KCSE)"
     },
     {
-      degree: "Primary Education", 
+      degree: "Primary Education",
       institution: "Kaliani Primary School",
       period: "2009 - 2017",
       status: "Completed - 343 Marks",
@@ -42,7 +42,7 @@ const ResumePage = () => {
     {
       role: "Skills Development & Learning",
       company: "Self-Directed Learning",
-      period: "2023 - Present", 
+      period: "2023 - Present",
       location: "University & Online",
       achievements: [
         "Enhanced technical skills while studying at Kisii University",
@@ -135,8 +135,9 @@ Contact for professional creative solutions!
       <div className="text-center animate-fade-in">
         <div className="relative w-40 h-28 mx-auto mb-4 transform rotate-3">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-lg border-2 border-[#ff9900] border-opacity-100"></div>
-          <img 
-            src="/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png"
+          <img
+            loading="lazy"
+            src="/lovable-uploads/andrew green.png"
             alt="Andrew Cephas Ngumbau"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -145,7 +146,7 @@ Contact for professional creative solutions!
           Andrew Cephas Ngumbau
         </h2>
         <p className="text-gray-600 mb-4">Creative Designer & Developer</p>
-        <button 
+        <button
           onClick={handleDownload}
           className="px-6 py-2 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold hover:scale-105 transition-transform duration-300 flex items-center gap-2 mx-auto"
         >

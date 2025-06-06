@@ -11,12 +11,12 @@ const HeroPage = ({ onNavigateToProjects }: HeroPageProps) => {
   const fullText = "Graphic Designer & Creative Innovator";
 
   const profileImages = [
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
-    "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+    "/lovable-uploads/andrew grey.png",
+    "/lovable-uploads/birthady mlolongo.png",
+    "/lovable-uploads/andrew green.png",
+    "/lovable-uploads/happy easter.png",
+    "/lovable-uploads/guitar pv.png",
+    "/lovable-uploads/logo catech.png",
   ];
 
   useEffect(() => {
@@ -145,6 +145,7 @@ Contact us for professional creative solutions!
                       }}
                     >
                       <img
+                        loading="lazy"
                         src={image}
                         alt={`Profile ${index + 1}`}
                         className="w-full h-full object-cover object-center"

@@ -13,7 +13,7 @@ const ProjectsPage = () => {
       githubUrl: "#"
     },
     {
-      title: "Print Design Portfolio", 
+      title: "Print Design Portfolio",
       description: "Collection of brochures, flyers and marketing materials",
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=200&fit=crop",
       tech: ["InDesign", "Photoshop", "Illustrator"],
@@ -58,18 +58,19 @@ const ProjectsPage = () => {
               <div className="flex space-x-4">
                 {/* Project image */}
                 <div className="w-32 h-20 rounded-lg overflow-hidden border border-gray-200 flex-shrink-0">
-                  <img 
+                  <img
+                    loading="lazy"
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                
+
                 {/* Project details */}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-gray-800 mb-1">{project.title}</h3>
                   <p className="text-gray-600 text-sm mb-3 line-clamp-2">{project.description}</p>
-                  
+
                   {/* Tech stack */}
                   <div className="flex flex-wrap gap-1 mb-3">
                     {project.tech.map((tech) => (
@@ -81,7 +82,7 @@ const ProjectsPage = () => {
                       </span>
                     ))}
                   </div>
-                  
+
                   {/* Action buttons */}
                   <div className="flex space-x-2">
                     <a
@@ -112,7 +113,7 @@ const ProjectsPage = () => {
 
       {/* View all projects button */}
       <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
-        <button 
+        <button
           onClick={handleViewAll}
           className="px-8 py-3 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold hover:scale-105 transition-transform duration-300 shadow-lg"
         >

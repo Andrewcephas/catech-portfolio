@@ -7,16 +7,16 @@ const TestimonialsPage = () => {
       name: "Sarah Johnson",
       role: "Marketing Director",
       company: "TechStart Kenya",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/andrew green.png",
       rating: 5,
       text: "Andrew delivered exceptional branding materials for our startup. His attention to detail and creative vision exceeded our expectations. The final designs perfectly captured our company's essence.",
       project: "Complete Brand Identity"
     },
     {
-      name: "Michael Chen", 
+      name: "Michael Chen",
       role: "CEO",
       company: "Digital Solutions Ltd",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/andrew grey.png",
       rating: 5,
       text: "Working with Andrew was a pleasure. He not only designed a beautiful website but also developed it flawlessly. His hybrid skills in design and development are rare and valuable.",
       project: "Website Design & Development"
@@ -25,7 +25,7 @@ const TestimonialsPage = () => {
       name: "Grace Wanjiku",
       role: "Small Business Owner",
       company: "Grace Boutique",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/andrew green.png",
       rating: 5,
       text: "Andrew created stunning print materials for my boutique. From business cards to brochures, everything was perfectly designed and delivered on time. Highly recommended!",
       project: "Print Design Package"
@@ -34,16 +34,16 @@ const TestimonialsPage = () => {
       name: "David Mutua",
       role: "Project Manager",
       company: "Nairobi Tech Hub",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/happy easter.png",
       rating: 5,
       text: "Andrew's professionalism and reliability are outstanding. He consistently delivers high-quality work and communicates effectively throughout the project lifecycle.",
       project: "UI/UX Design"
     },
     {
       name: "Emma Kariuki",
-      role: "Creative Director", 
+      role: "Creative Director",
       company: "Brandhub Agency",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/guitar pv.png",
       rating: 5,
       text: "As a fellow creative, I can appreciate Andrew's artistic eye and technical skills. His ability to bridge design and development makes him an invaluable partner for any project.",
       project: "Brand Guidelines"
@@ -52,7 +52,7 @@ const TestimonialsPage = () => {
       name: "James Ochieng",
       role: "Startup Founder",
       company: "InnovateTech",
-      image: "/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png",
+      image: "/lovable-uploads/logo catech.png",
       rating: 5,
       text: "Andrew transformed our vague ideas into a concrete visual identity. His creativity and problem-solving skills helped us stand out in a competitive market.",
       project: "Complete Branding"
@@ -75,7 +75,8 @@ const TestimonialsPage = () => {
       <div className="text-center animate-fade-in">
         <div className="relative w-40 h-28 mx-auto mb-4 transform -rotate-2">
           <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
-          <img 
+          <img
+            loading="lazy"
             src="/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png"
             alt="Team collaboration"
             className="w-full h-full object-cover rounded-lg"
@@ -114,6 +115,7 @@ const TestimonialsPage = () => {
               <div className="relative">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#ff9900] flex-shrink-0">
                   <img
+                    loading="lazy"
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
@@ -154,7 +156,7 @@ const TestimonialsPage = () => {
       <div className="text-center p-6 bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl border border-[#ff9900]/20 animate-fade-in">
         <h3 className="text-xl font-bold text-gray-800 mb-2">Ready to Work Together?</h3>
         <p className="text-gray-600 mb-4">Join these satisfied clients and let's create something amazing</p>
-        <button 
+        <button
           onClick={() => window.open('mailto:ngumbaucephas2@gmail.com?subject=New Project Inquiry&body=Hello Andrew, I would like to discuss a new project with you.', '_blank')}
           className="px-6 py-2 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold hover:scale-105 transition-transform duration-300"
         >

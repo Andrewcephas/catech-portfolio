@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Palette, Code, Monitor, Settings } from "lucide-react";
 
 const SkillsPage = () => {
-  const [animatedSkills, setAnimatedSkills] = useState<{[key: string]: number}>({});
+  const [animatedSkills, setAnimatedSkills] = useState<{ [key: string]: number }>({});
 
   const skillCategories = [
     {
@@ -20,7 +20,7 @@ const SkillsPage = () => {
       ]
     },
     {
-      title: "💻 Development Skills", 
+      title: "💻 Development Skills",
       icon: <Code size={24} />,
       color: "from-[#017020] to-[#017020]/70",
       skills: [
@@ -61,7 +61,7 @@ const SkillsPage = () => {
   ];
 
   const designTools = [
-    "Photoshop", "Illustrator", "InDesign", "After Effects", 
+    "Photoshop", "Illustrator", "InDesign", "After Effects",
     "Premiere Pro", "XD", "Lightroom", "Figma", "Sketch"
   ];
 
@@ -77,14 +77,14 @@ const SkillsPage = () => {
           const skillKey = skill.name;
           let currentValue = 0;
           const increment = skill.level / 50;
-          
+
           const timer = setInterval(() => {
             currentValue += increment;
             if (currentValue >= skill.level) {
               currentValue = skill.level;
               clearInterval(timer);
             }
-            
+
             setAnimatedSkills(prev => ({
               ...prev,
               [skillKey]: Math.round(currentValue)
@@ -104,7 +104,8 @@ const SkillsPage = () => {
       <div className="text-center mb-6 animate-fade-in">
         <div className="relative w-full h-32 rounded-xl overflow-hidden border-2 border-[#ff9900] mb-4">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20"></div>
-          <img 
+          <img
+            loading="lazy"
             src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=200&fit=crop"
             alt="Skills workspace"
             className="w-full h-full object-cover"

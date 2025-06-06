@@ -116,7 +116,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
 
       {/* Book Container - Enhanced responsive design */}
       <div className="w-full max-w-8xl mx-auto h-full relative">
-        <div className="w-full lg:w-[95%] xl:w-[98%] mx-auto h-full bg-white/95 backdrop-blur-xl rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in border border-white/20">
+        <div className="w-full lg:w-[91%] xl:w-[70%] mx-auto h-full bg-white/95 backdrop-blur-xl rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl overflow-hidden relative animate-scale-in border border-white/20">
           {/* Page Content */}
           <div className="h-full relative">
             <div

@@ -6,10 +6,10 @@ const DesignGeneratorPage = () => {
   const [tagline, setTagline] = useState('Stay Cool');
   const [mainTitle, setMainTitle] = useState('Happy');
   const [scriptTitle, setScriptTitle] = useState('Easter');
-  const [quote, setQuote] = useState('He is not here; he has risen! Remember how he told you, while he was still with you in Galilee.');
+  const [quote, setQuote] = useState('He is not here; he has risen! Remember how he told you, while he was still with you in Galilee. make you design a poster for this Easter season.He is not here; he has risen! Remember how he told you, while he was still with you in Galilee. make you design a poster for this Easter season. ');
   const [reference, setReference] = useState('Matthew 28:6');
-  const [footerText, setFooterText] = useState('CATECH SOLUTIONS | ngumbaucephas2@gmail.com | +254 793 614 592');
-  const [userImage, setUserImage] = useState('/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png');
+  const [footerText, setFooterText] = useState('CATECH SOLUTIONS | 🔥Choose Us ❤️‍🔥 | +254 793 614 592');
+  const [userImage, setUserImage] = useState('/lovable-uploads/guitar pv.png'); // Default image
   const [isDownloading, setIsDownloading] = useState(false);
   const posterRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +31,7 @@ const DesignGeneratorPage = () => {
       { tagline: 'Stay Strong', main: 'New', script: 'Year', quote: 'Behold, I make all things new.', ref: 'Revelation 21:5' },
       { tagline: 'Be Thankful', main: 'Good', script: 'Friday', quote: 'It is finished.', ref: 'John 19:30' }
     ];
-    
+
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
     setTagline(randomTheme.tagline);
     setMainTitle(randomTheme.main);
@@ -42,19 +42,19 @@ const DesignGeneratorPage = () => {
 
   const downloadPoster = async () => {
     if (!posterRef.current) return;
-    
+
     const withWatermark = window.confirm("Do you want to download with watermark?\n\nClick OK for watermark (free)\nClick Cancel for no watermark (paid)");
-    
+
     if (!withWatermark) {
       alert("To download without watermark, please pay to CATECH account 0793614592 and contact us for the watermark-free version.");
       return;
     }
-    
+
     setIsDownloading(true);
     try {
       const originalElement = posterRef.current;
       const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-      
+
       const removeAnimations = (element: HTMLElement) => {
         element.style.animation = 'none';
         element.style.transition = 'none';
@@ -64,21 +64,21 @@ const DesignGeneratorPage = () => {
           removeAnimations(children[i] as HTMLElement);
         }
       };
-      
+
       removeAnimations(clonedElement);
-      
+
       clonedElement.style.position = 'absolute';
       clonedElement.style.left = '-9999px';
       clonedElement.style.top = '0';
       document.body.appendChild(clonedElement);
-      
+
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       const canvas = await html2canvas(clonedElement, {
         scale: 4,
         useCORS: true,
         allowTaint: false,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#f3f3ff',
         width: 400,
         height: 533,
         scrollX: 0,
@@ -97,17 +97,17 @@ const DesignGeneratorPage = () => {
           }
         }
       });
-      
+
       document.body.removeChild(clonedElement);
-      
+
       const link = document.createElement('a');
       link.download = `${mainTitle}-${scriptTitle}-poster-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
-      
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
     } catch (error) {
       console.error('Error downloading poster:', error);
       alert('Download failed. Please try again.');
@@ -134,7 +134,7 @@ const DesignGeneratorPage = () => {
               <Wand2 className="text-[#ff9900]" size={20} />
               Poster Controls
             </h3>
-            
+
             <div className="space-y-3 md:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1 md:mb-2">Tagline</label>
@@ -215,7 +215,7 @@ const DesignGeneratorPage = () => {
                   />
                   <label
                     htmlFor="image-upload"
-                    className="flex items-center space-x-2 px-3 md:px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-200 transition-colors text-sm md:text-base"
+                    className="flex items-center space-x-2 px-3 md:px-4 py-2 bg-black border border-[#FF9900] rounded-lg cursor-pointer  transition-colors text-sm md:text-base"
                   >
                     <Upload size={16} />
                     <span>Choose Image</span>
@@ -231,7 +231,7 @@ const DesignGeneratorPage = () => {
                   <RefreshCw size={16} />
                   <span>Random Theme</span>
                 </button>
-                <button 
+                <button
                   onClick={downloadPoster}
                   disabled={isDownloading}
                   className="flex items-center justify-center space-x-2 px-3 md:px-4 py-2 bg-[#ff9900] text-white rounded-lg hover:bg-[#e6870a] transition-colors text-sm md:text-base disabled:opacity-50"
@@ -248,21 +248,22 @@ const DesignGeneratorPage = () => {
         <div className="animate-scale-in">
           <div className="bg-white p-3 md:p-6 rounded-xl border border-gray-200">
             <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4">Live Preview</h3>
-            
-            <div 
+
+            <div
               ref={posterRef}
               data-poster-ref="true"
               className="relative bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden mx-auto"
-              style={{ 
+              style={{
                 width: '400px',
                 height: '533px',
                 maxWidth: '100%'
               }}
             >
               <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
-                <img 
-                  src="/lovable-uploads/a6a68b67-9026-42f1-a535-3e8057802d8c.png" 
-                  alt="CATECH Logo" 
+                <img
+                  src="/lovable-uploads/logo catech.png"
+                  loading="lazy"
+                  alt="CATECH Logo"
                   className="h-10 w-auto"
                   crossOrigin="anonymous"
                   style={{ imageRendering: 'crisp-edges' }}
@@ -282,9 +283,9 @@ const DesignGeneratorPage = () => {
                       <h1 className="text-black font-bold text-2xl leading-tight" style={{ fontFamily: 'Arial Black, sans-serif' }}>
                         {mainTitle}
                       </h1>
-                      <h1 
-                        className="text-[#ff9900] font-bold text-2xl mt-1 leading-tight" 
-                        style={{ 
+                      <h1
+                        className="text-[#ff9900] font-bold text-2xl mt-1 leading-tight"
+                        style={{
                           fontFamily: 'Brush Script MT, cursive',
                           textShadow: '1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white'
                         }}
@@ -294,8 +295,8 @@ const DesignGeneratorPage = () => {
                     </div>
 
                     <div className="mb-4">
-                      <p className="text-gray-800 text-sm leading-relaxed" style={{ 
-                        wordWrap: 'break-word', 
+                      <p className="text-gray-800 text-sm leading-relaxed" style={{
+                        wordWrap: 'break-word',
                         hyphens: 'auto',
                         lineHeight: '1.4'
                       }}>
@@ -313,6 +314,7 @@ const DesignGeneratorPage = () => {
                   <div className="w-1/2 pl-4 flex justify-center items-center">
                     <div className="relative" style={{ width: '140px', height: '200px' }}>
                       <img
+                        loading="lazy"
                         src={userImage}
                         alt="Profile"
                         className="w-full h-full object-cover rounded-lg"
@@ -328,7 +330,7 @@ const DesignGeneratorPage = () => {
                 </div>
               </div>
 
-              <div 
+              <div
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 opacity-10 z-0"
                 style={{ transformOrigin: 'center' }}
               >
@@ -338,8 +340,8 @@ const DesignGeneratorPage = () => {
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 bg-[#ff9900] text-white text-center py-2">
-                <p className="text-xs font-medium px-2" style={{ 
-                  wordWrap: 'break-word', 
+                <p className="text-xs font-medium px-2" style={{
+                  wordWrap: 'break-word',
                   lineHeight: '1.2',
                   whiteSpace: 'normal'
                 }}>

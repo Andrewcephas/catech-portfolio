@@ -10,7 +10,7 @@ const AboutPage = () => {
     },
     {
       icon: <Smartphone size={24} />,
-      title: "Mobile Apps", 
+      title: "Mobile Apps",
       description: "Creating cross-platform mobile applications"
     },
     {
@@ -55,9 +55,10 @@ const AboutPage = () => {
       <div className="text-center mb-8 animate-fade-in">
         <div className="relative w-32 h-32 mx-auto mb-4 transform rotate-3">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-2xl border-2 border-[#ff9900] border-opacity-100"></div>
-          <img 
-            src="/lovable-uploads/f04b0568-f72c-43fd-8e57-133cc4af1de6.png"
+          <img
+            src="/lovable-uploads/andrew green.png"
             alt="Andrew Cephas Ngumbau"
+            loading="lazy"
             className="w-full h-full object-cover rounded-2xl"
           />
         </div>
@@ -68,9 +69,9 @@ const AboutPage = () => {
         <div className="bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl p-4 border border-[#ff9900]/20">
           <p className="text-gray-700 leading-relaxed">
             <strong className="text-[#017020]">"I bridge the gap between user-friendly design and robust, scalable code."</strong>
-            <br/><br/>
-            As a hybrid creative professional currently studying at Kisii University, I combine artistic vision with technical expertise to deliver 
-            exceptional digital experiences. Since 2023, I've been actively developing my skills in both design and development, 
+            <br /><br />
+            As a hybrid creative professional currently studying at Kisii University, I combine artistic vision with technical expertise to deliver
+            exceptional digital experiences. Since 2023, I've been actively developing my skills in both design and development,
             creating solutions that make a real impact.
           </p>
         </div>
@@ -114,11 +115,10 @@ const AboutPage = () => {
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1">
                   <h4 className="font-semibold text-gray-800 text-sm">{edu.title}</h4>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    edu.status === 'In Progress' 
-                      ? 'bg-[#ff9900]/10 text-[#ff9900]' 
-                      : 'bg-[#017020]/10 text-[#017020]'
-                  }`}>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${edu.status === 'In Progress'
+                    ? 'bg-[#ff9900]/10 text-[#ff9900]'
+                    : 'bg-[#017020]/10 text-[#017020]'
+                    }`}>
                     {edu.status}
                   </span>
                 </div>
@@ -136,8 +136,9 @@ const AboutPage = () => {
         <div className="flex items-start space-x-4">
           <div className="relative w-24 h-24 transform -rotate-2">
             <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
-            <img 
-              src="/lovable-uploads/a28bc92e-ea57-43b0-be33-8ce891c2f057.png"
+            <img
+              src="/lovable-uploads/happy easter.png"
+              loading="lazy"
               alt="Creative workspace"
               className="w-full h-full object-cover rounded-lg"
             />
@@ -148,13 +149,13 @@ const AboutPage = () => {
               My Creative Journey
             </h3>
             <p className="text-gray-700 text-sm mb-3 leading-relaxed">
-              My journey began in 2018 after completing high school at Misuuni High School with a C+ grade. 
-              Since joining Kisii University in 2022, I've been on a continuous path of learning and growth, 
+              My journey began in 2018 after completing high school at Misuuni High School with a C+ grade.
+              Since joining Kisii University in 2022, I've been on a continuous path of learning and growth,
               developing expertise in both design and development.
             </p>
             <p className="text-gray-700 text-sm leading-relaxed">
-              What sets me apart is my ability to think both artistically and technically. Whether crafting 
-              a visual identity or building a web application, I approach each project with the same passion 
+              What sets me apart is my ability to think both artistically and technically. Whether crafting
+              a visual identity or building a web application, I approach each project with the same passion
               for excellence and attention to detail.
             </p>
           </div>
@@ -190,7 +191,7 @@ const AboutPage = () => {
       <div className="grid grid-cols-2 gap-4">
         {[
           { value: "50+", label: "Projects", color: "text-[#ff9900]" },
-          { value: "6+", label: "Years Experience", color: "text-[#017020]" },
+          { value: "3+", label: "Years Experience", color: "text-[#017020]" },
           { value: "30+", label: "Happy Clients", color: "text-[#ff9900]" },
           { value: "24/7", label: "Dedicated Support", color: "text-[#017020]" },
         ].map((stat, index) => (
