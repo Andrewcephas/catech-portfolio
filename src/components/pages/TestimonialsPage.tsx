@@ -77,7 +77,7 @@ const TestimonialsPage = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
           <img
             loading="lazy"
-            src="/lovable-uploads/6c8e0281-552c-47c5-b19f-da650e506a20.png"
+            src="/lovable-uploads/andrew green.png"
             alt="Team collaboration"
             className="w-full h-full object-cover rounded-lg"
           />
