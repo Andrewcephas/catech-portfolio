@@ -34,7 +34,7 @@ const BookLayout = ({ currentPage, setCurrentPage }: BookLayoutProps) => {
     { title: "Blog", component: <BlogPage />, animation: "animate-page-peel-in" },
     { title: "Games", component: <GamePage />, animation: "animate-page-peel-in" },
     { title: "Contact", component: <ContactPage />, animation: "animate-page-peel-in" },
-    { title: "AI Design", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
+    { title: "Create Poster", component: <DesignGeneratorPage />, animation: "animate-page-peel-in" },
   ];
 
   // Listen for custom navigation events

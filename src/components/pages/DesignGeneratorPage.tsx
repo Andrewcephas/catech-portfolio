@@ -121,7 +121,7 @@ const DesignGeneratorPage = () => {
       {/* Header */}
       <div className="text-center animate-fade-in">
         <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-          AI Poster Generator
+          Catech Auto poster Generator
         </h2>
         <p className="text-gray-600 text-sm md:text-base">Create beautiful custom posters with ease</p>
       </div>
