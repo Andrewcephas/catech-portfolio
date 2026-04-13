@@ -2,7 +2,7 @@ import ImageGallery from "./hero/ImageGallery";
 import TypewriterText from "./hero/TypewriterText";
 import JourneyTimeline from "./hero/JourneyTimeline";
 import ActionButtons from "./hero/ActionButtons";
-import { Github, Linkedin, Twitter, Instagram, Facebook, Youtube, Mail, Phone, Globe, Sparkles } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Facebook, Youtube, Mail, Phone, Globe, Sparkles, Tiktok } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface HeroPageProps {
@@ -161,9 +161,10 @@ Contact: ngumbaucephas2@gmail.com`;
             <a href="https://github.com/Andrewcephas" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#333] hover:text-white rounded-full transition-all" title="GitHub"><Github size={14} /></a>
             <a href="https://linkedin.com/in/andrew-cephas-ngumbau-543166243" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#0077b5] hover:text-white rounded-full transition-all" title="LinkedIn"><Linkedin size={14} /></a>
             <a href="https://twitter.com/catech_solutions" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#1da1f2] hover:text-white rounded-full transition-all" title="Twitter"><Twitter size={14} /></a>
-            <a href="https://instagram.com/catech_solutions" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#e4405f] hover:text-white rounded-full transition-all" title="Instagram"><Instagram size={14} /></a>
-            <a href="https://facebook.com/catech.solutions.ke" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#1877f2] hover:text-white rounded-full transition-all" title="Facebook"><Facebook size={14} /></a>
-            <a href="https://youtube.com/@catechsolutions" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#ff0000] hover:text-white rounded-full transition-all" title="YouTube"><Youtube size={14} /></a>
+            <a href="https://www.instagram.com/catechlifestyle/" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#e4405f] hover:text-white rounded-full transition-all" title="Instagram"><Instagram size={14} /></a>
+            <a href="https://www.facebook.com/ademaster.master" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#1877f2] hover:text-white rounded-full transition-all" title="Facebook"><Facebook size={14} /></a>
+            <a href="https://www.youtube.com/@catechlifestyle" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#ff0000] hover:text-white rounded-full transition-all" title="YouTube"><Youtube size={14} /></a>
+            <a href="https://www.tiktok.com/@andrewcephas" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-black hover:text-white rounded-full transition-all" title="TikTok"><Tiktok size={14} /></a>
             <a href="mailto:ngumbaucephas2@gmail.com" className="p-1.5 bg-gray-100 hover:bg-[#ff9900] hover:text-white rounded-full transition-all" title="Email"><Mail size={14} /></a>
             <a href="tel:+254793614592" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Call"><Phone size={14} /></a>
             <a href="https://catech.co.ke" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Website"><Globe size={14} /></a>
