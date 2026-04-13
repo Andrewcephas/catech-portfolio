@@ -64,7 +64,7 @@ const Chatbot = () => {
     
     // Portfolio queries
     if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('examples') || lowerMessage.includes('projects')) {
-      return "Check out our portfolio right here in this website! Navigate to the Projects page to see our recent work in web development, graphics design, and data science. You can also visit catech.co.ke for our complete portfolio and case studies. Which type of project interests you most?";
+      return "Check out our portfolio right here in this website! Navigate to the Projects page to see our recent work in web development, graphics design, and data science. You can also visit portfolio.catech.co.ke for our complete portfolio and case studies. Which type of project interests you most?";
     }
     
     // Contact queries

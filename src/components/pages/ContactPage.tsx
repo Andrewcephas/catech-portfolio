@@ -26,10 +26,10 @@ const ContactPage = () => {
           <Phone size={14} className="text-[#017020]" />
           <span className="text-xs">+254 793 614 592</span>
         </button>
-        <button onClick={() => window.open('https://catech.co.ke', '_blank')} 
+        <button onClick={() => window.open('https://portfolio.catech.co.ke', '_blank')} 
           className="w-full p-2 bg-gray-50 rounded-lg flex items-center gap-2 border border-gray-100">
           <Globe size={14} className="text-[#ff9900]" />
-          <span className="text-xs">catech.co.ke</span>
+          <span className="text-xs">portfolio.catech.co.ke</span>
         </button>
       </div>
 

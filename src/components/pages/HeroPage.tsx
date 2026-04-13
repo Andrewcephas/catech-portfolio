@@ -57,7 +57,7 @@ const HeroPage = ({ onNavigateToProjects }: HeroPageProps) => {
 Name: Andrew Cephas Ngumbau
 Email: ngumbaucephas2@gmail.com
 Phone: +254 793 614 592
-Website: catech.co.ke
+Website: portfolio.catech.co.ke
 GitHub: github.com/Andrewcephas
 LinkedIn: linkedin.com/in/andrew-ngumbau-8309a833a
 
@@ -167,7 +167,7 @@ Contact: ngumbaucephas2@gmail.com`;
             <a href="https://www.pinterest.com/CATECHSOLUTIONS8GRAPHICS" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#e60023] hover:text-white rounded-full transition-all" title="Pinterest"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.24 9.38 7.88 11.11-.11-.94-.21-2.4.04-3.44.23-.97 1.5-6.17 1.5-6.17s-.38-.77-.38-1.91c0-1.79 1.04-3.12 2.33-3.12 1.1 0 1.63.82 1.63 1.81 0 1.1-.7 2.75-1.06 4.27-.3 1.28.64 2.32 1.9 2.32 2.28 0 4.04-2.4 4.04-5.87 0-3.07-2.2-5.22-5.35-5.22-3.64 0-5.78 2.73-5.78 5.55 0 1.1.42 2.27.95 2.91.1.12.12.23.09.35l-.34 1.36c-.05.21-.18.25-.41.15-1.53-.71-2.48-2.88-2.48-4.64 0-3.78 2.75-7.26 7.92-7.26 4.16 0 7.4 2.97 7.4 6.93 0 4.14-2.6 7.46-6.22 7.46-1.21 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15.89.27 1.84.42 2.82.42 6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
             <a href="mailto:ngumbaucephas2@gmail.com" className="p-1.5 bg-gray-100 hover:bg-[#ff9900] hover:text-white rounded-full transition-all" title="Email"><Mail size={14} /></a>
             <a href="tel:+254793614592" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Call"><Phone size={14} /></a>
-            <a href="https://catech.co.ke" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Website"><Globe size={14} /></a>
+            <a href="https://portfolio.catech.co.ke" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Website"><Globe size={14} /></a>
           </div>
           
           <ActionButtons onViewWork={handleViewWork} onDownloadCV={handleDownloadCV} />

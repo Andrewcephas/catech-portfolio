@@ -22,7 +22,7 @@ const ProjectManager = () => {
       category: 'Branding',
       image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?w=500&h=300&fit=crop',
       tech: ['Illustrator', 'Photoshop', 'InDesign'],
-      liveUrl: 'https://catech.co.ke',
+      liveUrl: 'https://portfolio.catech.co.ke',
       githubUrl: 'https://github.com/Andrewcephas',
       dateCreated: '2024-01-15'
     }
