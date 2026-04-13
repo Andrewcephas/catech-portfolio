@@ -7,14 +7,10 @@ import HeroPage from "@/components/pages/HeroPage";
 import AboutPage from "@/components/pages/AboutPage";
 import SkillsPage from "@/components/pages/SkillsPage";
 import ProjectsPage from "@/components/pages/ProjectsPage";
-import ContactPage from "@/components/pages/ContactPage";
-import DesignGeneratorPage from "@/components/pages/DesignGeneratorPage";
 import ResumePage from "@/components/pages/ResumePage";
-import TestimonialsPage from "@/components/pages/TestimonialsPage";
 import GuitarPage from "@/components/pages/GuitarPage";
 import BlogPage from "@/components/pages/BlogPage";
-import GamePage from "@/components/pages/GamePage";
-import ProjectManager from "@/components/ProjectManager";
+import ContactPage from "@/components/pages/ContactPage";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -35,13 +31,9 @@ const Index = () => {
     { title: "Skills", component: <SkillsPage /> },
     { title: "Projects", component: <ProjectsPage /> },
     { title: "Resume", component: <ResumePage /> },
-    { title: "Testimonials", component: <TestimonialsPage /> },
     { title: "Guitar", component: <GuitarPage /> },
     { title: "Blog", component: <BlogPage /> },
-    { title: "Games", component: <GamePage /> },
     { title: "Contact", component: <ContactPage /> },
-    { title: "Design", component: <DesignGeneratorPage /> },
-    { title: "Manage", component: <ProjectManager /> },
     { title: "End", component: <EndPage /> },
   ];
 
@@ -67,16 +59,18 @@ const EndPage = () => (
     <div className="text-4xl mb-3">🙏</div>
     <h2 className="text-xl font-bold text-gray-800 mb-2">Thank You!</h2>
     <p className="text-sm text-gray-600 mb-4">For viewing my portfolio</p>
-    <div className="text-xs text-gray-500 space-y-1">
+    <div className="text-xs text-gray-500 space-y-1 mb-3">
       <p><strong>Andrew Cephas Ngumbau</strong></p>
       <p>CEO, Catech Solutions</p>
       <p>ngumbaucephas2@gmail.com</p>
       <p>+254 793 614 592</p>
     </div>
-    <div className="flex gap-3 mt-4">
-      <a href="https://linkedin.com/in/andrew-cephas-ngumbau-543166243" className="text-xs text-[#ff9900] hover:underline">LinkedIn</a>
-      <a href="https://github.com/Andrewcephas" className="text-xs text-[#ff9900] hover:underline">GitHub</a>
-      <a href="https://catech.co.ke" className="text-xs text-[#ff9900] hover:underline">Website</a>
+    <div className="flex gap-3 mt-2 text-xs">
+      <a href="https://catech.co.ke" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Website</a>
+      <a href="https://youtube.com/@catechlifestyle" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">YouTube</a>
+      <a href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">LinkedIn</a>
+      <a href="https://www.instagram.com/catechlifestyle/" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Instagram</a>
+      <a href="https://github.com/Andrewcephas" className="text-[#ff9900] hover:underline">GitHub</a>
     </div>
   </div>
 );

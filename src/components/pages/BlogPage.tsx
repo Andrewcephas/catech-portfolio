@@ -186,8 +186,8 @@ At Catech Solutions, we believe every business deserves a creative approach that
                       Contact Catech Solutions today to discuss how we can help transform your business with creative solutions.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-2 text-sm">
-                      <span className="text-[#ff9900] font-medium">📧 info@catech.co.ke</span>
-                      <span className="text-[#017020] font-medium">📞 +254 700 123 456</span>
+                      <span className="text-[#ff9900] font-medium">📧 ngumbaucephas2@gmail.com</span>
+                      <span className="text-[#017020] font-medium">📞 +254 793 614 592</span>
                     </div>
                   </div>
                 </div>

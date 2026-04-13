@@ -10,16 +10,16 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 3500);
     return () => clearInterval(timer);
   }, [images.length]);
 
   return (
-    <div className="relative mb-2 sm:mb-0">
+    <div className="relative mb-2">
       <div className="w-24 h-28 sm:w-28 sm:h-36 mx-auto overflow-hidden rounded-lg border-2 border-[#ff9900] shadow-md">
         <img
           src={images[currentIndex]}
-          alt={`Profile ${currentIndex + 1}`}
+          alt="Profile"
           className="w-full h-full object-cover"
         />
       </div>

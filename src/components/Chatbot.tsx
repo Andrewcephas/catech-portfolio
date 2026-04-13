@@ -69,7 +69,7 @@ const Chatbot = () => {
     
     // Contact queries
     if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone') || lowerMessage.includes('reach')) {
-      return "Great! You can reach us at info@catech.co.ke or call +254 700 123 456. We're also available on WhatsApp. You can use the contact form on our Contact page here. We typically respond within 2-4 hours during business hours. What's the best way to reach you?";
+      return "Great! You can reach us at ngumbaucephas2@gmail.com or call +254 793 614 592. We're also available on WhatsApp. You can use the contact form on our Contact page here. We typically respond within 2-4 hours during business hours. What's the best way to reach you?";
     }
     
     // Technology stack queries
@@ -90,9 +90,9 @@ const Chatbot = () => {
     // Default responses
     const defaultResponses = [
       "That's a great question! At Catech Solutions, we handle diverse projects across data science, web development, graphics design, UI/UX, and Python programming. Could you tell me more about what you're looking for specifically?",
-      "Thanks for reaching out! We'd love to discuss your project in detail. Our team specializes in cutting-edge technology and creative solutions. Feel free to email us at info@catech.co.ke for a comprehensive consultation!",
+      "Thanks for reaching out! We'd love to discuss your project in detail. Our team specializes in cutting-edge technology and creative solutions. Feel free to email us at ngumbaucephas2@gmail.com for a comprehensive consultation!",
       "Interesting! We work with clients on various technology and design challenges. Whether it's building a web app, creating stunning graphics, analyzing data, or developing Python solutions, we're here to help. What's your main goal?",
-      "I'd be happy to provide more specific information about our services! We're experts in modern web technologies, creative design, and data solutions. Let's connect via info@catech.co.ke to discuss your project requirements in detail."
+      "I'd be happy to provide more specific information about our services! We're experts in modern web technologies, creative design, and data solutions. Let's connect via ngumbaucephas2@gmail.com to discuss your project requirements in detail."
     ];
     
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
