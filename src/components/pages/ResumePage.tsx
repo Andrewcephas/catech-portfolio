@@ -137,7 +137,7 @@ Contact for professional creative solutions!
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-lg border-2 border-[#ff9900] border-opacity-100"></div>
           <img
             loading="lazy"
-            src="/lovable-uploads/andrew green.png"
+            src="/lovable-uploads/catech.jpg"
             alt="Andrew Cephas Ngumbau"
             className="w-full h-full object-cover rounded-lg"
           />

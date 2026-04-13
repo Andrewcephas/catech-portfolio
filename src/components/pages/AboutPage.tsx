@@ -20,7 +20,7 @@ const AboutPage = () => {
       <div className="text-center">
         <div className="relative w-20 h-20 mx-auto mb-2 transform rotate-3">
           <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20 rounded-xl border-2 border-[#ff9900]"></div>
-          <img src="/lovable-uploads/andrew green.png" alt="Andrew Cephas Ngumbau" loading="lazy" className="w-full h-full object-cover rounded-xl" />
+          <img src="/lovable-uploads/catech.jpg" alt="Andrew Cephas Ngumbau" loading="lazy" className="w-full h-full object-cover rounded-xl" />
         </div>
         <h2 className="text-lg font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent">
           Andrew Cephas Ngumbau
@@ -74,7 +74,7 @@ const AboutPage = () => {
         <div className="flex items-start gap-2">
           <div className="w-12 h-12 transform -rotate-2 flex-shrink-0">
             <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border border-[#017020]"></div>
-            <img src="/lovable-uploads/happy easter.png" loading="lazy" alt="Creative workspace" className="w-full h-full object-cover rounded-lg" />
+            <img src="/lovable-uploads/with computer.png" loading="lazy" alt="Creative workspace" className="w-full h-full object-cover rounded-lg" />
           </div>
           <div>
             <h3 className="text-sm font-bold text-[#017020] mb-1 flex items-center gap-1">

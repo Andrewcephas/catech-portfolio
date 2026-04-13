@@ -7,7 +7,7 @@ const TestimonialsPage = () => {
       name: "Sarah Johnson",
       role: "Marketing Director",
       company: "TechStart Kenya",
-      image: "/lovable-uploads/andrew green.png",
+      image: "/lovable-uploads/catech.jpg",
       rating: 5,
       text: "Andrew delivered exceptional branding materials for our startup. His attention to detail and creative vision exceeded our expectations. The final designs perfectly captured our company's essence.",
       project: "Complete Brand Identity"
@@ -16,7 +16,7 @@ const TestimonialsPage = () => {
       name: "Michael Chen",
       role: "CEO",
       company: "Digital Solutions Ltd",
-      image: "/lovable-uploads/andrew grey.png",
+      image: "/lovable-uploads/with computer.png",
       rating: 5,
       text: "Working with Andrew was a pleasure. He not only designed a beautiful website but also developed it flawlessly. His hybrid skills in design and development are rare and valuable.",
       project: "Website Design & Development"
@@ -25,7 +25,7 @@ const TestimonialsPage = () => {
       name: "Grace Wanjiku",
       role: "Small Business Owner",
       company: "Grace Boutique",
-      image: "/lovable-uploads/andrew green.png",
+      image: "/lovable-uploads/catech.jpg",
       rating: 5,
       text: "Andrew created stunning print materials for my boutique. From business cards to brochures, everything was perfectly designed and delivered on time. Highly recommended!",
       project: "Print Design Package"
@@ -34,7 +34,7 @@ const TestimonialsPage = () => {
       name: "David Mutua",
       role: "Project Manager",
       company: "Nairobi Tech Hub",
-      image: "/lovable-uploads/happy easter.png",
+      image: "/lovable-uploads/with computer.png",
       rating: 5,
       text: "Andrew's professionalism and reliability are outstanding. He consistently delivers high-quality work and communicates effectively throughout the project lifecycle.",
       project: "UI/UX Design"
@@ -43,7 +43,7 @@ const TestimonialsPage = () => {
       name: "Emma Kariuki",
       role: "Creative Director",
       company: "Brandhub Agency",
-      image: "/lovable-uploads/guitar pv.png",
+      image: "/lovable-uploads/logo catech.png",
       rating: 5,
       text: "As a fellow creative, I can appreciate Andrew's artistic eye and technical skills. His ability to bridge design and development makes him an invaluable partner for any project.",
       project: "Brand Guidelines"
@@ -77,7 +77,7 @@ const TestimonialsPage = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#017020]/20 to-[#ff9900]/20 rounded-lg border-2 border-[#017020] border-opacity-100"></div>
           <img
             loading="lazy"
-            src="/lovable-uploads/andrew green.png"
+            src="/lovable-uploads/catech.jpg"
             alt="Team collaboration"
             className="w-full h-full object-cover rounded-lg"
           />
