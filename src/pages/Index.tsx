@@ -102,12 +102,14 @@ const EndPage = () => (
       <p>+254 793 614 592</p>
     </div>
     <div className="flex gap-3 mt-2 text-xs">
+      <a href="https://catech.co.ke" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Website</a>
       <a href="https://www.youtube.com/@catechlifestyle" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">YouTube</a>
       <a href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">LinkedIn</a>
       <a href="https://www.instagram.com/catechlifestyle/" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Instagram</a>
       <a href="https://www.tiktok.com/@andrewcephas" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">TikTok</a>
       <a href="https://www.facebook.com/ademaster.master" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Facebook</a>
       <a href="https://www.pinterest.com/CATECHSOLUTIONS8GRAPHICS" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Pinterest</a>
+      <a href="https://github.com/Andrewcephas" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">GitHub</a>
     </div>
   </div>
 );

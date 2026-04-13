@@ -5,13 +5,13 @@ const SocialLinks = () => {
   const socialLinks = [
     { 
       icon: Github, 
-      href: "https://github.com/catechsolutions", 
+      href: "https://github.com/Andrewcephas", 
       color: "bg-gray-800", 
       label: "GitHub" 
     },
     { 
       icon: Linkedin, 
-      href: "https://linkedin.com/in/andrew-cephas-ngumbau", 
+      href: "https://www.linkedin.com/in/andrew-ngumbau-8309a833a", 
       color: "bg-blue-600", 
       label: "LinkedIn" 
     },

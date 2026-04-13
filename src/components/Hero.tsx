@@ -60,7 +60,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
 
           <div className="flex justify-center space-x-6 mb-12">
             <a
-              href="https://github.com/catechsolutions"
+              href="https://github.com/Andrewcephas"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
@@ -69,7 +69,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
               <Github size={24} />
             </a>
             <a
-              href="https://linkedin.com/in/andrew-cephas-ngumbau"
+              href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"

@@ -2,7 +2,7 @@ import ImageGallery from "./hero/ImageGallery";
 import TypewriterText from "./hero/TypewriterText";
 import JourneyTimeline from "./hero/JourneyTimeline";
 import ActionButtons from "./hero/ActionButtons";
-import { Github, Linkedin, Twitter, Instagram, Facebook, Youtube, Mail, Phone, Globe, Sparkles, Tiktok } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram, Facebook, Youtube, Mail, Phone, Globe, Sparkles, Linkedin as LinkedIn, Instagram as Insta, Youtube as YT, Facebook as FB } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface HeroPageProps {
@@ -59,7 +59,7 @@ Email: ngumbaucephas2@gmail.com
 Phone: +254 793 614 592
 Website: catech.co.ke
 GitHub: github.com/Andrewcephas
-LinkedIn: linkedin.com/in/andrew-cephas-ngumbau-543166243
+LinkedIn: linkedin.com/in/andrew-ngumbau-8309a833a
 
 EDUCATION:
 ---------
@@ -159,12 +159,12 @@ Contact: ngumbaucephas2@gmail.com`;
           
           <div className="flex flex-wrap justify-center sm:justify-start gap-1.5 my-2">
             <a href="https://github.com/Andrewcephas" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#333] hover:text-white rounded-full transition-all" title="GitHub"><Github size={14} /></a>
-            <a href="https://linkedin.com/in/andrew-cephas-ngumbau-543166243" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#0077b5] hover:text-white rounded-full transition-all" title="LinkedIn"><Linkedin size={14} /></a>
-            <a href="https://twitter.com/catech_solutions" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#1da1f2] hover:text-white rounded-full transition-all" title="Twitter"><Twitter size={14} /></a>
+            <a href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#0077b5] hover:text-white rounded-full transition-all" title="LinkedIn"><Linkedin size={14} /></a>
             <a href="https://www.instagram.com/catechlifestyle/" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#e4405f] hover:text-white rounded-full transition-all" title="Instagram"><Instagram size={14} /></a>
+            <a href="https://www.tiktok.com/@andrewcephas" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-black hover:text-white rounded-full transition-all" title="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></svg></a>
             <a href="https://www.facebook.com/ademaster.master" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#1877f2] hover:text-white rounded-full transition-all" title="Facebook"><Facebook size={14} /></a>
             <a href="https://www.youtube.com/@catechlifestyle" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#ff0000] hover:text-white rounded-full transition-all" title="YouTube"><Youtube size={14} /></a>
-            <a href="https://www.tiktok.com/@andrewcephas" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-black hover:text-white rounded-full transition-all" title="TikTok"><Tiktok size={14} /></a>
+            <a href="https://www.pinterest.com/CATECHSOLUTIONS8GRAPHICS" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#e60023] hover:text-white rounded-full transition-all" title="Pinterest"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.24 9.38 7.88 11.11-.11-.94-.21-2.4.04-3.44.23-.97 1.5-6.17 1.5-6.17s-.38-.77-.38-1.91c0-1.79 1.04-3.12 2.33-3.12 1.1 0 1.63.82 1.63 1.81 0 1.1-.7 2.75-1.06 4.27-.3 1.28.64 2.32 1.9 2.32 2.28 0 4.04-2.4 4.04-5.87 0-3.07-2.2-5.22-5.35-5.22-3.64 0-5.78 2.73-5.78 5.55 0 1.1.42 2.27.95 2.91.1.12.12.23.09.35l-.34 1.36c-.05.21-.18.25-.41.15-1.53-.71-2.48-2.88-2.48-4.64 0-3.78 2.75-7.26 7.92-7.26 4.16 0 7.4 2.97 7.4 6.93 0 4.14-2.6 7.46-6.22 7.46-1.21 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15.89.27 1.84.42 2.82.42 6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
             <a href="mailto:ngumbaucephas2@gmail.com" className="p-1.5 bg-gray-100 hover:bg-[#ff9900] hover:text-white rounded-full transition-all" title="Email"><Mail size={14} /></a>
             <a href="tel:+254793614592" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Call"><Phone size={14} /></a>
             <a href="https://catech.co.ke" target="_blank" rel="noopener noreferrer" className="p-1.5 bg-gray-100 hover:bg-[#017020] hover:text-white rounded-full transition-all" title="Website"><Globe size={14} /></a>
