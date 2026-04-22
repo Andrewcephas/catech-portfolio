@@ -83,7 +83,7 @@ const VisitCounter = () => {
 
   return (
     <div className="flex items-center space-x-1 sm:space-x-2 bg-white/90 backdrop-blur-xl rounded-lg px-1.5 sm:px-2 md:px-3 py-1 sm:py-1.5 md:py-2 shadow-lg border border-white/20">
-      <Eye size={10} className="text-[#017020] sm:w-3 sm:h-3 md:w-4 md:h-4" />
+      <Eye size={10} className="text-[#007520] sm:w-3 sm:h-3 md:w-4 md:h-4" />
       <span className="text-[8px] sm:text-[10px] md:text-sm font-semibold text-gray-700">
         {visitCount.toLocaleString()}
       </span>

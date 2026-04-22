@@ -2,44 +2,14 @@
 import { Music, Play, Heart, Award } from "lucide-react";
 
 const GuitarPage = () => {
-  const guitarJourney = [
-    {
-      year: "2015",
-      title: "First Guitar",
-      description: "Started my musical journey with an acoustic guitar, learning basic chords.",
-      milestone: "First song learned"
-    },
-    {
-      year: "2017", 
-      title: "Skill Development",
-      description: "Advanced to fingerpicking techniques and complex pieces.",
-      milestone: "First performance"
-    },
-    {
-      year: "2019",
-      title: "Creative Expression",
-      description: "Began writing original compositions and exploring genres.",
-      milestone: "Original compositions"
-    },
-    {
-      year: "2022",
-      title: "Digital Integration",
-      description: "Combined tech skills with music for digital recordings.",
-      milestone: "Tech + Music fusion"
-    }
-  ];
-
   const musicalSkills = [
     { skill: "Acoustic Guitar", level: 85 },
     { skill: "Fingerpicking", level: 80 },
     { skill: "Chord Progressions", level: 90 },
-    { skill: "Music Theory", level: 75 },
-    { skill: "Composition", level: 70 },
-    { skill: "Recording", level: 65 }
   ];
 
   const favoriteGenres = [
-    "Classical", "Fingerstyle", "Folk", "Blues", "Contemporary", "Ambient"
+    "Folk", "Blues", "Contemporary"
   ];
 
   return (
@@ -76,44 +46,10 @@ const GuitarPage = () => {
               <Heart className="text-[#ff9900]" size={20} />
               Music & Design Harmony
             </h3>
-            <p className="text-gray-700 text-xs md:text-sm leading-relaxed mb-2 md:mb-3 text-wrap">
-              Music and design share a beautiful relationship in my life. Both require creativity, rhythm, 
-              and attention to detail.
-            </p>
-            <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-wrap">
-              The patience developed through guitar playing directly enhances my design work, creating harmony 
-              between melody and visual composition.
+            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+              Music inspires my creative rhythm and adds depth to my visual design process.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Musical Journey Timeline */}
-      <div className="bg-white rounded-xl p-4 md:p-6 border border-gray-200 animate-slide-up">
-        <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-4 flex items-center gap-2">
-          <Music className="text-[#ff9900]" size={20} />
-          Musical Evolution
-        </h3>
-        <div className="space-y-3 md:space-y-4">
-          {guitarJourney.map((item, index) => (
-            <div key={index} className="flex space-x-3 md:space-x-4">
-              <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-[#ff9900] to-[#017020] rounded-full flex items-center justify-center text-white font-bold text-xs md:text-sm">
-                  {item.year}
-                </div>
-                {index < guitarJourney.length - 1 && (
-                  <div className="w-1 h-12 md:h-16 bg-gradient-to-b from-[#ff9900] to-[#017020] mt-2"></div>
-                )}
-              </div>
-              <div className="flex-1 pb-6 md:pb-8">
-                <h4 className="font-bold text-gray-800 mb-1 text-sm md:text-base text-wrap">{item.title}</h4>
-                <p className="text-gray-600 text-xs md:text-sm mb-2 text-wrap line-clamp-2">{item.description}</p>
-                <span className="px-2 md:px-3 py-1 bg-[#ff9900]/10 text-[#ff9900] rounded-full text-xs font-medium">
-                  {item.milestone}
-                </span>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 

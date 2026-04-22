@@ -7,23 +7,23 @@ interface ActionButtonsProps {
 
 const ActionButtons = ({ onViewWork, onDownloadCV }: ActionButtonsProps) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-2 justify-center px-1">
+    <div className="flex flex-col sm:flex-row gap-3 justify-center px-1">
       <button
         onClick={onViewWork}
-        className="group px-4 py-1.5 sm:py-2 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold text-xs transition-all duration-300 hover:scale-105 hover:shadow-md"
+        className="group w-full sm:w-auto px-6 py-3 bg-gray-900 text-white rounded-full font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-md"
       >
-        <span className="flex items-center justify-center gap-1">
-          <Eye size={12} />
+        <span className="flex items-center justify-center gap-2">
+          <Eye size={16} />
           View My Work
-          <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
+          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
         </span>
       </button>
       <button
         onClick={onDownloadCV}
-        className="group px-4 py-1.5 sm:py-2 border border-[#ff9900] text-[#ff9900] rounded-full font-semibold text-xs transition-all duration-300 hover:bg-[#ff9900] hover:text-white hover:scale-105 hover:shadow-md"
+        className="group w-full sm:w-auto px-6 py-3 border border-[var(--brand-primary)] text-[var(--brand-primary)] rounded-full font-semibold text-base sm:text-lg transition-all duration-300 hover:bg-[var(--brand-primary)] hover:text-white hover:scale-105 hover:shadow-md"
       >
-        <span className="flex items-center justify-center gap-1">
-          <Download size={12} />
+        <span className="flex items-center justify-center gap-2">
+          <Download size={16} />
           Download CV
         </span>
       </button>

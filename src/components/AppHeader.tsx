@@ -1,85 +1,122 @@
-import { Menu, X, Home, User, Code, FolderKanban, FileText, MessageSquare, Music, BookOpen, Gamepad2, Mail, Palette, Briefcase } from "lucide-react";
-import DateTimeDisplay from "./DateTimeDisplay";
+import { useState, useEffect } from "react";
+import { Menu, X, Home, User, Code, FolderKanban, Mail, Sparkles } from "lucide-react";
 import VisitCounter from "./VisitCounter";
-import ThemeToggle from "./ThemeToggle";
+import ColorSwitcher from "./ColorSwitcher";
 
 interface AppHeaderProps {
-  isMenuOpen: boolean;
-  setIsMenuOpen: (isOpen: boolean) => void;
-  pages: { title: string }[];
-  currentPage: number;
-  goToPage: (pageIndex: number) => void;
+  activeSection: string;
+  onNavigate: (sectionId: string) => void;
 }
 
-const AppHeader = ({ isMenuOpen, setIsMenuOpen, pages, currentPage, goToPage }: AppHeaderProps) => {
-  const getPageIcon = (title: string) => {
-    const icons: Record<string, React.ReactNode> = {
-      Home: <Home size={16} />,
-      About: <User size={16} />,
-      Skills: <Code size={16} />,
-      Projects: <FolderKanban size={16} />,
-      Resume: <FileText size={16} />,
-      Testimonials: <MessageSquare size={16} />,
-      Guitar: <Music size={16} />,
-      Blog: <BookOpen size={16} />,
-      Games: <Gamepad2 size={16} />,
-      Contact: <Mail size={16} />,
-      "Create Poster": <Palette size={16} />,
-      "Manage Projects": <Briefcase size={16} />,
+const AppHeader = ({ activeSection, onNavigate }: AppHeaderProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
     };
-    return icons[title] || <FolderKanban size={16} />;
-  };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const sections = [
+    { id: 'welcome', label: 'Welcome', icon: <Sparkles size={16} /> },
+    { id: 'hero', label: 'Home', icon: <Home size={16} /> },
+    { id: 'about', label: 'About', icon: <User size={16} /> },
+    { id: 'skills', label: 'Skills', icon: <Code size={16} /> },
+    { id: 'projects', label: 'Projects', icon: <FolderKanban size={16} /> },
+    { id: 'contact', label: 'Contact', icon: <Mail size={16} /> },
+  ];
 
   return (
     <>
-      <header className="flex-shrink-0 bg-white/90 backdrop-blur-sm border-b border-gray-200 z-40">
-        <div className="flex items-center justify-between px-3 py-2">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 bg-[#ff9900]/10 hover:bg-[#ff9900] text-[#ff9900] hover:text-white rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-            <div className="hidden sm:block">
-              <VisitCounter />
+      <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50 shadow-md">
+        {/* Scroll Progress Bar */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gray-200">
+          <div 
+            className="h-full transition-all duration-300 ease-out"
+            style={{ width: `${scrollProgress}%`, backgroundColor: 'var(--brand-primary)' }}
+          />
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center shadow-sm" style={{ background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-secondary))' }}>
+                <Sparkles size={14} className="text-white" />
+              </div>
+              <span className="font-bold text-lg text-gray-900">
+                Andrew Cephas
+              </span>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <DateTimeDisplay />
-            <ThemeToggle />
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-0.5">
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => onNavigate(section.id)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                      activeSection === section.id
+                        ? 'text-white shadow-sm'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
+                  style={activeSection === section.id ? { background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-secondary))' } : {}}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </nav>
+
+            {/* Right Side Controls */}
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:block">
+                <VisitCounter />
+              </div>
+              <ColorSwitcher />
+              
+              {/* Mobile Menu Button - Now on the right */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 hover:bg-gray-100 text-gray-700 rounded-lg transition-all duration-200 md:hidden"
+              >
+                {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center animate-fade-in" 
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <div 
-            className="bg-white rounded-2xl p-4 md:p-6 max-w-sm w-full mx-4 shadow-2xl animate-scale-in max-h-[80vh] overflow-hidden border border-gray-200" 
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="text-lg font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-4 text-center">
-              Navigation
-            </h3>
-            <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
-              {pages.map((page, index) => (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setIsMenuOpen(false)} />
+          <div className="absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+            <nav className="max-h-96 overflow-y-auto">
+              {sections.map((section) => (
                 <button
-                  key={index}
-                  onClick={() => goToPage(index)}
-                  className={`w-full p-3 rounded-xl text-left transition-all duration-300 text-sm flex items-center gap-3 ${
-                    currentPage === index
-                      ? 'bg-gradient-to-r from-[#ff9900] to-[#017020] text-white shadow-md'
-                      : 'bg-gray-100 text-gray-700 hover:bg-[#ff9900]/10 hover:text-[#ff9900]'
+                  key={section.id}
+                  onClick={() => {
+                    onNavigate(section.id);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors ${
+                      activeSection === section.id
+                        ? 'text-white'
+                        : 'text-gray-600 hover:bg-gray-50'
                   }`}
+                  style={activeSection === section.id ? { background: 'linear-gradient(135deg, var(--brand-primary), var(--brand-secondary))' } : {}}
                 >
-                  <span className="opacity-70">{getPageIcon(page.title)}</span>
-                  <span className="font-medium">{page.title}</span>
+                  {section.icon}
+                  {section.label}
                 </button>
               ))}
-            </div>
+            </nav>
           </div>
         </div>
       )}

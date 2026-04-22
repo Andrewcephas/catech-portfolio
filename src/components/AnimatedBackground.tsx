@@ -51,7 +51,7 @@ const AnimatedBackground = () => {
 
       // Animated waves - clean lines
       ctx.globalAlpha = 0.15;
-      ctx.strokeStyle = '#ff9900';
+      ctx.strokeStyle = '#e85d04';
       ctx.lineWidth = 2;
       ctx.beginPath();
       for (let x = 0; x <= canvas.width; x += 3) {
@@ -61,7 +61,7 @@ const AnimatedBackground = () => {
       }
       ctx.stroke();
 
-      ctx.strokeStyle = '#017020';
+      ctx.strokeStyle = '#007520';
       ctx.beginPath();
       for (let x = 0; x <= canvas.width; x += 3) {
         const y = canvas.height * 0.4 + Math.sin((x + waveOffset + 120) * 0.006) * 40 + Math.sin((x + waveOffset * 1.2) * 0.003) * 20;
@@ -81,7 +81,7 @@ const AnimatedBackground = () => {
 
       // Draw connecting lines between points
       ctx.globalAlpha = 0.1;
-      ctx.strokeStyle = '#ff9900';
+      ctx.strokeStyle = '#e85d04';
       ctx.lineWidth = 1;
 
       for (let i = 0; i < points.length; i++) {
@@ -109,7 +109,7 @@ const AnimatedBackground = () => {
 
       // Draw dots at intersection points
       ctx.globalAlpha = 0.3;
-      ctx.fillStyle = '#ff9900';
+      ctx.fillStyle = '#e85d04';
       points.forEach(point => {
         ctx.beginPath();
         ctx.arc(point.x, point.y, point.size, 0, Math.PI * 2);

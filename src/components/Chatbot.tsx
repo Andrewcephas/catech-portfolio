@@ -136,7 +136,7 @@ const Chatbot = () => {
       {/* Chat button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-[#ff9900] to-[#017020] text-white shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center z-50 ${isOpen ? 'rotate-180' : ''}`}
+        className={`fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-r from-[#e85d04] to-[#007520] text-white shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center z-50 ${isOpen ? 'rotate-180' : ''}`}
       >
         {isOpen ? <X size={28} /> : <MessageCircle size={28} />}
       </button>
@@ -145,7 +145,7 @@ const Chatbot = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-80 md:w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col z-40 animate-scale-in">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#ff9900] to-[#017020] text-white p-4 rounded-t-2xl">
+          <div className="bg-gradient-to-r from-[#e85d04] to-[#007520] text-white p-4 rounded-t-2xl">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <Bot size={20} />
@@ -165,13 +165,13 @@ const Chatbot = () => {
                 className={`flex ${message.isBot ? 'justify-start' : 'justify-end'} animate-fade-in`}
               >
                 <div className={`flex items-start space-x-2 max-w-[80%] ${message.isBot ? '' : 'flex-row-reverse space-x-reverse'}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.isBot ? 'bg-[#ff9900]' : 'bg-[#017020]'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.isBot ? 'bg-[#e85d04]' : 'bg-[#007520]'}`}>
                     {message.isBot ? <Bot size={16} className="text-white" /> : <User size={16} className="text-white" />}
                   </div>
                   <div
                     className={`p-3 rounded-2xl ${message.isBot 
                       ? 'bg-white text-gray-800 border border-gray-200' 
-                      : 'bg-gradient-to-r from-[#ff9900] to-[#017020] text-white'
+                      : 'bg-gradient-to-r from-[#e85d04] to-[#007520] text-white'
                     }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
@@ -186,7 +186,7 @@ const Chatbot = () => {
             {isTyping && (
               <div className="flex justify-start animate-fade-in">
                 <div className="flex items-start space-x-2">
-                  <div className="w-8 h-8 bg-[#ff9900] rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-[#e85d04] rounded-full flex items-center justify-center">
                     <Bot size={16} className="text-white" />
                   </div>
                   <div className="bg-white p-3 rounded-2xl border border-gray-200">
@@ -211,14 +211,14 @@ const Chatbot = () => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask about our services..."
-                className="flex-1 p-3 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#ff9900] bg-gray-50 text-black"
+                className="flex-1 p-3 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#e85d04] bg-gray-50 text-black"
                 disabled={isTyping}
                 style={{ color: '#000000' }}
               />
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || isTyping}
-                className="p-3 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-3 bg-gradient-to-r from-[#e85d04] to-[#007520] text-white rounded-full hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send size={16} />
               </button>

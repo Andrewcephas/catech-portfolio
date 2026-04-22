@@ -1,50 +1,145 @@
-import { Mail, Phone, Globe, Send } from "lucide-react";
+import { Mail, Phone, Globe, Send, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    window.open('mailto:ngumbaucephas2@gmail.com', '_blank');
+    const subject = `Contact from ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    window.open(`mailto:ngumbaucephas2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
     setTimeout(() => setSubmitted(false), 3000);
   };
 
+  const contactMethods = [
+    {
+      icon: <Mail size={24} />,
+      title: "Email",
+      value: "ngumbaucephas2@gmail.com",
+      action: () => window.open('mailto:ngumbaucephas2@gmail.com', '_blank'),
+      color: "var(--brand-primary)",
+      tooltip: "Click to send an email"
+    },
+    {
+      icon: <Phone size={24} />,
+      title: "Phone",
+      value: "+254 793 614 592",
+      action: () => window.open('tel:+254793614592', '_blank'),
+      color: "var(--brand-secondary)",
+      tooltip: "Click to call"
+    },
+    {
+      icon: <Globe size={24} />,
+      title: "Website",
+      value: "catech.co.ke",
+      action: () => window.open('https://catech.co.ke', '_blank'),
+      color: "var(--brand-primary)",
+      tooltip: "Click to visit website"
+    }
+  ];
+
   return (
-    <div className="h-full flex flex-col p-1.5">
-      <h2 className="text-sm font-bold text-gray-800 mb-2 text-center">Contact Me</h2>
-      
-      <div className="space-y-1.5 mb-2">
-        <button onClick={() => window.open('mailto:ngumbaucephas2@gmail.com', '_blank')} 
-          className="w-full p-2 bg-gray-50 rounded-lg flex items-center gap-2 border border-gray-100">
-          <Mail size={14} className="text-[#ff9900]" />
-          <span className="text-xs">ngumbaucephas2@gmail.com</span>
-        </button>
-        <button onClick={() => window.open('tel:+254793614592', '_blank')} 
-          className="w-full p-2 bg-gray-50 rounded-lg flex items-center gap-2 border border-gray-100">
-          <Phone size={14} className="text-[#017020]" />
-          <span className="text-xs">+254 793 614 592</span>
-        </button>
-        <button onClick={() => window.open('https://portfolio.catech.co.ke', '_blank')} 
-          className="w-full p-2 bg-gray-50 rounded-lg flex items-center gap-2 border border-gray-100">
-          <Globe size={14} className="text-[#ff9900]" />
-          <span className="text-xs">portfolio.catech.co.ke</span>
-        </button>
+    <div className="space-y-12">
+      {/* Contact Methods */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {contactMethods.map((method, index) => (
+          <Tooltip key={index}>
+            <TooltipTrigger asChild>
+              <div
+                onClick={method.action}
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                  style={{ backgroundColor: `${method.color}20` }}
+                >
+                  <div style={{ color: method.color }}>
+                    {method.icon}
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{method.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{method.value}</p>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{method.tooltip}</p>
+            </TooltipContent>
+          </Tooltip>
+        ))}
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-1.5">
-        <input type="text" placeholder="Your Name" required
-          className="w-full p-2 text-xs border border-gray-200 rounded-lg" />
-        <input type="email" placeholder="Your Email" required
-          className="w-full p-2 text-xs border border-gray-200 rounded-lg" />
-        <textarea placeholder="Message" rows={2} required
-          className="w-full p-2 text-xs border border-gray-200 rounded-lg resize-none" />
-        <button type="submit" 
-          className="w-full py-2 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white text-xs rounded-lg flex items-center justify-center gap-1">
-          <Send size={12} /> Send
-        </button>
-      </form>
+      {/* Contact Form */}
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+        <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Send a Message</h3>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Your Name
+              </label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[var(--brand-primary)]/50 focus:border-[var(--brand-primary)] transition-all text-gray-800"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Your Email
+              </label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[var(--brand-primary)]/50 focus:border-[var(--brand-primary)] transition-all text-gray-800"
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Message
+            </label>
+            <textarea
+              rows={5}
+              required
+              value={formData.message}
+              onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[var(--brand-primary)]/50 focus:border-[var(--brand-primary)] transition-all text-gray-800 resize-none"
+              placeholder="Tell me about your project..."
+            />
+          </div>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="submit"
+                className="w-full py-4 bg-[var(--brand-primary)] text-white rounded-lg hover:shadow-lg hover:shadow-[var(--brand-primary)]/25 transition-all duration-300 flex items-center justify-center gap-3 text-lg font-semibold"
+              >
+                <Send size={20} />
+                {submitted ? 'Message Sent!' : 'Send Message'}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Fill the form and click to send message</p>
+            </TooltipContent>
+          </Tooltip>
+        </form>
+      </div>
     </div>
   );
 };

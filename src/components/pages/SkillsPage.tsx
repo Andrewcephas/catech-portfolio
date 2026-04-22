@@ -1,227 +1,88 @@
-import { useEffect, useState } from "react";
-import { Palette, Code, Settings, Monitor } from "lucide-react";
+import { useState } from "react";
+import { Code, Palette, Layers, Database, Figma, Code2, Database2, Github, Globe } from "lucide-react";
+
+const iconMap: Record<string, any> = {
+  "Adobe Photoshop": <svg viewBox="0 0 24 24" width="20" height="20" fill="#31A8FF"><path d="M11.72 0h.56l-1.04 1.52L12.52 0h1.14L12.21 1.95l.49-.45h-1.7l-.53.82h1.38l-.51.8H12.1l-.52.81h1.7l-.49.82-1.06.45 1.08 1.52h-.56l-.48-.73H11.3l-.52.82H10.8l.51-.81-.51.81h-1.14l-.49.82h1.14l.48-.73H10.3l.5.73-.52.82h1.14l.52-.82.49-.45h1.7l.53.82.51-.8h-1.38l.5-.81h1.14l.51-.81-.51.81h-1.14l-.5-.81H11.3l.48.73.52-.81-.51.81h-.49z"/></svg>,
+  "Adobe Illustrator": <svg viewBox="0 0 24 24" width="20" height="20" fill="#FF9A00"><path d="M11.72 0h.56l-1.04 1.52L12.52 0h1.14L12.21 1.95l.49-.45h-1.7l-.53.82h1.38l-.51.8H12.1l-.52.81h1.7l-.49.82-1.06.45 1.08 1.52h-.56l-.48-.73H11.3l-.52.82H10.8l.51-.81-.51.81h-1.14l-.49.82h1.14l.48-.73H10.3l.5.73-.52.82h1.14l.52-.82.49-.45h1.7l.53.82.51-.8h-1.38l.5-.81h1.14l.51-.81-.51.81h-1.14l-.5-.81H11.3l.48.73.52-.81-.51.81h-.49z"/></svg>,
+  "Figma": <Figma size={20} className="text-pink-500" />,
+  "Canva": <svg viewBox="0 0 24 24" width="20" height="20" fill="#00C4CC"><circle cx="12" cy="12" r="10" fill="#00C4CC"/><text x="12" y="16" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">C</text></svg>,
+  "HTML": <Code2 size={20} className="text-orange-500" />,
+  "CSS": <Code2 size={20} className="text-blue-500" />,
+  "JavaScript": <Code size={20} className="text-yellow-500" />,
+  "React.js": <svg viewBox="0 0 24 24" width="20" height="20" fill="#61DAFB"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" fill="none" stroke="#61DAFB" strokeWidth="1" transform="rotate(120 12 12)"/></svg>,
+  "Python": <svg viewBox="0 0 24 24" width="20" height="20" fill="#3776AB"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1 3v6l5 3-1 1.67L11 13V5h1z"/></svg>,
+  "MERN Stack": <Layers size={20} className="text-green-500" />,
+  "Flask": <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2L4 8v12h16V8L12 2z" fill="none" stroke="#000" strokeWidth="2"/><path d="M8 22V12l4 3 4-3v10" fill="none" stroke="#000" strokeWidth="2"/></svg>,
+  "Tailwind CSS": <svg viewBox="0 0 24 24" width="20" height="20" fill="#06B6D4"><path d="M12 0l-2 4h4l-2-4zM12 6l-2 4h4l-2-4zM12 12l-2 4h4l-2-4zM12 18l-2 4h4l-2-4zM18 0l-2 4h4l-2-4zM18 6l-2 4h4l-2-4z"/></svg>,
+  "Node.js": <svg viewBox="0 0 24 24" width="20" height="20" fill="#339933"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 4l6 3.5v7L12 18l-6-3.5v-7L12 4z"/></svg>,
+  "Networking": <Globe size={20} className="text-gray-500" />,
+  "System Security": <svg viewBox="0 0 24 24" width="20" height="20" fill="#DC2626"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v5.7c0 4.47-3.11 8.68-7 9.93-3.89-1.25-7-5.46-7-9.93v-5.7l7-3.12z"/></svg>,
+  "MongoDB": <svg viewBox="0 0 24 24" width="20" height="20" fill="#47A248"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 3c4.2 0 7.58 3.39 7.58 7.58 0 1.75-.6 3.35-1.6 4.58l-1.3-1.3c.7-.87 1.1-1.95 1.1-3.08 0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.13 0 2.21-.4 3.08-1.1l1.3 1.3c-1.23 1-2.83 1.6-4.58 1.6-3.19 0-5.78-2.59-5.78-5.78 0-3.19 2.59-5.78 5.78-5.78z"/></svg>,
+  "WordPress": <svg viewBox="0 0 24 24" width="20" height="20" fill="#21759B"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 3c4.2 0 7.58 3.39 7.58 7.58 0 1.75-.6 3.35-1.6 4.58l-1.3-1.3c.7-.87 1.1-1.95 1.1-3.08 0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.13 0 2.21-.4 3.08-1.1l1.3 1.3c-1.23 1-2.83 1.6-4.58 1.6-3.19 0-5.78-2.59-5.78-5.78 0-3.19 2.59-5.78 5.78-5.78zM3.5 12l6 3.5v5L12 18l-2.5 1.5v-5L3.5 12zm17 0v5l-2.5 1.5v-5L20.5 12z"/></svg>,
+  "GitHub": <Github size={20} className="text-gray-800" />,
+  "UI/UX Design": <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="8" cy="8" r="2"/><path d="M8 12v4M12 12v4M16 12v4" stroke="currentColor" strokeWidth="2"/></svg>,
+};
+
+const defaultIcon = <Code size={20} className="text-gray-500" />;
 
 const SkillsPage = () => {
-  const [animatedSkills, setAnimatedSkills] = useState<{ [key: string]: number }>({});
+  const [activeTab, setActiveTab] = useState(0);
+  
+  const tabs = [
+    { id: 0, label: "Design Tools", icon: <Palette size={18} /> },
+    { id: 1, label: "Technical Skills", icon: <Code size={18} /> },
+    { id: 2, label: "Frameworks", icon: <Layers size={18} /> },
+    { id: 3, label: "Other", icon: <Database size={18} /> },
+  ];
 
-  const skillCategories = [
+  const skills = [
     {
-      title: "Design Skills",
-      icon: <Palette size={16} />,
-      color: "from-[#ff9900] to-[#ff9900]/70",
-      barColor: "bg-[#ff9900]",
-      skills: [
-        { name: "Adobe Photoshop", level: 95 },
-        { name: "Adobe Illustrator", level: 90 },
-        { name: "Adobe InDesign", level: 88 },
-        { name: "Adobe After Effects", level: 85 },
-        { name: "Figma", level: 82 },
-        { name: "UI/UX Design", level: 88 },
-      ]
+      category: "Design Tools",
+      items: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva", "UI/UX Design"]
     },
     {
-      title: "Development Skills",
-      icon: <Code size={16} />,
-      color: "from-[#017020] to-[#017020]/70",
-      barColor: "bg-[#017020]",
-      skills: [
-        { name: "HTML/CSS", level: 92 },
-        { name: "JavaScript", level: 88 },
-        { name: "React", level: 85 },
-        { name: "Node.js", level: 80 },
-        { name: "Responsive Design", level: 90 },
-        { name: "Version Control (Git)", level: 85 },
-      ]
+      category: "Technical Skills",
+      items: ["HTML", "CSS", "JavaScript", "React.js", "Python"]
     },
     {
-      title: "Tools & Software",
-      icon: <Settings size={16} />,
-      color: "from-[#ff9900] to-[#017020]",
-      barColor: "bg-gradient-to-r from-[#ff9900] to-[#017020]",
-      skills: [
-        { name: "VS Code", level: 90 },
-        { name: "Adobe Creative Suite", level: 95 },
-        { name: "Figma", level: 85 },
-        { name: "GitHub", level: 88 },
-        { name: "WordPress", level: 82 },
-        { name: "Database (MySQL)", level: 75 },
-      ]
+      category: "Frameworks",
+      items: ["MERN Stack", "Flask", "Tailwind CSS", "React.js", "Node.js"]
     },
     {
-      title: "Specializations",
-      icon: <Monitor size={16} />,
-      color: "from-[#017020] to-[#ff9900]",
-      barColor: "bg-gradient-to-r from-[#017020] to-[#ff9900]",
-      skills: [
-        { name: "Brand Identity Design", level: 92 },
-        { name: "Print Design", level: 88 },
-        { name: "Web Graphics", level: 86 },
-        { name: "Prototyping", level: 80 },
-        { name: "Design Systems", level: 78 },
-        { name: "Accessibility (WCAG)", level: 75 },
-      ]
+      category: "Other",
+      items: ["Networking", "System Security", "MongoDB", "WordPress", "GitHub"]
     }
   ];
 
-  const designTools = [
-    "Photoshop", "Illustrator", "InDesign", "After Effects",
-    "Premiere Pro", "XD", "Lightroom", "Figma", "Sketch"
-  ];
-
-  const devTools = [
-    "VS Code", "Git", "GitHub", "Webpack", "npm", "React DevTools",
-    "Chrome DevTools", "Postman", "MySQL Workbench"
-  ];
-
-  useEffect(() => {
-    const animateSkills = () => {
-      skillCategories.forEach((category) => {
-        category.skills.forEach((skill) => {
-          const skillKey = skill.name;
-          let currentValue = 0;
-          const increment = skill.level / 50;
-
-          const timer = setInterval(() => {
-            currentValue += increment;
-            if (currentValue >= skill.level) {
-              currentValue = skill.level;
-              clearInterval(timer);
-            }
-
-            setAnimatedSkills(prev => ({
-              ...prev,
-              [skillKey]: Math.round(currentValue)
-            }));
-          }, 40);
-        });
-      });
-    };
-
-    const timeout = setTimeout(animateSkills, 500);
-    return () => clearTimeout(timeout);
-  }, []);
-
   return (
-    <div className="h-full space-y-3 overflow-y-auto">
-      {/* Header */}
-      <div className="text-center mb-3">
-        <div className="relative w-full h-24 rounded-xl overflow-hidden border-2 border-[#ff9900]">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900]/20 to-[#017020]/20"></div>
-          <img
-            loading="lazy"
-            src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=200&fit=crop"
-            alt="Skills workspace"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#ff9900]/30 to-[#017020]/30 flex items-center justify-center">
-            <h2 className="text-xl font-bold text-white drop-shadow-lg">Skills & Expertise</h2>
-          </div>
-        </div>
-        <p className="text-xs text-gray-600 mt-1">Bridging the gap between design and development</p>
-      </div>
-
-      {/* Skills categories */}
-      <div className="space-y-3">
-        {skillCategories.map((category, categoryIndex) => (
-          <div
-            key={categoryIndex}
-            className={`bg-gradient-to-r ${category.color} p-0.5 rounded-xl`}
-            style={{ animationDelay: `${categoryIndex * 0.2}s` }}
+    <div className="space-y-6 px-4">
+      <div className="flex flex-wrap justify-center gap-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all font-medium text-sm ${
+              activeTab === tab.id
+                ? 'bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] text-white shadow-md'
+                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+            }`}
           >
-            <div className="bg-white rounded-xl p-3">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="text-[#ff9900]">{category.icon}</div>
-                <h3 className="text-sm font-bold text-gray-800">{category.title}</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {category.skills.map((skill, skillIndex) => {
-                  const animatedValue = animatedSkills[skill.name] || 0;
-                  return (
-                    <div key={skillIndex} className="group">
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-xs text-gray-700 font-medium">{skill.name}</span>
-                        <span className="text-[#ff9900] font-bold text-xs">
-                          {animatedValue}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
-                        <div
-                          className={`${category.barColor} h-2 rounded-full transition-all duration-1000 ease-out relative`}
-                          style={{ width: `${animatedValue}%` }}
-                        >
-                          <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
         ))}
       </div>
 
-      {/* Tools Mastery */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        {/* Design Tools */}
-        <div className="bg-gradient-to-r from-[#ff9900]/10 to-[#017020]/10 rounded-xl p-3 border border-[#ff9900]/20">
-          <h3 className="text-sm font-bold text-gray-800 mb-2 flex items-center gap-1">
-            <Palette className="text-[#ff9900]" size={14} />
-            Design Tools Mastery
-          </h3>
-          <div className="grid grid-cols-3 gap-1.5">
-            {designTools.map((tool, index) => (
-              <div
-                key={tool}
-                className="bg-white rounded-lg p-2 text-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 animate-fade-in border border-[#ff9900]/20 text-xs font-semibold text-gray-700"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                {tool}
-              </div>
-            ))}
+      <div className="flex flex-wrap justify-center gap-3">
+        {skills[activeTab].items.map((skill, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all min-w-[140px]"
+          >
+            <span className="flex-shrink-0">{iconMap[skill] || defaultIcon}</span>
+            <span className="text-sm font-medium text-gray-700 whitespace-nowrap">{skill}</span>
           </div>
-        </div>
-
-        {/* Development Tools */}
-        <div className="bg-gradient-to-r from-[#017020]/10 to-[#ff9900]/10 rounded-xl p-3 border border-[#017020]/20">
-          <h3 className="text-sm font-bold text-gray-800 mb-2 flex items-center gap-1">
-            <Code className="text-[#017020]" size={14} />
-            Development Tools
-          </h3>
-          <div className="grid grid-cols-3 gap-1.5">
-            {devTools.map((tool, index) => (
-              <div
-                key={tool}
-                className="bg-white rounded-lg p-2 text-center shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 animate-fade-in border border-[#017020]/20 text-xs font-semibold text-gray-700"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                {tool}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Professional Approach */}
-      <div className="bg-gradient-to-r from-[#ff9900]/5 to-[#017020]/5 rounded-xl p-3 border border-[#ff9900]/20">
-        <h3 className="text-sm font-bold text-gray-800 mb-2 text-center">My Professional Approach</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-          <div className="text-center p-2 bg-white rounded-lg border border-gray-200">
-            <div className="text-lg mb-1">🎯</div>
-            <h4 className="text-xs font-semibold text-gray-800 mb-0.5">User-Centered</h4>
-            <p className="text-[10px] text-gray-600">Every design decision is made with the end user in mind</p>
-          </div>
-          <div className="text-center p-2 bg-white rounded-lg border border-gray-200">
-            <div className="text-lg mb-1">⚡</div>
-            <h4 className="text-xs font-semibold text-gray-800 mb-0.5">Performance</h4>
-            <p className="text-[10px] text-gray-600">Optimized code and assets for lightning-fast experiences</p>
-          </div>
-          <div className="text-center p-2 bg-white rounded-lg border border-gray-200">
-            <div className="text-lg mb-1">♿</div>
-            <h4 className="text-xs font-semibold text-gray-800 mb-0.5">Accessible</h4>
-            <p className="text-[10px] text-gray-600">Following WCAG guidelines for inclusive design</p>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const SocialLinks = () => {
     { 
       icon: Mail, 
       href: "mailto:ngumbaucephas2@gmail.com", 
-      color: "bg-[#ff9900]", 
+      color: "bg-[var(--brand-primary)]", 
       label: "Email" 
     },
   ];

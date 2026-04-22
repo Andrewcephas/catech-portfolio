@@ -1,20 +1,18 @@
-import { useState, useEffect } from "react";
-import BookLayout from "@/components/BookLayout";
+import { useState, useEffect, useRef } from "react";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import { Page } from "@/types";
+import AppHeader from "@/components/AppHeader";
 
 import HeroPage from "@/components/pages/HeroPage";
 import AboutPage from "@/components/pages/AboutPage";
 import SkillsPage from "@/components/pages/SkillsPage";
+import TechStack from "@/components/pages/TechStack";
 import ProjectsPage from "@/components/pages/ProjectsPage";
-import ResumePage from "@/components/pages/ResumePage";
-import GuitarPage from "@/components/pages/GuitarPage";
-import BlogPage from "@/components/pages/BlogPage";
 import ContactPage from "@/components/pages/ContactPage";
+import { ChevronUp, Sparkles } from "lucide-react";
 
 const Index = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [direction, setDirection] = useState<'next' | 'prev' | 'fade'>('fade');
+  const [activeSection, setActiveSection] = useState('welcome');
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -25,91 +23,203 @@ const Index = () => {
     }
   }, []);
 
-  const pages: Page[] = [
-    { title: "Welcome", component: <WelcomePage onStart={() => navigateToPage(1)} /> },
-    { title: "Home", component: <HeroPage onNavigateToProjects={() => navigateToPage(4)} /> },
-    { title: "About", component: <AboutPage /> },
-    { title: "Skills", component: <SkillsPage /> },
-    { title: "Projects", component: <ProjectsPage /> },
-    { title: "Resume", component: <ResumePage /> },
-    { title: "Guitar", component: <GuitarPage /> },
-    { title: "Blog", component: <BlogPage /> },
-    { title: "Contact", component: <ContactPage /> },
-    { title: "End", component: <EndPage /> },
-  ];
-
-  const navigateToPage = (pageIndex: number) => {
-    if (pageIndex > currentPage) setDirection('next');
-    else if (pageIndex < currentPage) setDirection('prev');
-    else setDirection('fade');
-    setCurrentPage(pageIndex);
+  const scrollToSection = (sectionId: string) => {
+    const element = sectionRefs.current[sectionId];
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+    }
   };
 
+  const handleNavigateToProjects = () => {
+    scrollToSection('projects');
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+      const sections = Object.keys(sectionRefs.current);
+      
+      for (const section of sections) {
+        const element = sectionRefs.current[section];
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen w-screen overflow-hidden relative">
-      <AnimatedBackground />
-      <main className="relative z-10 h-screen w-screen">
-        <BookLayout currentPage={currentPage} setCurrentPage={navigateToPage} pages={pages} direction={direction} />
+    <div className="min-h-screen bg-white">
+      <AppHeader activeSection={activeSection} onNavigate={scrollToSection} />
+      
+      <main className="relative z-10">
+        <section 
+          id="welcome" 
+          ref={(el) => sectionRefs.current.welcome = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <WelcomePage onStart={() => scrollToSection('hero')} />
+        </section>
+
+        <section 
+          id="hero" 
+          ref={(el) => sectionRefs.current.hero = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <div className="max-w-6xl w-full">
+            <HeroPage onNavigateToProjects={handleNavigateToProjects} />
+          </div>
+        </section>
+
+        <section 
+          id="about" 
+          ref={(el) => sectionRefs.current.about = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <div className="max-w-4xl w-full">
+            <AboutPage />
+          </div>
+        </section>
+
+        <section 
+          id="skills" 
+          ref={(el) => sectionRefs.current.skills = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <div className="max-w-6xl w-full">
+            <SkillsPage />
+          </div>
+        </section>
+
+        <TechStack />
+
+        <section 
+          id="projects" 
+          ref={(el) => sectionRefs.current.projects = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <div className="max-w-6xl w-full">
+            <ProjectsPage />
+          </div>
+        </section>
+
+        <section 
+          id="contact" 
+          ref={(el) => sectionRefs.current.contact = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <div className="max-w-2xl w-full">
+            <ContactPage />
+          </div>
+        </section>
+
+        <section 
+          id="end" 
+          ref={(el) => sectionRefs.current.end = el}
+          className="min-h-screen flex items-center justify-center px-4 py-20"
+        >
+          <EndPage />
+        </section>
       </main>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={() => scrollToSection('welcome')}
+        className="fixed bottom-8 right-8 p-3 bg-[var(--brand-primary)] text-white rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 z-40"
+      >
+        <ChevronUp size={24} />
+      </button>
     </div>
   );
 };
 
 const WelcomePage = ({ onStart }: { onStart: () => void }) => (
-  <div className="h-full flex flex-col items-center justify-center text-center p-6">
-    <div className="w-28 h-28 mb-4 relative">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ff9900] to-[#017020] rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute inset-2 bg-gradient-to-br from-[#ff9900] to-[#017020] rounded-full opacity-40"></div>
-      <img 
-        src="/lovable-uploads/catech.jpg" 
-        alt="Andrew Cephas Ngumbau"
-        className="w-full h-full object-cover rounded-full border-4 border-[#ff9900]"
-      />
+  <div className="h-full flex flex-col items-center justify-center text-center p-6 max-w-3xl mx-auto">
+    <div className="relative mb-8">
+      <div className="absolute -inset-4 bg-[var(--brand-primary)] rounded-full opacity-20 blur-2xl animate-pulse"></div>
+      <div className="w-40 h-40 sm:w-48 sm:h-48 relative">
+        <img
+          src="/lovable-uploads/catech.jpg"
+          alt="Andrew Cephas Ngumbau"
+          className="w-full h-full object-cover rounded-full border-4 border-white shadow-2xl"
+        />
+        <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-[var(--brand-primary)] rounded-full flex items-center justify-center border-4 border-white">
+          <Sparkles size={20} className="text-white" />
+        </div>
+      </div>
     </div>
-    <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-      Welcome
-    </h1>
-    <h2 className="text-xl font-bold text-gray-800 mb-1">Andrew Cephas Ngumbau</h2>
-    <p className="text-sm text-[#017020] font-medium mb-4">CEO, Catech Solutions</p>
-    <p className="text-sm text-gray-600 mb-6 max-w-xs leading-relaxed">
-      Creative Designer & Developer<br/>
-      Bridging the gap between user-friendly design and robust, scalable code
-    </p>
-    <button 
+    
+    <div className="space-y-4">
+      <p className="text-sm font-medium tracking-[0.3em] uppercase text-gray-500">
+        Welcome to my portfolio
+      </p>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+        Andrew Cephas <span className="text-[var(--brand-primary)]">Ngumbau</span>
+      </h1>
+      <p className="text-xl sm:text-2xl text-gray-600 font-light">
+        Creative Director & Full-Stack Developer
+      </p>
+      <p className="text-base text-gray-500 max-w-lg mx-auto leading-relaxed mt-4">
+        Transforming ideas into powerful digital experiences. I design brands, build web applications, and create solutions that drive real results for businesses.
+      </p>
+    </div>
+
+    <div className="flex flex-wrap justify-center gap-6 mt-10 text-base text-gray-500">
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-[var(--brand-primary)] rounded-full"></div>
+        <span>Brand Design</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-[var(--brand-secondary)] rounded-full"></div>
+        <span>Web Development</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-[var(--brand-primary)] rounded-full"></div>
+        <span>Digital Strategy</span>
+      </div>
+    </div>
+
+    <button
       onClick={onStart}
-      className="px-8 py-3 bg-gradient-to-r from-[#ff9900] to-[#017020] text-white rounded-full font-semibold hover:scale-105 transition-transform shadow-lg flex items-center gap-2"
+      className="mt-10 px-10 py-4 bg-[var(--brand-primary)] text-white rounded-full font-semibold hover:scale-105 hover:shadow-2xl transition-all duration-300 flex items-center gap-3 text-lg group"
     >
-      <span>Open Book</span>
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-      </svg>
+      <span>Explore My Work</span>
+      <Sparkles size={20} className="group-hover:animate-pulse" />
     </button>
-    <div className="mt-8 text-xs text-gray-400">
-      <p>Designer • Developer • Creator</p>
-    </div>
   </div>
 );
 
 const EndPage = () => (
   <div className="h-full flex flex-col items-center justify-center text-center p-4">
-    <div className="text-4xl mb-3">🙏</div>
-    <h2 className="text-xl font-bold text-gray-800 mb-2">Thank You!</h2>
-    <p className="text-sm text-gray-600 mb-4">For viewing my portfolio</p>
-    <div className="text-xs text-gray-500 space-y-1 mb-3">
-      <p><strong>Andrew Cephas Ngumbau</strong></p>
-      <p>CEO, Catech Solutions</p>
-      <p>ngumbaucephas2@gmail.com</p>
-      <p>+254 793 614 592</p>
+    <div className="relative mb-6">
+      <div className="w-24 h-24 bg-[var(--brand-primary)] rounded-full p-1">
+        <div className="w-full h-full bg-white rounded-full flex items-center justify-center">
+          <Sparkles size={32} className="text-[var(--brand-primary)]" />
+        </div>
+      </div>
     </div>
-    <div className="flex gap-3 mt-2 text-xs">
-      <a href="https://portfolio.catech.co.ke" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Website</a>
-      <a href="https://www.youtube.com/@catechlifestyle" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">YouTube</a>
-      <a href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">LinkedIn</a>
-      <a href="https://www.instagram.com/catechlifestyle/" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Instagram</a>
-      <a href="https://www.tiktok.com/@andrewcephas" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">TikTok</a>
-      <a href="https://www.facebook.com/ademaster.master" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Facebook</a>
-      <a href="https://www.pinterest.com/CATECHSOLUTIONS8GRAPHICS" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">Pinterest</a>
-      <a href="https://github.com/Andrewcephas" target="_blank" rel="noopener noreferrer" className="text-[#ff9900] hover:underline">GitHub</a>
+    <h2 className="text-2xl font-bold text-gray-900 mb-2">Thank You for Visiting!</h2>
+    <p className="text-gray-600 mb-6 text-base">I'd love to hear from you. Let's create something amazing together.</p>
+    <div className="flex flex-wrap justify-center gap-4 mb-6">
+      <a href="mailto:ngumbaucephas2@gmail.com" className="px-5 py-2.5 bg-[var(--brand-primary)] text-white rounded-lg font-medium hover:shadow-lg transition-all">
+        Get in Touch
+      </a>
+      <a href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a" target="_blank" rel="noopener noreferrer" className="px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg font-medium hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] transition-all">
+        LinkedIn
+      </a>
+    </div>
+    <div className="text-sm text-gray-500">
+      <p><strong>Andrew Cephas Ngumbau</strong> · Founder & CEO, Catech Solutions</p>
+      <p className="mt-2">ngumbaucephas2@gmail.com · +254 793 614 592</p>
     </div>
   </div>
 );

@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { Page } from "@/types";
 import { ChevronLeft, ChevronRight, Menu, X, Zap, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface BookLayoutProps {
   currentPage: number;
@@ -279,18 +280,32 @@ const BookLayout = ({ currentPage, setCurrentPage, pages, direction }: BookLayou
             <div className="sticky bottom-0 z-20 flex items-center justify-center gap-4 bg-white/90 backdrop-blur-sm border-t border-gray-200/50 px-4 py-3 rounded-b-xl" style={{
               background: 'linear-gradient(0deg, #faf8f5 0%, #fff 100%)'
             }}>
-              <button onClick={goToPrevPage} disabled={currentPage === 0 || isFlipping}
-                className="p-2 bg-[#ff9900]/10 hover:bg-[#ff9900] hover:text-white text-[#ff9900] rounded-full disabled:opacity-30 disabled:hover:bg-[#ff9900]/10 disabled:hover:text-[#ff9900] transition-all shadow-sm">
-                <ChevronLeft size={16} />
-              </button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button onClick={goToPrevPage} disabled={currentPage === 0 || isFlipping}
+                    className="p-2 bg-[#ff9900]/10 hover:bg-[#ff9900] hover:text-white text-[#ff9900] rounded-full disabled:opacity-30 disabled:hover:bg-[#ff9900]/10 disabled:hover:text-[#ff9900] transition-all shadow-sm">
+                    <ChevronLeft size={16} />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Go to previous section</p>
+                </TooltipContent>
+              </Tooltip>
               <div className="flex items-center gap-1.5">
                 <Zap size={12} className="text-[#ff9900] fill-[#ff9900] animate-pulse" />
                 <span className="text-sm font-medium text-gray-500">{currentPage + 1}/{pages.length}</span>
               </div>
-              <button onClick={goToNextPage} disabled={currentPage === pages.length - 1 || isFlipping}
-                className="p-2 bg-[#017020]/10 hover:bg-[#017020] hover:text-white text-[#017020] rounded-full disabled:opacity-30 disabled:hover:bg-[#017020]/10 disabled:hover:text-[#017020] transition-all shadow-sm">
-                <ChevronRight size={16} />
-              </button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button onClick={goToNextPage} disabled={currentPage === pages.length - 1 || isFlipping}
+                    className="p-2 bg-[#017020]/10 hover:bg-[#017020] hover:text-white text-[#017020] rounded-full disabled:opacity-30 disabled:hover:bg-[#017020]/10 disabled:hover:text-[#017020] transition-all shadow-sm">
+                    <ChevronRight size={16} />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Go to next section</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
         </div>
