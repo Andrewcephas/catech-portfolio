@@ -36,7 +36,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20"></div>
-      
+
       <div className="text-center z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
@@ -45,7 +45,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
               Andrew
             </span>
           </h1>
-          
+
           <div className="h-16 mb-8">
             <p className="text-xl md:text-2xl text-gray-300 font-light">
               {displayText}
@@ -54,13 +54,13 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
           </div>
 
           <p className="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Passionate about creating innovative web solutions and bringing ideas to life through code. 
+            Passionate about creating innovative web solutions and bringing ideas to life through code.
             Specialized in modern web technologies and user experience design.
           </p>
 
           <div className="flex justify-center space-x-6 mb-12">
             <a
-              href="https://github.com/Andrewcephas"
+              href="https://github.com/AndrewNgumbau"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
@@ -69,7 +69,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
               <Github size={24} />
             </a>
             <a
-              href="https://www.linkedin.com/in/andrew-ngumbau-8309a833a"
+              href="https://www.linkedin.com/in/Andrew-ngumbau-8309a833a"
               target="_blank"
               rel="noopener noreferrer"
               className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
@@ -78,7 +78,7 @@ const Hero = ({ onNavigateToPage }: HeroProps) => {
               <Linkedin size={24} />
             </a>
             <a
-              href="mailto:ngumbaucephas2@gmail.com"
+              href="mailto:ngumbauNgumbau2@gmail.com"
               className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/25"
               title="Email"
             >

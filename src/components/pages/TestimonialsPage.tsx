@@ -157,7 +157,7 @@ const TestimonialsPage = () => {
         <h3 className="text-xl font-bold text-foreground mb-2">Ready to Work Together?</h3>
         <p className="text-muted-foreground mb-4">Join these satisfied clients and let's create something amazing</p>
         <button
-          onClick={() => window.open('mailto:ngumbaucephas2@gmail.com?subject=New Project Inquiry&body=Hello Andrew, I would like to discuss a new project with you.', '_blank')}
+          onClick={() => window.open('mailto:ngumbauNgumbau2@gmail.com?subject=New Project Inquiry&body=Hello Andrew, I would like to discuss a new project with you.', '_blank')}
           className="px-6 py-2 bg-gradient-to-r from-[var(--brand-orange)] to-[var(--brand-green)] text-white rounded-full font-semibold hover:scale-105 transition-transform duration-300"
         >
           Start Your Project

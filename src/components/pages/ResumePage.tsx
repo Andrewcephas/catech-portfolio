@@ -74,13 +74,13 @@ const ResumePage = () => {
 
   const handleDownload = () => {
     const cvContent = `
-ANDREW CEPHAS NGUMBAU - CREATIVE PROFESSIONAL
+Andrew Ngumbau NGUMBAU - CREATIVE PROFESSIONAL
 ============================================
 
 Personal Information:
 --------------------
-Name: Andrew Cephas Ngumbau
-Email: ngumbaucephas2@gmail.com
+Name: Andrew Ngumbau Ngumbau
+Email: ngumbauNgumbau2@gmail.com
 Phone: +254 793 614 592
 Website: ceo.catech.co.ke
 
@@ -124,7 +124,7 @@ Contact for professional creative solutions!
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'Andrew_Cephas_Ngumbau_Resume.txt';
+    link.download = 'Andrew_Ngumbau_Ngumbau_Resume.txt';
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -138,12 +138,12 @@ Contact for professional creative solutions!
           <img
             loading="lazy"
             src="/lovable-uploads/catech.jpg"
-            alt="Andrew Cephas Ngumbau"
+            alt="Andrew Ngumbau Ngumbau"
             className="w-full h-full object-cover rounded-lg"
           />
         </div>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-[#ff9900] to-[#017020] bg-clip-text text-transparent mb-2">
-          Andrew Cephas Ngumbau
+          Andrew Ngumbau Ngumbau
         </h2>
         <p className="text-gray-600 mb-4">Creative Designer & Developer</p>
         <button

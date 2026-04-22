@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Code, Palette, Layers, Database, Figma, Code2, Database2, Github, Globe } from "lucide-react";
 
 const iconMap: Record<string, any> = {
@@ -27,6 +27,13 @@ const defaultIcon = <Code size={20} className="text-gray-500" />;
 
 const SkillsPage = () => {
   const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % tabs.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   
   const tabs = [
     { id: 0, label: "Design Tools", icon: <Palette size={18} /> },
@@ -56,31 +63,36 @@ const SkillsPage = () => {
 
   return (
     <div className="space-y-6 px-4">
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all font-medium text-sm ${
+            className={`flex flex-col items-center justify-center gap-3 p-6 rounded-2xl whitespace-nowrap transition-all font-bold text-sm reveal-on-scroll zoom-in border-2 ${
               activeTab === tab.id
-                ? 'bg-gradient-to-r from-[var(--brand-primary)] to-[var(--brand-secondary)] text-white shadow-md'
-                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                ? 'bg-[var(--brand-primary)] text-white border-[var(--brand-primary)] shadow-lg scale-105'
+                : 'bg-white text-gray-600 hover:bg-gray-50 border-gray-100 hover:border-gray-200 shadow-sm'
             }`}
           >
-            {tab.icon}
+            <div className={`p-3 rounded-xl ${activeTab === tab.id ? 'bg-white/20' : 'bg-gray-100'}`}>
+              {tab.icon}
+            </div>
             <span>{tab.label}</span>
           </button>
         ))}
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {skills[activeTab].items.map((skill, index) => (
           <div
             key={index}
-            className="flex items-center gap-2 px-4 py-3 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all min-w-[140px]"
+            className="flex flex-col items-center justify-center p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-[var(--brand-primary)]/30 hover:-translate-y-1 transition-all duration-300 reveal-on-scroll zoom-in"
+            style={{ transitionDelay: `${index * 0.05}s` }}
           >
-            <span className="flex-shrink-0">{iconMap[skill] || defaultIcon}</span>
-            <span className="text-sm font-medium text-gray-700 whitespace-nowrap">{skill}</span>
+            <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-xl mb-3 group-hover:scale-110 transition-transform">
+              {iconMap[skill] || defaultIcon}
+            </div>
+            <span className="text-sm font-bold text-gray-800 text-center">{skill}</span>
           </div>
         ))}
       </div>

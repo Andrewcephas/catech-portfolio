@@ -20,8 +20,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6 text-white">Let's Connect</h3>
               <p className="text-gray-400 leading-relaxed mb-8">
-                I'm always interested in hearing about new projects and opportunities. 
-                Whether you're a company looking to hire, or you're someone looking for a 
+                I'm always interested in hearing about new projects and opportunities.
+                Whether you're a company looking to hire, or you're someone looking for a
                 developer to help bring your ideas to life, I'd love to hear from you.
               </p>
             </div>
@@ -33,7 +33,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Email</h4>
-                  <p className="text-gray-400">ngumbaucephas2@gmail.com</p>
+                  <p className="text-gray-400">ngumbauNgumbau2@gmail.com</p>
                 </div>
               </div>
 

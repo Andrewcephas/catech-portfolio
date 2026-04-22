@@ -25,7 +25,7 @@ const AppFooter = ({ currentPage, totalPages, prevPage, nextPage }: AppFooterPro
           <button
             onClick={prevPage}
             disabled={currentPage === 0}
-            className="p-2 bg-[#007520]/10 hover:bg-[#007520] text-[#007520] rounded-full transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:hover:scale-100"
+            className="p-2 bg-[var(--brand-secondary)]/10 hover:bg-[var(--brand-secondary)] text-[var(--brand-secondary)] rounded-lg transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:hover:scale-100"
             aria-label="Previous page"
           >
             <ChevronLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -34,7 +34,7 @@ const AppFooter = ({ currentPage, totalPages, prevPage, nextPage }: AppFooterPro
           <div className="hidden md:block w-24 lg:w-32">
             <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#e85d04] to-[#007520] rounded-full transition-all duration-300"
+                className="h-full bg-[var(--brand-primary)] rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -43,7 +43,7 @@ const AppFooter = ({ currentPage, totalPages, prevPage, nextPage }: AppFooterPro
           <button
             onClick={nextPage}
             disabled={currentPage === totalPages - 1}
-            className="p-2 bg-[#e85d04]/10 hover:bg-[#e85d04] text-[#e85d04] rounded-full transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:hover:scale-100"
+            className="p-2 bg-[var(--brand-primary)]/10 hover:bg-[var(--brand-primary)] text-[var(--brand-primary)] rounded-lg transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:hover:scale-100"
             aria-label="Next page"
           >
             <ChevronRight size={18} className="group-hover:translate-x-0.5 transition-transform" />

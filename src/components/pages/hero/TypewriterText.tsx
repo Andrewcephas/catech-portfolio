@@ -51,7 +51,7 @@ const TypewriterText = ({ text, speed = 50 }: TypewriterTextProps) => {
     <div className="h-8 sm:h-10 mb-3">
       <p className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 leading-snug max-w-4xl">
         {displayText}
-        <span className={`inline-block w-0.5 h-4 sm:h-5 ml-1 align-middle bg-[#e85d04] ${isTyping ? 'animate-pulse' : ''}`}></span>
+        <span className={`inline-block w-0.5 h-4 sm:h-5 ml-1 align-middle bg-[var(--brand-primary)] ${isTyping ? 'animate-pulse' : ''}`}></span>
       </p>
     </div>
   );

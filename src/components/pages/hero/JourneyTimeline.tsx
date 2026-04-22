@@ -1,10 +1,10 @@
 
 const JourneyTimeline = () => {
   const timelineData = [
-    { year: "2018", label: "Design Start", color: "#e85d04" },
-    { year: "2022", label: "University", color: "#007520" },
-    { year: "2024", label: "CATECH Solutions", color: "#e85d04" },
-    { year: "Now", label: "100+ Clients", color: "#007520" },
+    { year: "2018", label: "Design Start", color: "var(--brand-primary)" },
+    { year: "2022", label: "University", color: "var(--brand-secondary)" },
+    { year: "2024", label: "CATECH Solutions", color: "var(--brand-primary)" },
+    { year: "Now", label: "100+ Clients", color: "var(--brand-secondary)" },
   ];
 
   return (
@@ -14,7 +14,7 @@ const JourneyTimeline = () => {
         {timelineData.map((item, index) => (
           <div 
             key={index}
-            className="bg-gradient-to-r from-[#e85d04]/10 to-[#007520]/10 p-3 rounded text-center"
+            className="bg-[var(--brand-primary)]/5 p-3 rounded text-center"
           >
             <span className="block font-bold" style={{ color: item.color }}>
               {item.year}

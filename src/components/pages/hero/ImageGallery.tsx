@@ -16,13 +16,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
 
   return (
     <div className="relative mb-4">
-      <div className="absolute -left-10 -top-10 w-36 h-36 rounded-full bg-[#e85d04]/10 blur-3xl animate-float" />
-      <div className="absolute right-4 top-16 w-24 h-24 rounded-full bg-[#007520]/10 blur-3xl animate-glow" />
-      <div className="w-full max-w-[420px] h-[540px] mx-auto overflow-hidden rounded-[36px] border-4 border-white shadow-[0_35px_80px_rgba(0,0,0,0.16)] bg-gray-50">
+      <div className="w-full max-w-[420px] aspect-[4/5] mx-auto overflow-hidden rounded-2xl border-4 border-white shadow-2xl bg-gray-50">
         <img
           src={images[currentIndex]}
           alt="Profile"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-contain"
         />
       </div>
       
@@ -33,8 +31,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             onClick={() => setCurrentIndex(index)}
             className={`transition-all duration-300 ${
               index === currentIndex 
-                ? 'w-5 bg-[#e85d04]' 
-                : 'w-2.5 bg-gray-300 hover:bg-[#e85d04]'
+                ? 'w-5 bg-[var(--brand-primary)]' 
+                : 'w-2.5 bg-gray-300 hover:bg-[var(--brand-primary)]'
             } h-2.5 rounded-full`}
           />
         ))}

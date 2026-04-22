@@ -47,7 +47,7 @@ const ColorSwitcher = () => {
       </button>
       
       {isOpen && (
-        <div className="absolute right-0 top-12 bg-white rounded-xl shadow-xl border border-gray-200 p-4 z-50 w-64">
+        <div className="absolute right-0 bottom-full mb-4 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 z-[100] w-64 animate-fade-in">
           <h3 className="text-sm font-bold text-gray-800 mb-3">Choose Color Theme</h3>
           <div className="grid grid-cols-2 gap-2">
             {colorThemes.map((theme, index) => (
@@ -55,21 +55,21 @@ const ColorSwitcher = () => {
                 key={index}
                 onClick={() => handleThemeChange(index)}
                 className={`flex flex-col items-center gap-1 p-2 rounded-lg border-2 transition-all ${
-                  activeTheme === index ? 'border-gray-800' : 'border-gray-100 hover:border-gray-300'
+                  activeTheme === index ? 'border-[var(--brand-secondary)]' : 'border-gray-100 hover:border-gray-300'
                 }`}
               >
-                <div className="flex gap-0.5">
+                <div className="flex w-10 h-10 rounded-full overflow-hidden border border-gray-200">
                   <div 
-                    className="w-4 h-4 rounded-full"
+                    className="w-1/2 h-full"
                     style={{ backgroundColor: theme.primary }}
                   />
                   <div 
-                    className="w-4 h-4 rounded-full -ml-1"
+                    className="w-1/2 h-full"
                     style={{ backgroundColor: theme.secondary }}
                   />
                 </div>
-                <span className="text-xs text-gray-600">{theme.name}</span>
-                {activeTheme === index && <Check size={12} className="text-gray-800" />}
+                <span className="text-[10px] font-bold text-gray-700 uppercase tracking-tighter">{theme.name}</span>
+                {activeTheme === index && <Check size={12} className="text-[var(--brand-secondary)]" />}
               </button>
             ))}
           </div>

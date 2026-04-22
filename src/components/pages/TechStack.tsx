@@ -26,7 +26,7 @@ const TechStack = () => {
 
   return (
     <div className="py-8 px-4">
-      <div className="text-center mb-6">
+      <div className="text-center mb-6 reveal-on-scroll slide-up">
         <h3 className="text-xl font-bold text-gray-800">Tech Stack</h3>
         <p className="text-gray-500 text-sm">Technologies I work with</p>
       </div>
@@ -35,7 +35,8 @@ const TechStack = () => {
         {techItems.map((tech, index) => (
           <div
             key={index}
-            className="flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all"
+            className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-all reveal-on-scroll zoom-in"
+            style={{ transitionDelay: `${index * 0.05}s` }}
           >
             <span className="flex-shrink-0">{iconMap[tech] || defaultIcon}</span>
             <span className="text-sm font-medium text-gray-700 whitespace-nowrap">{tech}</span>

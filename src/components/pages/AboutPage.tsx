@@ -15,20 +15,20 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="h-full overflow-y-auto space-y-6 p-4">
+    <div className="h-full overflow-y-auto space-y-4 p-4">
       {/* Header */}
-      <div className="text-center">
-        <div className="relative w-28 h-28 sm:w-36 sm:h-36 mx-auto mb-3">
-          <div className="absolute inset-0 bg-[var(--brand-primary)] opacity-10 rounded-full" />
-          <img src="/lovable-uploads/catech.jpg" alt="Andrew Cephas Ngumbau" loading="lazy" className="w-full h-full object-cover rounded-full border-4 border-white shadow-xl" />
+      <div className="text-center reveal-on-scroll zoom-in">
+        <div className="relative w-full max-w-[220px] aspect-square mx-auto mb-4 overflow-hidden rounded-2xl border-4 border-white shadow-xl bg-gray-50">
+          <img src="/lovable-uploads/with computer.png" alt="Andrew Cephas" loading="lazy" className="w-full h-full object-contain" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-          Andrew Cephas Ngumbau
+        <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tighter uppercase">
+          Andrew Ngumbau
         </h2>
-        <p className="text-base sm:text-lg text-[var(--brand-primary)] font-semibold mt-1">Founder, CATECH Solutions</p>
-        <div className="bg-gray-50 rounded-xl p-4 mt-4 max-w-xl mx-auto border border-gray-100">
-          <p className="text-base sm:text-lg text-gray-700">
-            Creative Graphic Designer and IT student with hands-on experience in branding, web design, and software development. Building systems that make an impact.
+        <p className="text-sm font-mono text-[var(--brand-primary)] font-bold mt-1 uppercase tracking-widest">{`// IT Student & Creative Director`}</p>
+        <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-4 mt-4 max-w-xl mx-auto border border-gray-100 shadow-sm">
+          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+            I blend <span className="font-bold text-gray-900">Technical Precision</span> with <span className="font-bold text-gray-900">Visual Artistry</span>.
+            Currently pursuing IT while leading <span className="text-[var(--brand-primary)] font-bold">CATECH Solutions</span> to deliver elite digital experiences.
           </p>
         </div>
       </div>
@@ -36,8 +36,8 @@ const AboutPage = () => {
       {/* Services Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {services.map((service, index) => (
-          <div key={index} className="bg-[var(--brand-primary)]/5 p-4 rounded-3xl border border-gray-200 hover:border-[var(--brand-primary)]/30 hover:shadow-lg transition-all">
-            <div className="text-[var(--brand-primary)] mb-3">{service.icon}</div>
+          <div key={index} className={`bg-white p-6 rounded-2xl border-2 border-gray-100 hover:border-[var(--brand-secondary)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 reveal-on-scroll ${index % 2 === 0 ? 'slide-left' : 'slide-right'}`}>
+            <div className="text-[var(--brand-secondary)] mb-4 bg-gray-50 w-12 h-12 flex items-center justify-center rounded-xl">{service.icon}</div>
             <h3 className="text-base font-bold text-gray-800">{service.title}</h3>
             <p className="text-base text-gray-600 mt-1">{service.desc}</p>
           </div>
@@ -45,7 +45,7 @@ const AboutPage = () => {
       </div>
 
       {/* Professional Journey */}
-      <div className="bg-[var(--brand-primary)]/5 rounded-3xl p-4 border border-[var(--brand-primary)]/20">
+      <div className="bg-[var(--brand-primary)]/5 rounded-3xl p-4 border border-[var(--brand-primary)]/20 reveal-on-scroll slide-up">
         <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2">
           <GraduationCap size={18} className="text-[var(--brand-primary)]" />
           My Journey
@@ -68,15 +68,14 @@ const AboutPage = () => {
 
       {/* Personal Journey */}
       <div className="bg-[var(--brand-primary)]/5 rounded-3xl p-4 border border-[var(--brand-primary)]/20">
-        <div className="grid grid-cols-1 sm:grid-cols-[100px_1fr] gap-4 items-start">
-          <div className="relative w-full h-28 sm:h-36 rounded-3xl overflow-hidden">
-            <div className="absolute inset-0 bg-[var(--brand-primary)]/20 rounded-3xl border border-[var(--brand-primary)]" />
-            <img src="/lovable-uploads/with computer.png" loading="lazy" alt="Creative workspace" className="w-full h-full object-cover rounded-3xl" />
+        <div className="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-4 items-center text-center sm:text-left">
+          <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border-2 border-white shadow-md bg-white">
+            <img src="/lovable-uploads/with computer.png" loading="lazy" alt="Creative workspace" className="w-full h-full object-contain" />
           </div>
           <div>
             <h3 className="text-base sm:text-lg font-bold text-[var(--brand-primary)] mb-2">My Creative Journey</h3>
             <p className="text-base text-gray-600 leading-relaxed">
-              I blend artistry with technical precision to build visually stunning and highly functional digital solutions. 
+              I blend artistry with technical precision to build visually stunning and highly functional digital solutions.
               At CATECH Solutions, I help businesses elevate their online presence.
             </p>
           </div>
@@ -86,12 +85,12 @@ const AboutPage = () => {
       {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { value: "100+", label: "Clients Served", icon: <Users size={18} className="text-[var(--brand-primary)]"/> },
-          { value: "7+", label: "Years Experience", icon: <Clock size={18} className="text-[var(--brand-secondary)]"/> },
-          { value: "50+", label: "Projects Completed", icon: <Sparkles size={18} className="text-[var(--brand-primary)]"/> },
-          { value: "24/7", label: "Support Available", icon: <Award size={18} className="text-[var(--brand-secondary)]"/> },
+          { value: "100+", label: "Clients Served", icon: <Users size={18} className="text-[var(--brand-primary)]" /> },
+          { value: "7+", label: "Years Experience", icon: <Clock size={18} className="text-[var(--brand-secondary)]" /> },
+          { value: "50+", label: "Projects Completed", icon: <Sparkles size={18} className="text-[var(--brand-primary)]" /> },
+          { value: "24/7", label: "Support Available", icon: <Award size={18} className="text-[var(--brand-secondary)]" /> },
         ].map((stat, index) => (
-          <div key={index} className="text-center p-4 bg-white rounded-3xl border border-gray-200 hover:shadow-xl hover:border-[var(--brand-primary)]/20 transition-all">
+          <div key={index} className="text-center p-4 bg-white rounded-3xl border border-gray-200 hover:shadow-xl hover:border-[var(--brand-primary)]/20 transition-all reveal-on-scroll zoom-in" style={{ transitionDelay: `${index * 0.1}s` }}>
             <div className="mb-3 flex justify-center">{stat.icon}</div>
             <div className="text-2xl sm:text-3xl font-bold text-gray-900">{stat.value}</div>
             <div className="text-base text-gray-500 mt-1">{stat.label}</div>

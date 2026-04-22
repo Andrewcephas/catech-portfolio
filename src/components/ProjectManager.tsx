@@ -23,7 +23,7 @@ const ProjectManager = () => {
       image: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?w=500&h=300&fit=crop',
       tech: ['Illustrator', 'Photoshop', 'InDesign'],
       liveUrl: 'https://portfolio.catech.co.ke',
-      githubUrl: 'https://github.com/Andrewcephas',
+      githubUrl: 'https://github.com/AndrewNgumbau',
       dateCreated: '2024-01-15'
     }
   ]);
@@ -63,8 +63,8 @@ const ProjectManager = () => {
     }
   };
 
-  const filteredProjects = selectedCategory === 'All' 
-    ? projects 
+  const filteredProjects = selectedCategory === 'All'
+    ? projects
     : projects.filter(p => p.category === selectedCategory);
 
   return (
@@ -91,11 +91,10 @@ const ProjectManager = () => {
           <button
             key={category}
             onClick={() => setSelectedCategory(category)}
-            className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${
-              selectedCategory === category
-                ? 'bg-brand-orange text-white'
-                : 'bg-muted text-muted-foreground hover:bg-brand-orange/20'
-            }`}
+            className={`px-3 py-1 rounded-full text-sm transition-all duration-200 ${selectedCategory === category
+              ? 'bg-brand-orange text-white'
+              : 'bg-muted text-muted-foreground hover:bg-brand-orange/20'
+              }`}
           >
             {category}
           </button>
@@ -141,9 +140,9 @@ const ProjectManager = () => {
             <input
               type="text"
               placeholder="Technologies (comma separated)"
-              onChange={(e) => setNewProject({ 
-                ...newProject, 
-                tech: e.target.value.split(',').map(t => t.trim()).filter(t => t) 
+              onChange={(e) => setNewProject({
+                ...newProject,
+                tech: e.target.value.split(',').map(t => t.trim()).filter(t => t)
               })}
               className="p-3 border border-border rounded-lg bg-background text-foreground"
             />

@@ -8,7 +8,7 @@ const DesignGeneratorPage = () => {
   const [scriptTitle, setScriptTitle] = useState('NEW WEEK');
   const [quote, setQuote] = useState('Wishing You a Joyful and Productive Week');
   const [reference, setReference] = useState('- From Catech Solutions and Graphics.');
-  const [userImage, setUserImage] = useState('/lovable-uploads/andrew green.png'); // Default image
+  const [userImage, setUserImage] = useState('/lovable-uploads/Andrew green.png'); // Default image
   const [isDownloading, setIsDownloading] = useState(false);
   const posterRef = useRef<HTMLDivElement>(null);
 

@@ -17,10 +17,11 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased overflow-x-hidden;
   }
   html {
     scroll-behavior: smooth;
+    @apply overflow-x-hidden;
   }
 }
 
@@ -163,4 +164,66 @@
 
 .animate-page-enter {
   animation: page-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@layer utilities {
+  .reveal-on-scroll {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+  }
+
+  .reveal-on-scroll.active {
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .slide-left {
+    transform: translateX(-100px);
+  }
+
+  .slide-right {
+    transform: translateX(100px);
+  }
+
+  .slide-up {
+    transform: translateY(100px);
+  }
+
+  .slide-down {
+    transform: translateY(-100px);
+  }
+
+  .zoom-in {
+    transform: scale(0.5);
+  }
+
+  .rotate-in {
+    transform: rotate(-15deg) scale(0.8);
+  }
+
+  @keyframes violent-shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(5px, 5px) rotate(1deg); }
+    50% { transform: translate(-5px, -5px) rotate(-1deg); }
+    75% { transform: translate(5px, -5px) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
+
+  .animate-violent {
+    animation: violent-shake 0.2s infinite;
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .digital-grid {
+    background-image: radial-gradient(circle, #f0f0f0 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
 }

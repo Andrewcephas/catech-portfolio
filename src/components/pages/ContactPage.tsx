@@ -55,18 +55,19 @@ const ContactPage = () => {
             <TooltipTrigger asChild>
               <div
                 onClick={method.action}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                className={`bg-white rounded-2xl shadow-lg border-2 border-gray-100 p-8 hover:shadow-xl hover:border-[var(--brand-secondary)] transition-all duration-300 cursor-pointer group reveal-on-scroll zoom-in flex flex-col items-center text-center`}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
-                  style={{ backgroundColor: `${method.color}20` }}
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-sm"
+                  style={{ backgroundColor: `${method.color}15` }}
                 >
                   <div style={{ color: method.color }}>
                     {method.icon}
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{method.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{method.value}</p>
+                <h3 className="text-xl font-black text-gray-900 mb-2 uppercase tracking-tighter">{method.title}</h3>
+                <p className="text-gray-600 font-medium break-all">{method.value}</p>
               </div>
             </TooltipTrigger>
             <TooltipContent>
@@ -77,7 +78,7 @@ const ContactPage = () => {
       </div>
 
       {/* Contact Form */}
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 reveal-on-scroll slide-up" style={{ transitionDelay: '0.3s' }}>
         <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">Send a Message</h3>
 
         <form onSubmit={handleSubmit} className="space-y-6">
