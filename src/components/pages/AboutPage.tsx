@@ -19,7 +19,7 @@ const AboutPage = () => {
       {/* Header */}
       <div className="text-center reveal-on-scroll zoom-in">
         <div className="relative w-full max-w-[220px] aspect-square mx-auto mb-4 overflow-hidden rounded-2xl border-4 border-white shadow-xl bg-gray-50">
-          <img src="/lovable-uploads/with computer.png" alt="Andrew Cephas" loading="lazy" className="w-full h-full object-contain" />
+          <img src="/lovable-uploads/with computer.png" alt="Andrew Ngumbau" loading="lazy" className="w-full h-full object-contain" />
         </div>
         <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tighter uppercase">
           Andrew Ngumbau
